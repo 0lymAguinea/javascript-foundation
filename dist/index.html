@@ -4,19 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="output.css" />
-    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculator</title>
   </head>
   <body>
-    <style>
-      body {
-        background-image: url(/home/lym/repos/javascript-foundation/background.jpg);
-        background-repeat: no-repeat;
-      }
-    </style>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissor">Scissor</button>
-
+    <div class="container">
+      <div id="display" data-value="1">123456789</div>
+      <div class="buttons">
+        <div class="rows">
+          <button id="allClear">AC</button>
+          <button id="clear">C</button>
+          <button id="modulo">%</button>
+          <button id="operator">÷</button>
+        </div>
+        <div class="rows">
+          <button id="number">7</button>
+          <button id="number">8</button>
+          <button id="number">9</button>
+          <button id="modulo">X</button>
+        </div>
+        <div class="rows">
+          <button id="number">4</button>
+          <button id="number">5</button>
+          <button id="number">6</button>
+          <button id="subtract">-</button>
+        </div>
+        <div class="rows">
+          <button id="number">1</button>
+          <button id="number">2</button>
+          <button id="number">3</button>
+          <button id="add">+</button>
+        </div>
+        <div class="rows">
+          <button id="number">0</button>
+          <button id="number">.</button>
+          <button id="equal">=</button>
+        </div>
+      </div>
+    </div>
     <script src="script.js" defer></script>
   </body>
 </html>
