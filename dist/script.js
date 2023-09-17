@@ -13,7 +13,9 @@ function btnFunc() {
     displayValue = [];
   });
   btnDel.addEventListener("click", () => {
-    console.log("HI");
+    let str = display.textContent;
+    display.textContent = str.slice(0, str.length - 1);
+    displayValue.pop();
   });
   btnPeriod.addEventListener("click", () => {
     const operatorRegex = /[+\-*/]/g;
