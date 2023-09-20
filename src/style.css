@@ -1,8 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-#display {
-  height: 20px;
+@media (min-width: 500px) {
+  .container {
+    max-width: 500px;
+  }
+  button {
+    min-height: 4rem;
+  }
+  #display {
+    width: 100%;
+  }
 }

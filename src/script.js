@@ -1,5 +1,6 @@
 let display = document.getElementById("display");
-let displayValue = [];
+let displayValue = ["0"];
+
 const btnNumbers = document.querySelectorAll(".number");
 const btnOperators = document.querySelectorAll(".operator");
 const btnAllClear = document.getElementById("allClear");
@@ -33,7 +34,7 @@ function btnFunc() {
       if (display.textContent === "0") {
         display.textContent = clickedButton;
         displayValue = [clickedButton];
-      } else {
+      } else if (display.textContent.length < 9) {
         display.textContent += btn.value;
         displayValue.push(btn.value);
       }
@@ -43,7 +44,7 @@ function btnFunc() {
     btn.addEventListener("click", () => {
       let operatorClicked = btn.value;
       if (
-        displayValue.length > 0 &&
+        displayValue.length < 9 &&
         "+-*/".includes(displayValue[displayValue.length - 1])
       ) {
         displayValue[displayValue.length - 1] = operatorClicked;
@@ -103,8 +104,12 @@ function operate(operator, firstNum, secondNum) {
       return multiply(firstNum, secondNum);
       break;
     case "/":
+      if (secondNum === 0) {
+        return "ERROR";
+      }
       return divide(firstNum, secondNum);
-      break;
+    default:
+      return "ERROR";
   }
 }
 function add(a, b) {
