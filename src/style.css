@@ -49,10 +49,10 @@ ul.logos {
   justify-items: center;
 }
 ul.menu {
-  padding-left: 10px;
+  margin-left: 10px;
 }
 .mainMenu > ul li {
-  padding-top: 15px;
+  margin-top: 15px;
 }
 .settingsMenu {
   grid-row: 2 / 3;
@@ -61,7 +61,18 @@ ul.menu {
   grid-template-rows: repeat(3, 40px);
 }
 .settingsMenu > ul li {
-  padding-top: 15px;
+  margin-top: 15px;
+}
+ul.logosSettings {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 20px;
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+}
+ul.menuSettings {
+  margin-left: 10px;
 }
 .main-content {
   display: grid;
