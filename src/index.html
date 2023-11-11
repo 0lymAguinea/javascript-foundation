@@ -57,8 +57,15 @@
               placeholder="Book's chapters"
             />
             <div class="radioButt">
-              <input type="radio" name="hasRead" id="yes" checked />Read
-              <input type="radio" name="hasRead" id="no" />Not yet
+              <input
+                type="radio"
+                name="hasRead"
+                id="yes"
+                value="Read"
+                checked
+              />Read
+              <input type="radio" name="hasRead" id="no" value="Not Yet" />Not
+              yet
             </div>
           </div>
           <button class="addBook" type="button">Add book</button>
@@ -73,6 +80,7 @@
               <th>Author</th>
               <th>Pages</th>
               <th>Read status</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +89,7 @@
               <td class="tdAuthor">J.R.R Tolkien</td>
               <td class="tdPages">245</td>
               <td><button type="button">Read</button></td>
+              <td><button type="button" class="delButton">X</button></td>
             </tr>
           </tbody>
         </table>
