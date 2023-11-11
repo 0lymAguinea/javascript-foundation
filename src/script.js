@@ -7,6 +7,16 @@ function Book(title, author, pages, hasRead) {
   this.hasRead = hasRead;
 }
 
+function deleteBook() {
+  const delButton = document.querySelectorAll("[data-bookid]");
+  delButton.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const bookIndex = parseInt(button.dataset.bookid);
+      myLibrary.splice(bookIndex, 1);
+    });
+  });
+}
+
 function displayBook() {
   const table = document.querySelector("table");
   let readButton = document.createElement("button");
@@ -27,7 +37,7 @@ function displayBook() {
     delButton.innerHTML = book.delCell;
     delCell.appendChild(delButton).innerText = "X";
     delButton.dataset.bookid = bookID++;
-    removeBook();
+    deleteBook();
   });
 }
 
@@ -40,17 +50,11 @@ function addBookToLibrary() {
   const noRadio = document.getElementById("no");
 
   addButton.addEventListener("click", () => {
-    if (yesRadio.checked) {
-      myLibrary.push(
-        new Book(title.value, author.value, pages.value, yesRadio.value)
-      );
-      displayBook();
-    } else if (noRadio.checked) {
-      myLibrary.push(
-        new Book(title.value, author.value, pages.value, noRadio.value)
-      );
-      displayBook();
-    }
+    const hasReadValue = yesRadio.checked ? "Read" : "Not Yet";
+    myLibrary.push(
+      new Book(title.value, author.value, pages.value, hasReadValue)
+    );
+    displayBook();
   });
 }
 addBookToLibrary();
