@@ -7,37 +7,51 @@ function Book(title, author, pages, hasRead) {
   this.hasRead = hasRead;
 }
 
-function deleteBook() {
-  const delButton = document.querySelectorAll("[data-bookid]");
-  delButton.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const bookIndex = parseInt(button.dataset.bookid);
-      myLibrary.splice(bookIndex, 1);
-    });
-  });
+function hasReadStatus(book, hasReadButton) {
+  if (hasReadButton.textContent === "Read") {
+    hasReadButton.textContent = "Not Yet";
+    book.hasRead = "Not Yet";
+  } else if (hasReadButton.textContent === "Not Yet") {
+    hasReadButton.textContent = "Read";
+    book.hasRead = "Read";
+  }
+}
+
+function deleteBook(bookIndex) {
+  myLibrary.splice(bookIndex, 1);
+  displayBook();
 }
 
 function displayBook() {
-  const table = document.querySelector("table");
-  let readButton = document.createElement("button");
-  let delButton = document.createElement("button");
-  let bookID = 0;
-  let row = table.insertRow(-1);
-  let title = row.insertCell(0);
-  let author = row.insertCell(1);
-  let pages = row.insertCell(2);
-  let hasRead = row.insertCell(3);
-  let delCell = row.insertCell(4);
-  myLibrary.forEach((book) => {
-    title.innerHTML = book.title;
-    author.innerHTML = book.author;
-    pages.innerHTML = book.pages;
-    readButton.innerHTML = book.hasRead;
-    hasRead.appendChild(readButton);
-    delButton.innerHTML = book.delCell;
-    delCell.appendChild(delButton).innerText = "X";
-    delButton.dataset.bookid = bookID++;
-    deleteBook();
+  const table = document.querySelector("tbody");
+  table.innerHTML = "";
+  myLibrary.forEach((book, bookIndex) => {
+    const row = table.insertRow(-1);
+    const titleCell = row.insertCell(0);
+    const authorCell = row.insertCell(1);
+    const pagesCell = row.insertCell(2);
+    const hasReadCell = row.insertCell(3);
+    const delCell = row.insertCell(4);
+
+    const hasReadButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
+
+    titleCell.innerHTML = book.title;
+    authorCell.innerHTML = book.author;
+    pagesCell.innerHTML = book.pages;
+    hasReadButton.innerHTML = book.hasRead;
+    hasReadCell.appendChild(hasReadButton);
+
+    hasReadButton.addEventListener("click", () => {
+      hasReadStatus(book, hasReadButton);
+    });
+
+    delCell.appendChild(deleteButton);
+    deleteButton.textContent = "X";
+    deleteButton.dataset.bookid = bookIndex;
+    deleteButton.addEventListener("click", () => {
+      deleteBook(bookIndex);
+    });
   });
 }
 
@@ -47,12 +61,11 @@ function addBookToLibrary() {
   const author = document.getElementById("author");
   const pages = document.getElementById("pages");
   const yesRadio = document.getElementById("yes");
-  const noRadio = document.getElementById("no");
 
   addButton.addEventListener("click", () => {
-    const hasReadValue = yesRadio.checked ? "Read" : "Not Yet";
+    const hasReadBook = yesRadio.checked ? "Read" : "Not Yet";
     myLibrary.push(
-      new Book(title.value, author.value, pages.value, hasReadValue)
+      new Book(title.value, author.value, pages.value, hasReadBook)
     );
     displayBook();
   });
