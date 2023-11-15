@@ -31,10 +31,15 @@ const player2 = createPlayer("MYLO", "O");
 function insertMark(board, row, column, player) {
   return board(row, column, player.marker, player);
 }
+
 function playGame() {
   const board = gameBoard();
   let playing = (row, column, player) => insertMark(board, row, column, player);
-  console.log(playing(1, 2, player1));
-  console.log(playing(1, 1, player2));
+  return { board, playing };
 }
-playGame();
+const game = playGame();
+
+function play(row, column, player) {
+  let playing = game.playing;
+  console.log(playing(row, column, player));
+}
