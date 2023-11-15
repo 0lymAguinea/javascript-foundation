@@ -8,7 +8,15 @@ function gameBoard() {
     if (row >= 0 && row < 3 && column >= 0 && column < 3) {
       if (board[row][column] === "") {
         board[row][column] = playerMarker;
-        console.log(`Inserted ${playerMarker} at (${row}, ${column})`);
+        if (playerMarker === "X") {
+          console.log(
+            `${player1.name} Inserted ${playerMarker} at (${row}, ${column})`
+          );
+        } else if (playerMarker === "O") {
+          console.log(
+            `${player2.name} Inserted ${playerMarker} at (${row}, ${column})`
+          );
+        }
       } else {
         console.log(`The location (${row}, ${column}) is already occupied.`);
       }
@@ -20,11 +28,13 @@ function gameBoard() {
     return board;
   };
 }
-
 function createPlayer(name, marker) {
   let player = { name, marker };
   return player;
 }
+const player1 = createPlayer("OLYM", "X");
+const player2 = createPlayer("MYLO", "O");
+
 function insertMark() {
   const board = gameBoard();
   return function (row, column, playerMarker) {
@@ -34,9 +44,8 @@ function insertMark() {
 }
 function playGame() {
   let playing = insertMark();
-  const player1 = createPlayer("OLYM", "X");
-  const player2 = createPlayer("MYLO", "O");
   console.log(playing(1, 2, player1.marker));
   console.log(playing(1, 1, player2.marker));
 }
+
 playGame();
