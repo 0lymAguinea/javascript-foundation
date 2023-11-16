@@ -6,47 +6,36 @@ function gameBoard() {
   ];
   let turn = true;
   let numberOfTurns = 9;
+
+  function switchTurn() {
+    turn = !turn;
+    console.log(`Player ${turn ? 1 : 2} Turn`);
+  }
+
   function insertMark(row, column, playerMarker, player) {
-    if (row >= 0 && row < 3 && column >= 0 && column < 3) {
-      if (numberOfTurns > 0) {
-        if (
-          board[row][column] === "" &&
-          turn === true &&
-          playerMarker === "X"
-        ) {
-          board[row][column] = playerMarker;
-          console.log(
-            `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
-          );
-          numberOfTurns--;
-          turn = false;
-          console.log("Player 2 Turn");
-        } else if (
-          board[row][column] === "" &&
-          turn === false &&
-          playerMarker === "O"
-        ) {
-          board[row][column] = playerMarker;
-          console.log(
-            `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
-          );
-          numberOfTurns--;
-          turn = true;
-          console.log("Player 1 Turn");
-        } else if (turn === false && playerMarker === "X") {
-          console.log("PLAYER 2 TURN");
-        } else if (turn === true && playerMarker === "O") {
-          console.log("PLAYER 1 TURN");
-        } else {
-          console.log(`The location (${row}, ${column}) is already occupied. `);
-        }
-      } else {
-        console.log("GAMEOVER");
-      }
-    } else {
+    if (row < 0 || row >= 3 || column < 0 || column >= 3) {
       console.log(
         "Invalid location. Please provide valid row and column indices."
       );
+      return board;
+    }
+    if (numberOfTurns <= 0) {
+      console.log("GAMEOVER");
+      return board;
+    }
+    if (board[row][column] !== "") {
+      console.log(`The location (${row}, ${column}) is already occupied. `);
+      return board;
+    }
+    if ((turn && playerMarker === "X") || (!turn && playerMarker === "O")) {
+      board[row][column] = playerMarker;
+      console.log(
+        `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
+      );
+      numberOfTurns--;
+      switchTurn();
+    } else {
+      console.log(`Player ${turn ? 2 : 1} turn`);
     }
     return board;
   }
