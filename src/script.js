@@ -4,15 +4,44 @@ function gameBoard() {
     ["", "", ""],
     ["", "", ""],
   ];
+  let turn = true;
+  let numberOfTurns = 9;
   function insertMark(row, column, playerMarker, player) {
     if (row >= 0 && row < 3 && column >= 0 && column < 3) {
-      if (board[row][column] === "") {
-        board[row][column] = playerMarker;
-        console.log(
-          `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
-        );
+      if (numberOfTurns > 0) {
+        if (
+          board[row][column] === "" &&
+          turn === true &&
+          playerMarker === "X"
+        ) {
+          board[row][column] = playerMarker;
+          console.log(
+            `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
+          );
+          numberOfTurns--;
+          turn = false;
+          console.log("Player 2 Turn");
+        } else if (
+          board[row][column] === "" &&
+          turn === false &&
+          playerMarker === "O"
+        ) {
+          board[row][column] = playerMarker;
+          console.log(
+            `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
+          );
+          numberOfTurns--;
+          turn = true;
+          console.log("Player 1 Turn");
+        } else if (turn === false && playerMarker === "X") {
+          console.log("PLAYER 2 TURN");
+        } else if (turn === true && playerMarker === "O") {
+          console.log("PLAYER 1 TURN");
+        } else {
+          console.log(`The location (${row}, ${column}) is already occupied. `);
+        }
       } else {
-        console.log(`The location (${row}, ${column}) is already occupied.`);
+        console.log("GAMEOVER");
       }
     } else {
       console.log(
@@ -25,6 +54,7 @@ function gameBoard() {
   function getBoard() {
     return board;
   }
+
   return { insertMark, getBoard };
 }
 
