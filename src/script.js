@@ -5,7 +5,6 @@ function gameBoard() {
     ["", "", ""],
   ];
   let turn = true;
-  let numberOfTurns = 9;
 
   function switchTurn() {
     turn = !turn;
@@ -44,9 +43,9 @@ function gameBoard() {
     return board;
   }
 
-  return { insertMark, getBoard };
+  return { insertMark, getBoard, numberOfTurns };
 }
-
+let numberOfTurns = 9;
 function createPlayer(name, marker) {
   return { name, marker };
 }
@@ -63,7 +62,31 @@ function playGame() {
   return { playing };
 }
 const game = playGame();
+let consecutiveWins = 0;
 
+function winnerStreak(updatedBoard, player) {
+  if (consecutiveWins <= 3) {
+    console.log(`${player.name} has ${++consecutiveWins}`);
+  }
+  if (consecutiveWins !== 3) {
+    resetBoard(updatedBoard);
+  } else if (consecutiveWins === 3) {
+    console.log("WIN WIN CHICKEN DINNER");
+  }
+}
+function resetBoard(updatedBoard) {
+  console.log("RESET BOARD");
+
+  numberOfTurns = 9;
+
+  for (let row = 0; row < 3; row++) {
+    for (let column = 0; column < 3; column++) {
+      updatedBoard[row][column] = "";
+    }
+  }
+
+  console.log(updatedBoard);
+}
 function checkWinner(updatedBoard, player) {
   for (let row = 0; row < 3; row++) {
     if (
@@ -72,6 +95,7 @@ function checkWinner(updatedBoard, player) {
       updatedBoard[row][1] === updatedBoard[row][2]
     ) {
       console.log(`${player.name} is the winner`);
+      winnerStreak(updatedBoard, player);
       return updatedBoard[row][0];
     }
   }
@@ -82,6 +106,7 @@ function checkWinner(updatedBoard, player) {
       updatedBoard[1][column] === updatedBoard[2][column]
     ) {
       console.log(`${player.name} is the winner`);
+      winnerStreak(updatedBoard);
       return updatedBoard[0][column];
     }
   }
@@ -91,6 +116,7 @@ function checkWinner(updatedBoard, player) {
     updatedBoard[1][1] === updatedBoard[2][2]
   ) {
     console.log(`${player.name} is the winner`);
+    winnerStreak(updatedBoard);
     return updatedBoard[0][0];
   }
   if (
@@ -99,6 +125,7 @@ function checkWinner(updatedBoard, player) {
     updatedBoard[1][1] === updatedBoard[2][0]
   ) {
     console.log(`${player.name} is the winner`);
+    winnerStreak(updatedBoard);
     return updatedBoard[0][2];
   }
   return null;
