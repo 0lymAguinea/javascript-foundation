@@ -20,7 +20,8 @@ function gameBoard() {
     }
     if (numberOfTurns <= 0) {
       console.log("GAMEOVER");
-      return board;
+      resetBoard(board);
+      numberOfTurns = 9;
     }
     if (board[row][column] !== "") {
       console.log(`The location (${row}, ${column}) is already occupied. `);
@@ -31,7 +32,8 @@ function gameBoard() {
       console.log(
         `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
       );
-      numberOfTurns--;
+      --numberOfTurns;
+      console.log(numberOfTurns);
       switchTurn();
     } else {
       console.log(`Player ${turn ? 2 : 1} turn`);
@@ -43,7 +45,7 @@ function gameBoard() {
     return board;
   }
 
-  return { insertMark, getBoard, numberOfTurns };
+  return { insertMark, getBoard, resetBoard };
 }
 let numberOfTurns = 9;
 function createPlayer(name, marker) {
@@ -62,31 +64,42 @@ function playGame() {
   return { playing };
 }
 const game = playGame();
-let consecutiveWins = 0;
+let player1Win = 0;
+let player2Win = 0;
 
 function winnerStreak(updatedBoard, player) {
-  if (consecutiveWins <= 3) {
-    console.log(`${player.name} has ${++consecutiveWins}`);
-  }
-  if (consecutiveWins !== 3) {
+  if (player1Win !== 3 || player2Win !== 3) {
     resetBoard(updatedBoard);
-  } else if (consecutiveWins === 3) {
-    console.log("WIN WIN CHICKEN DINNER");
+  }
+  if (player1Win === 3 || player2Win === 3) {
+    console.log(`${player.name} IS THE WINNER`);
   }
 }
+
 function resetBoard(updatedBoard) {
   console.log("RESET BOARD");
-
-  numberOfTurns = 9;
 
   for (let row = 0; row < 3; row++) {
     for (let column = 0; column < 3; column++) {
       updatedBoard[row][column] = "";
     }
   }
-
+  numberOfTurns = 9;
   console.log(updatedBoard);
 }
+
+function checkPlayerWinner(updatedBoard, player) {
+  if (player.marker === "X") {
+    console.log(`${player.name} winstreak:${++player1Win}`);
+    player2Win = 0;
+    winnerStreak(updatedBoard, player);
+  } else if (player.marker === "O") {
+    console.log(`${player.name} winstreak:${++player2Win}`);
+    player1Win = 0;
+    winnerStreak(updatedBoard, player);
+  }
+}
+
 function checkWinner(updatedBoard, player) {
   for (let row = 0; row < 3; row++) {
     if (
@@ -94,8 +107,7 @@ function checkWinner(updatedBoard, player) {
       updatedBoard[row][0] === updatedBoard[row][1] &&
       updatedBoard[row][1] === updatedBoard[row][2]
     ) {
-      console.log(`${player.name} is the winner`);
-      winnerStreak(updatedBoard, player);
+      checkPlayerWinner(updatedBoard, player);
       return updatedBoard[row][0];
     }
   }
@@ -105,8 +117,7 @@ function checkWinner(updatedBoard, player) {
       updatedBoard[0][column] === updatedBoard[1][column] &&
       updatedBoard[1][column] === updatedBoard[2][column]
     ) {
-      console.log(`${player.name} is the winner`);
-      winnerStreak(updatedBoard);
+      checkPlayerWinner(updatedBoard, player);
       return updatedBoard[0][column];
     }
   }
@@ -115,8 +126,7 @@ function checkWinner(updatedBoard, player) {
     updatedBoard[0][0] === updatedBoard[1][1] &&
     updatedBoard[1][1] === updatedBoard[2][2]
   ) {
-    console.log(`${player.name} is the winner`);
-    winnerStreak(updatedBoard);
+    checkPlayerWinner(updatedBoard, player);
     return updatedBoard[0][0];
   }
   if (
@@ -124,8 +134,7 @@ function checkWinner(updatedBoard, player) {
     updatedBoard[0][2] === updatedBoard[1][1] &&
     updatedBoard[1][1] === updatedBoard[2][0]
   ) {
-    console.log(`${player.name} is the winner`);
-    winnerStreak(updatedBoard);
+    checkPlayerWinner(updatedBoard, player);
     return updatedBoard[0][2];
   }
   return null;
