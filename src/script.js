@@ -12,11 +12,14 @@ function gameBoard() {
   }
 
   function insertMark(row, column, playerMarker, player) {
+    if (game === null) {
+      console.log("The game is over. Start a new game");
+      return board;
+    }
     if (row < 0 || row >= 3 || column < 0 || column >= 3) {
       console.log(
         "Invalid location. Please provide valid row and column indices."
       );
-      return board;
     }
     if (numberOfTurns <= 0) {
       console.log("GAMEOVER");
@@ -25,7 +28,6 @@ function gameBoard() {
     }
     if (board[row][column] !== "") {
       console.log(`The location (${row}, ${column}) is already occupied. `);
-      return board;
     }
     if ((turn && playerMarker === "X") || (!turn && playerMarker === "O")) {
       board[row][column] = playerMarker;
@@ -33,7 +35,6 @@ function gameBoard() {
         `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
       );
       --numberOfTurns;
-      console.log(numberOfTurns);
       switchTurn();
     } else {
       console.log(`Player ${turn ? 2 : 1} turn`);
@@ -63,16 +64,21 @@ function playGame() {
   };
   return { playing };
 }
-const game = playGame();
+let game = playGame();
 let player1Win = 0;
 let player2Win = 0;
+const WINNING_STREAK = 3;
 
+function gameOver() {}
 function winnerStreak(updatedBoard, player) {
-  if (player1Win !== 3 || player2Win !== 3) {
+  if (player1Win !== WINNING_STREAK || player2Win !== WINNING_STREAK) {
     resetBoard(updatedBoard);
   }
-  if (player1Win === 3 || player2Win === 3) {
+  if (player1Win === WINNING_STREAK || player2Win === WINNING_STREAK) {
+    console.clear();
     console.log(`${player.name} IS THE WINNER`);
+    console.log("GAMEOVER");
+    game = null;
   }
 }
 
@@ -141,6 +147,10 @@ function checkWinner(updatedBoard, player) {
 }
 
 function play(row, column, player) {
+  if (game === null) {
+    console.log("The game is over. Start a new game.");
+    return;
+  }
   let playing = game.playing;
   let updatedBoard = playing(row, column, player);
   console.log(updatedBoard);
