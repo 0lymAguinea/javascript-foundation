@@ -20,6 +20,7 @@ function gameBoard() {
       console.log(
         "Invalid location. Please provide valid row and column indices."
       );
+      return board;
     }
     if (numberOfTurns <= 0) {
       console.log("GAMEOVER");
@@ -28,6 +29,7 @@ function gameBoard() {
     }
     if (board[row][column] !== "") {
       console.log(`The location (${row}, ${column}) is already occupied. `);
+      return board;
     }
     if ((turn && playerMarker === "X") || (!turn && playerMarker === "O")) {
       board[row][column] = playerMarker;
@@ -52,17 +54,25 @@ let numberOfTurns = 9;
 function createPlayer(name, marker) {
   return { name, marker };
 }
-
 const player1 = createPlayer("OLYM", "X");
 const player2 = createPlayer("MYLO", "O");
 
 function playGame() {
   const { insertMark, getBoard } = gameBoard();
-  let playing = (row, column, player) => {
-    insertMark(row, column, player.marker, player);
+  let currentPlayer = player1;
+  let playing = (row, column) => {
+    insertMark(row, column, currentPlayer.marker, currentPlayer);
     return getBoard();
   };
-  return { playing };
+
+  function switchPlayer() {
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+  }
+
+  function getCurrentPlayer() {
+    return currentPlayer;
+  }
+  return { playing, switchPlayer, getCurrentPlayer };
 }
 let game = playGame();
 let player1Win = 0;
@@ -146,13 +156,44 @@ function checkWinner(updatedBoard, player) {
   return null;
 }
 
-function play(row, column, player) {
+function play(row, column) {
   if (game === null) {
     console.log("The game is over. Start a new game.");
     return;
   }
   let playing = game.playing;
-  let updatedBoard = playing(row, column, player);
+  let updatedBoard = playing(row, column);
   console.log(updatedBoard);
-  checkWinner(updatedBoard, player);
+  checkWinner(updatedBoard, game.getCurrentPlayer());
 }
+
+function diplayButtons() {
+  const getGameBoard = gameBoard();
+  const board = getGameBoard.getBoard();
+  const display = document.getElementById("display");
+
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      const button = document.createElement("button");
+      button.textContent = board[i][j];
+      button.dataset.row = i;
+      button.dataset.column = j;
+      display.appendChild(button);
+    }
+  }
+}
+diplayButtons();
+
+function buttonController() {
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let row = btn.getAttribute("data-row");
+      let column = btn.getAttribute("data-column");
+      play(row, column);
+      game.switchPlayer();
+    });
+  });
+}
+buttonController();
