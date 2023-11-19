@@ -25,6 +25,7 @@ function gameBoard() {
     if (numberOfTurns <= 0) {
       console.log("GAMEOVER");
       resetBoard(board);
+      resetButtonContent();
       numberOfTurns = 9;
     }
     if (board[row][column] !== "") {
@@ -51,9 +52,11 @@ function gameBoard() {
   return { insertMark, getBoard, resetBoard };
 }
 let numberOfTurns = 9;
+
 function createPlayer(name, marker) {
   return { name, marker };
 }
+
 const player1 = createPlayer("OLYM", "X");
 const player2 = createPlayer("MYLO", "O");
 
@@ -62,17 +65,22 @@ function playGame() {
   let currentPlayer = player1;
   let playing = (row, column) => {
     insertMark(row, column, currentPlayer.marker, currentPlayer);
+    switchCurrentPlayer();
     return getBoard();
   };
 
-  function switchPlayer() {
+  function newBoard() {
+    return getBoard();
+  }
+
+  function switchCurrentPlayer() {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
   }
 
   function getCurrentPlayer() {
     return currentPlayer;
   }
-  return { playing, switchPlayer, getCurrentPlayer };
+  return { playing, switchCurrentPlayer, getCurrentPlayer, newBoard };
 }
 let game = playGame();
 let player1Win = 0;
@@ -83,6 +91,7 @@ function gameOver() {}
 function winnerStreak(updatedBoard, player) {
   if (player1Win !== WINNING_STREAK || player2Win !== WINNING_STREAK) {
     resetBoard(updatedBoard);
+    resetButtonContent();
   }
   if (player1Win === WINNING_STREAK || player2Win === WINNING_STREAK) {
     console.clear();
@@ -156,17 +165,19 @@ function checkWinner(updatedBoard, player) {
   return null;
 }
 
-function play(row, column) {
+function play(row, column, player) {
   if (game === null) {
     console.log("The game is over. Start a new game.");
     return;
   }
   let playing = game.playing;
+  let getCurrentPlayer = game.getCurrentPlayer();
   let updatedBoard = playing(row, column);
   console.log(updatedBoard);
-  checkWinner(updatedBoard, game.getCurrentPlayer());
-}
+  checkWinner(updatedBoard, getCurrentPlayer);
 
+  return { updatedBoard };
+}
 function diplayButtons() {
   const getGameBoard = gameBoard();
   const board = getGameBoard.getBoard();
@@ -178,22 +189,46 @@ function diplayButtons() {
       button.textContent = board[i][j];
       button.dataset.row = i;
       button.dataset.column = j;
+      button.classList = "playableButton";
       display.appendChild(button);
     }
   }
 }
 diplayButtons();
 
-function buttonController() {
+function buttonsController() {
   const buttons = document.querySelectorAll("button");
+  let getCurrentPlayer = game.getCurrentPlayer;
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      let row = e.target.getAttribute("data-row");
+      let column = e.target.getAttribute("data-column");
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      let row = btn.getAttribute("data-row");
-      let column = btn.getAttribute("data-column");
+      if (button.textContent === "") {
+        button.textContent = getCurrentPlayer().marker;
+      }
       play(row, column);
-      game.switchPlayer();
     });
   });
 }
-buttonController();
+buttonsController();
+
+function resetButton() {
+  const display = document.getElementById("display");
+  const resetButton = document.createElement("button");
+  resetButton.textContent = "RESET";
+  resetButton.id = "resetButton";
+  display.append(resetButton);
+
+  resetButton.addEventListener("click", () => {
+    console.log("resetButton");
+  });
+}
+resetButton();
+
+function resetButtonContent() {
+  let grabAllButton = document.querySelectorAll(".playableButton");
+  grabAllButton.forEach((button) => {
+    button.textContent = "";
+  });
+}
