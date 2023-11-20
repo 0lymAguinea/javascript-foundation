@@ -16,21 +16,12 @@ function gameBoard() {
       console.log("The game is over. Start a new game");
       return board;
     }
-    if (row < 0 || row >= 3 || column < 0 || column >= 3) {
-      console.log(
-        "Invalid location. Please provide valid row and column indices."
-      );
-      return board;
-    }
-    if (numberOfTurns <= 0) {
+    //For some reason, it only works when I use 2 instead of 0, it think 2 === 0
+    if (numberOfTurns < 2) {
       console.log("GAMEOVER");
       resetBoard(board);
-      resetButtonContent();
+      refreshButtonContent();
       numberOfTurns = 9;
-    }
-    if (board[row][column] !== "") {
-      console.log(`The location (${row}, ${column}) is already occupied. `);
-      return board;
     }
     if ((turn && playerMarker === "X") || (!turn && playerMarker === "O")) {
       board[row][column] = playerMarker;
@@ -39,6 +30,7 @@ function gameBoard() {
       );
       --numberOfTurns;
       switchTurn();
+      console.log(numberOfTurns);
     } else {
       console.log(`Player ${turn ? 2 : 1} turn`);
     }
@@ -52,7 +44,6 @@ function gameBoard() {
   return { insertMark, getBoard, resetBoard };
 }
 let numberOfTurns = 9;
-
 function createPlayer(name, marker) {
   return { name, marker };
 }
@@ -69,10 +60,6 @@ function playGame() {
     return getBoard();
   };
 
-  function newBoard() {
-    return getBoard();
-  }
-
   function switchCurrentPlayer() {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
   }
@@ -80,7 +67,7 @@ function playGame() {
   function getCurrentPlayer() {
     return currentPlayer;
   }
-  return { playing, switchCurrentPlayer, getCurrentPlayer, newBoard };
+  return { playing, switchCurrentPlayer, getCurrentPlayer };
 }
 let game = playGame();
 let player1Win = 0;
@@ -91,7 +78,7 @@ function gameOver() {}
 function winnerStreak(updatedBoard, player) {
   if (player1Win !== WINNING_STREAK || player2Win !== WINNING_STREAK) {
     resetBoard(updatedBoard);
-    resetButtonContent();
+    refreshButtonContent();
   }
   if (player1Win === WINNING_STREAK || player2Win === WINNING_STREAK) {
     console.clear();
@@ -118,11 +105,26 @@ function checkPlayerWinner(updatedBoard, player) {
     console.log(`${player.name} winstreak:${++player1Win}`);
     player2Win = 0;
     winnerStreak(updatedBoard, player);
+    displayScore(player1Win, player2Win);
   } else if (player.marker === "O") {
     console.log(`${player.name} winstreak:${++player2Win}`);
     player1Win = 0;
     winnerStreak(updatedBoard, player);
+    displayScore(player1Win, player2Win);
   }
+  function getplayer1Win() {
+    return player1Win;
+  }
+  function getplayer2Win() {
+    return player2Win;
+  }
+
+  return { getplayer1Win, getplayer2Win };
+}
+function test() {
+  let check = checkPlayerWinner(null, player2.marker);
+  let win1 = check.getplayer1Win;
+  console.log(win1());
 }
 
 function checkWinner(updatedBoard, player) {
@@ -165,7 +167,7 @@ function checkWinner(updatedBoard, player) {
   return null;
 }
 
-function play(row, column, player) {
+function play(row, column) {
   if (game === null) {
     console.log("The game is over. Start a new game.");
     return;
@@ -201,34 +203,63 @@ function buttonsController() {
   let getCurrentPlayer = game.getCurrentPlayer;
   buttons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      let row = e.target.getAttribute("data-row");
-      let column = e.target.getAttribute("data-column");
-
-      if (button.textContent === "") {
-        button.textContent = getCurrentPlayer().marker;
+      if (game !== null) {
+        let row = e.target.getAttribute("data-row");
+        let column = e.target.getAttribute("data-column");
+        if (button.textContent === "") {
+          button.textContent = getCurrentPlayer().marker;
+          play(row, column);
+        }
       }
-      play(row, column);
     });
   });
 }
 buttonsController();
 
-function resetButton() {
-  const display = document.getElementById("display");
-  const resetButton = document.createElement("button");
-  resetButton.textContent = "RESET";
-  resetButton.id = "resetButton";
-  display.append(resetButton);
+function topDisplayContent() {
+  let player1Turn = document.querySelector(".player1Turn");
+  player1Turn.textContent = `${player1.name} : ${player1.marker}`;
 
-  resetButton.addEventListener("click", () => {
-    console.log("resetButton");
-  });
+  let winstreak = document.querySelector(".winningStreak");
+  winstreak.textContent = `0 : 0`;
+
+  let player2Turn = document.querySelector(".player2Turn");
+  player2Turn.textContent = `${player2.name} : ${player2.marker}`;
 }
-resetButton();
+topDisplayContent();
 
-function resetButtonContent() {
+function displayScore(updatedplayer1Score, updatedplayer2Score) {
+  let winstreak = document.querySelector(".winningStreak");
+  winstreak.textContent = `${updatedplayer1Score} : ${updatedplayer2Score}`;
+}
+
+function refreshButtonContent() {
   let grabAllButton = document.querySelectorAll(".playableButton");
+  let getGameBoard = gameBoard();
+  let board = getGameBoard.getBoard;
   grabAllButton.forEach((button) => {
-    button.textContent = "";
+    setTimeout(() => {
+      button.textContent = "";
+      for (let i = 0; i > 3; i++) {
+        for (let j = 0; j > 3; i++) {
+          board[i][j] = "";
+          return board;
+        }
+      }
+      console.clear();
+    }, 400);
   });
 }
+
+function restartButton() {
+  const bottomDisplay = document.querySelector(".bottomDisplay");
+  const restartButton = document.createElement("button");
+  restartButton.textContent = "RESTART GAME";
+  restartButton.id = "restartButton";
+  bottomDisplay.append(restartButton);
+
+  restartButton.addEventListener("click", () => {
+    location.reload();
+  });
+}
+restartButton();
