@@ -8,31 +8,23 @@ function gameBoard() {
 
   function switchTurn() {
     turn = !turn;
-    console.log(`Player ${turn ? 1 : 2} Turn`);
   }
 
   function insertMark(row, column, playerMarker, player) {
     if (game === null) {
-      console.log("The game is over. Start a new game");
+      announcement();
       return board;
     }
     //For some reason, it only works when I use 2 instead of 0, it think 2 === 0
     if (numberOfTurns < 2) {
-      console.log("GAMEOVER");
       resetBoard(board);
       refreshButtonContent();
       numberOfTurns = 9;
     }
     if ((turn && playerMarker === "X") || (!turn && playerMarker === "O")) {
       board[row][column] = playerMarker;
-      console.log(
-        `${player.name} Inserted ${playerMarker} at (${row}, ${column})`
-      );
       --numberOfTurns;
       switchTurn();
-      console.log(numberOfTurns);
-    } else {
-      console.log(`Player ${turn ? 2 : 1} turn`);
     }
     return board;
   }
@@ -81,33 +73,28 @@ function winnerStreak(updatedBoard, player) {
     refreshButtonContent();
   }
   if (player1Win === WINNING_STREAK || player2Win === WINNING_STREAK) {
-    console.clear();
-    console.log(`${player.name} IS THE WINNER`);
-    console.log("GAMEOVER");
     game = null;
+    announcement();
   }
 }
 
 function resetBoard(updatedBoard) {
-  console.log("RESET BOARD");
-
   for (let row = 0; row < 3; row++) {
     for (let column = 0; column < 3; column++) {
       updatedBoard[row][column] = "";
     }
   }
   numberOfTurns = 9;
-  console.log(updatedBoard);
 }
 
 function checkPlayerWinner(updatedBoard, player) {
   if (player.marker === "X") {
-    console.log(`${player.name} winstreak:${++player1Win}`);
+    ++player1Win;
     player2Win = 0;
     winnerStreak(updatedBoard, player);
     displayScore(player1Win, player2Win);
   } else if (player.marker === "O") {
-    console.log(`${player.name} winstreak:${++player2Win}`);
+    ++player2Win;
     player1Win = 0;
     winnerStreak(updatedBoard, player);
     displayScore(player1Win, player2Win);
@@ -120,11 +107,6 @@ function checkPlayerWinner(updatedBoard, player) {
   }
 
   return { getplayer1Win, getplayer2Win };
-}
-function test() {
-  let check = checkPlayerWinner(null, player2.marker);
-  let win1 = check.getplayer1Win;
-  console.log(win1());
 }
 
 function checkWinner(updatedBoard, player) {
@@ -169,13 +151,10 @@ function checkWinner(updatedBoard, player) {
 
 function play(row, column) {
   if (game === null) {
-    console.log("The game is over. Start a new game.");
-    return;
   }
   let playing = game.playing;
   let getCurrentPlayer = game.getCurrentPlayer();
   let updatedBoard = playing(row, column);
-  console.log(updatedBoard);
   checkWinner(updatedBoard, getCurrentPlayer);
 
   return { updatedBoard };
@@ -246,7 +225,6 @@ function refreshButtonContent() {
           return board;
         }
       }
-      console.clear();
     }, 400);
   });
 }
@@ -263,3 +241,11 @@ function restartButton() {
   });
 }
 restartButton();
+
+function announcement() {
+  let announce = document.querySelector(".announcement");
+  let p = document.createElement("p");
+  p.style.fontSize = "2rem";
+  p.textContent = "CLICK THE RESTART GAME BUTTON TO PLAY AGAIN";
+  announce.append(p);
+}
