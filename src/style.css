@@ -63,3 +63,10 @@ body {
 .playableButton:nth-child(9) {
   border-bottom: none;
 }
+.announcement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
