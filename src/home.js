@@ -1,46 +1,4 @@
-import logoPicture from "./logo.png";
-
-function createHeader() {
-  const header = document.createElement("header");
-  const restaurantName = document.createElement("h1");
-  const myIcon = document.createElement("img");
-
-  myIcon.id = "logo";
-  myIcon.src = logoPicture;
-  restaurantName.textContent = "OlymFans Restaurant";
-
-  header.append(myIcon);
-  header.append(restaurantName);
-
-  return header;
-}
-
-function createNav(onHomeButtonClick, onContactButtonClick, onMenuButtonClick) {
-  const nav = document.createElement("nav");
-  const homeButton = document.createElement("button");
-  const contactButton = document.createElement("button");
-  const menuButton = document.createElement("button");
-
-  homeButton.textContent = "Home";
-  homeButton.id = "homeButton";
-  contactButton.textContent = "Contact";
-  menuButton.textContent = "Menu";
-
-  homeButton.addEventListener("click", () => {
-    onHomeButtonClick();
-  });
-
-  contactButton.addEventListener("click", () => {
-    onContactButtonClick();
-  });
-
-  menuButton.addEventListener("click", () => {
-    onMenuButtonClick();
-  });
-
-  nav.append(homeButton, contactButton, menuButton);
-  return nav;
-}
+import "./styles/main.css";
 
 function createArticle() {
   const article = document.createElement("article");
@@ -111,18 +69,10 @@ function createArticle() {
   return article;
 }
 
-function homePage(onHomeButtonClick, onContactButtonClick, onMenuButtonClick) {
+function homePage() {
   const content = document.getElementById("content");
-  const header = createHeader();
-  const nav = createNav(
-    onHomeButtonClick,
-    onContactButtonClick,
-    onMenuButtonClick
-  );
   const articles = createArticle();
 
-  content.append(header);
-  content.append(nav);
   content.append(articles);
   return content;
 }

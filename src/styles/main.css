@@ -49,3 +49,19 @@ h2 {
   grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
 }
+#contactDetailsLabel {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+#restaurantEmail {
+  color: #eee2de;
+}
+.bottomDetail {
+  display: flex;
+  justify-content: center;
+}
