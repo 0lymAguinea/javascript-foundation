@@ -65,3 +65,35 @@ h2 {
   display: flex;
   justify-content: center;
 }
+#menuContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+#extraRare,
+#rare,
+#mediumRare,
+#medium,
+#mediumWell,
+#wellDone {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+}
+#extraRare img,
+#rare img,
+#mediumRare img,
+#medium img,
+#mediumWell img,
+#wellDone img {
+  max-width: 9rem;
+}
+#extraRare p:nth-child(2)::before,
+#rare p:nth-child(2)::before,
+#mediumRare p:nth-child(2)::before,
+#medium p:nth-child(2)::before,
+#mediumWell p:nth-child(2)::before,
+#wellDone p:nth-child(2)::before,
+p:nth-child(3)::before,
+p:nth-child(4)::before {
+  content: "✓";
+}
