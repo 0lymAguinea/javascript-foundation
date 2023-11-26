@@ -2,6 +2,7 @@ import "./styles/main.css";
 import logoPicture from "./logo.png";
 import { homePage } from "./home.js";
 import { contactPage } from "./contact.js";
+import { menuPage } from "./menu.js";
 
 function createHeader() {
   const content = document.getElementById("content");
@@ -50,4 +51,4 @@ function createNav() {
 
 createHeader();
 
-document.body.append(contactPage());
+document.body.append(menuPage());
