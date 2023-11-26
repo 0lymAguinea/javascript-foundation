@@ -53,7 +53,7 @@ function createArticle() {
   experience!`;
 
   const pOwner = document.createElement("p");
-  pOwner.innerHTML = `<h3>Sincerely,</h3>
+  pOwner.innerHTML = `<br><h3>Sincerely,</h3>
   <p>Olym</p>
   <p>Owner/Manager, OlymFans</p>`;
   article.append(announcement);
