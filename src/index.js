@@ -4,6 +4,38 @@ import { homePage } from "./home.js";
 import { contactPage } from "./contact.js";
 import { menuPage } from "./menu.js";
 
+function clearContent() {
+  const content = document.getElementById("content");
+  let startNode = content.childNodes[2];
+  while (startNode) {
+    let nextNode = startNode.nextSibling;
+    content.removeChild(startNode);
+    startNode = nextNode;
+  }
+}
+
+function tabSwitch() {
+  let currentPage = homePage();
+  const homeButton = document.getElementById("homeButton");
+  const contactButton = document.getElementById("contactButton");
+  const menuButton = document.getElementById("menuButton");
+
+  homeButton.addEventListener("click", () => {
+    clearContent();
+    currentPage = homePage();
+  });
+  contactButton.addEventListener("click", () => {
+    clearContent();
+    currentPage = contactPage();
+  });
+  menuButton.addEventListener("click", () => {
+    clearContent();
+    currentPage = menuPage();
+  });
+
+  return currentPage;
+}
+
 function createHeader() {
   const content = document.getElementById("content");
   const header = document.createElement("header");
@@ -31,17 +63,9 @@ function createNav() {
   homeButton.textContent = "Home";
   homeButton.id = "homeButton";
   contactButton.textContent = "Contact";
+  contactButton.id = "contactButton";
   menuButton.textContent = "Menu";
-
-  homeButton.addEventListener("click", () => {
-    alert("HOME BUTTON");
-  });
-  contactButton.addEventListener("click", () => {
-    alert("CONTACT BUTTON");
-  });
-  menuButton.addEventListener("click", () => {
-    alert("MENU BUTTON");
-  });
+  menuButton.id = "menuButton";
 
   nav.append(homeButton);
   nav.append(contactButton);
@@ -50,5 +74,4 @@ function createNav() {
 }
 
 createHeader();
-
-document.body.append(menuPage());
+document.body.append(tabSwitch());

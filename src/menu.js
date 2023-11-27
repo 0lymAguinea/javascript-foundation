@@ -4,6 +4,7 @@ import mediumRarePic from "./assets/imgs/mediumRare.jpg";
 import mediumPic from "./assets/imgs/medium.jpg";
 import mediumWellPic from "./assets/imgs/mediumWell.jpg";
 import wellDonePic from "./assets/imgs/wellDone.jpg";
+
 function createMenu() {
   const menuContainer = document.createElement("div");
   menuContainer.id = "menuContainer";
