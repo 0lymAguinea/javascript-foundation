@@ -2,6 +2,7 @@ import showDefaultContent from "./scripts/default.js";
 import showToday from "./scripts/today.js";
 import showTomorrow from "./scripts/tomorrow.js";
 import createTodoPage from "./scripts/createTodoPage.js";
+import displayTodo from "./scripts/todo.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
   projectFolders.textContent = "My TODO List";
@@ -24,20 +25,28 @@ function myProjects() {
   projectButtonSelector();
 }
 
+function clearMainContent() {
+  const mainContent = document.getElementById("mainContent");
+  mainContent.innerHTML = "";
+}
+
 function projectButtonSelector() {
   const projectsBtn = document.getElementById("projectsBtn");
   const todayBtn = document.getElementById("todayBtn");
   const tomorrowBtn = document.getElementById("tomorrowBtn");
 
   projectsBtn.addEventListener("click", () => {
+    clearMainContent();
     showDefaultContent();
   });
 
   todayBtn.addEventListener("click", () => {
+    clearMainContent();
     showToday();
   });
 
   tomorrowBtn.addEventListener("click", () => {
+    clearMainContent();
     showTomorrow();
   });
 }
@@ -47,5 +56,7 @@ function pageContents() {
 
   return { middileContent, rightContent };
 }
+
 myProjects();
 pageContents();
+displayTodo();
