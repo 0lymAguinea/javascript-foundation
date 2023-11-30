@@ -9,10 +9,42 @@ body {
 .content {
   display: grid;
   grid-template-columns: 1fr 4fr 2fr;
+  margin: 1rem;
 }
 #projectFolders {
   display: flex;
   flex-direction: column;
+  background-color: rgb(236, 233, 233);
+  border-radius: 5px;
 }
 #mainContent {
+  display: grid;
+  grid-template-rows: 1fr 1fr 2fr;
+}
+#todoPage {
+  background-color: rgb(236, 233, 233);
+  border-radius: 5px;
+}
+#projectFolders,
+#mainContent,
+#todoPage {
+  padding: 0 1rem;
+}
+#mainContent > #currentProjectContainer {
+  display: flex;
+  flex-direction: row;
+}
+#currentProjectContainer > h2 {
+  padding-right: 1rem;
+}
+#addTodoButton {
+  display: flex;
+  width: 100%;
+}
+#addTodoButton::before {
+  content: "+";
+}
+#bottomDisplay {
+  display: flex;
+  flex-direction: column;
 }
