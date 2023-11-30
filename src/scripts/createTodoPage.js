@@ -19,18 +19,23 @@ function createFormLabels() {
   const labelTitle = document.createElement("label");
   labelTitle.for = "title";
   labelTitle.textContent = "Title";
+  labelTitle.id = "labelTitle";
   const labelDescription = document.createElement("label");
   labelDescription.for = "description";
   labelDescription.textContent = "Description";
+  labelDescription.id = "labelDescription";
   const labelDueDate = document.createElement("label");
   labelDueDate.for = "dueDate";
   labelDueDate.textContent = "Due Date";
+  labelDueDate.id = "labelDueDate";
   const labelPriority = document.createElement("label");
   labelPriority.for = "priority";
   labelPriority.textContent = "Priority";
+  labelPriority.id = "labelPriority";
   const labelNote = document.createElement("label");
   labelNote.for = "note";
   labelNote.textContent = "Note";
+  labelNote.id = "labelNote";
 
   form.append(labels);
   labels.append(labelTitle);
@@ -41,9 +46,10 @@ function createFormLabels() {
 }
 
 function createFormInput() {
-  const form = document.querySelector("form");
-  const inputForm = document.createElement("div");
-  inputForm.id = "inputForm";
+  const labelTitle = document.getElementById("labelTitle");
+  const labelDescription = document.getElementById("labelDescription");
+  const labelDueDate = document.getElementById("labelDueDate");
+  const labelNote = document.getElementById("labelNote");
 
   const inputTitle = document.createElement("input");
   inputTitle.type = "text";
@@ -68,16 +74,15 @@ function createFormInput() {
   inputNote.id = "note";
   inputNote.placeholder = "Note";
 
-  form.append(inputForm);
-  inputForm.append(inputTitle);
-  inputForm.append(inputDescription);
-  inputForm.append(inputDueDate);
+  labelTitle.append(inputTitle);
+  labelDescription.append(inputDescription);
+  labelDueDate.append(inputDueDate);
   inputSelectOption();
-  inputForm.append(inputNote);
+  labelNote.append(inputNote);
   formSubmitButton();
 }
 function inputSelectOption() {
-  const inputForm = document.getElementById("inputForm");
+  const labelPriority = document.getElementById("labelPriority");
 
   const inputPriority = document.createElement("select");
   inputPriority.name = "priority";
@@ -92,15 +97,17 @@ function inputSelectOption() {
   optionLowPriority.value = "lowPriority";
   optionLowPriority.text = "Low priority";
 
-  inputForm.append(inputPriority);
+  labelPriority.append(inputPriority);
   inputPriority.append(optionHighPriority);
   inputPriority.append(optionMediumPriority);
   inputPriority.append(optionLowPriority);
 }
 function formSubmitButton() {
-  const inputForm = document.getElementById("inputForm");
+  const labels = document.getElementById("labels");
   const submitButton = document.createElement("button");
   submitButton.textContent = "Add";
+  submitButton.id = "submitButton";
+  submitButton.type = "button";
 
-  inputForm.append(submitButton);
+  labels.append(submitButton);
 }
