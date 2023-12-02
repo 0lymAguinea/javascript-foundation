@@ -88,13 +88,13 @@ function inputSelectOption() {
   inputPriority.name = "priority";
   inputPriority.id = "priority";
   const optionHighPriority = document.createElement("option");
-  optionHighPriority.value = "highPriority";
+  optionHighPriority.value = "High priority";
   optionHighPriority.text = "High priority";
   const optionMediumPriority = document.createElement("option");
-  optionMediumPriority.value = "mediumPriority";
+  optionMediumPriority.value = "Medium priority";
   optionMediumPriority.text = "Medium priority";
   const optionLowPriority = document.createElement("option");
-  optionLowPriority.value = "lowPriority";
+  optionLowPriority.value = "Low priority";
   optionLowPriority.text = "Low priority";
 
   labelPriority.append(inputPriority);
