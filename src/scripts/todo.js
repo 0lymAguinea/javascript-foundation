@@ -50,7 +50,7 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
   );
   displayMiddleContentTodos();
 }
-function displayMiddleContentTodos() {
+export function displayMiddleContentTodos() {
   createMiddleContentTodo();
 }
 function createMiddleContentTodo() {
@@ -59,6 +59,7 @@ function createMiddleContentTodo() {
   myTodos.forEach((todos, index) => {
     const todoButton = document.createElement("button");
     todoButton.textContent = todos.title;
+    todoButton.dataset.todoid = index;
     bottomDisplay.append(todoButton);
   });
 }
