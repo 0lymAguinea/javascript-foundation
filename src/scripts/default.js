@@ -1,4 +1,5 @@
 import createTodoPage from "./createTodoPage";
+import displayTodo from "./todo.js";
 
 export default function showDefaultContent() {
   showDefaultDisplay();
@@ -8,7 +9,6 @@ function showDefaultDisplay() {
   createTopDisplay();
   createMiddleDisplay();
   createBottomDisplay();
-  displayTodoForm();
 }
 function createTopDisplay() {
   let projectCount = 0;
@@ -34,6 +34,7 @@ function createMiddleDisplay() {
 
   mainContent.append(middleDisplay);
   middleDisplay.append(addTodoButton);
+  displayTodoForm();
 }
 function createBottomDisplay() {
   const mainContent = document.getElementById("mainContent");
@@ -52,5 +53,6 @@ function displayTodoForm() {
   addTodoButton.addEventListener("click", () => {
     clearTodoPage();
     createTodoPage();
+    displayTodo();
   });
 }
