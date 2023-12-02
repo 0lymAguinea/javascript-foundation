@@ -29,6 +29,11 @@ function clearMainContent() {
   mainContent.innerHTML = "";
 }
 
+function clearTodoPage() {
+  const todoPage = document.getElementById("todoPage");
+  todoPage.innerHTML = "";
+}
+
 function projectButtonSelector() {
   const projectsBtn = document.getElementById("projectsBtn");
   const todayBtn = document.getElementById("todayBtn");
@@ -42,11 +47,13 @@ function projectButtonSelector() {
 
   todayBtn.addEventListener("click", () => {
     clearMainContent();
+    clearTodoPage();
     showToday();
   });
 
   tomorrowBtn.addEventListener("click", () => {
     clearMainContent();
+    clearTodoPage();
     showTomorrow();
   });
 }
