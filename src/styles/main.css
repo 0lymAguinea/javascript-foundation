@@ -19,7 +19,7 @@ body {
 }
 #mainContent {
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr;
+  grid-template-rows: 2rem 1.5rem 2fr;
 }
 #todoPage {
   background-color: rgb(236, 233, 233);
@@ -47,4 +47,20 @@ body {
 #bottomDisplay {
   display: flex;
   flex-direction: column;
+}
+#bottomDisplay > button {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+}
+
+#bottomDisplay > button::after {
+  content: ">";
+}
+#todoPage > h5 {
+  color: rgb(71, 70, 70);
+}
+#todoPage > h5 > p {
+  font-size: 1.5rem;
+  color: black;
 }
