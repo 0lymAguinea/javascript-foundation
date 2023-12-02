@@ -1,8 +1,7 @@
 import showDefaultContent from "./scripts/default.js";
 import showToday from "./scripts/today.js";
 import showTomorrow from "./scripts/tomorrow.js";
-import createTodoPage from "./scripts/createTodoPage.js";
-import displayTodo from "./scripts/todo.js";
+import { displayMiddleContentTodos } from "./scripts/todo.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
   projectFolders.textContent = "My TODO List";
@@ -38,6 +37,7 @@ function projectButtonSelector() {
   projectsBtn.addEventListener("click", () => {
     clearMainContent();
     showDefaultContent();
+    displayMiddleContentTodos();
   });
 
   todayBtn.addEventListener("click", () => {
@@ -52,11 +52,11 @@ function projectButtonSelector() {
 }
 function pageContents() {
   let middileContent = showDefaultContent();
-  let rightContent = createTodoPage();
+  //let rightContent = createTodoPage();
 
-  return { middileContent, rightContent };
+  return { middileContent };
 }
 
 myProjects();
 pageContents();
-displayTodo();
+//displayTodo();
