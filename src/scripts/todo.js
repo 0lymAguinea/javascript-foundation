@@ -1,5 +1,6 @@
 //Responsible to creating todo items
-const myTodos = [];
+export const myTodos = [];
+import { getTodoPriorty } from "./priority";
 class Todo {
   constructor(title, description, dueDate, priority, note = []) {
     this.title = title;
@@ -67,10 +68,12 @@ function createMiddleContentTodo() {
     textTitle = todos.title;
     textDate = todos.dueDate;
     todoButton.dataset.todoid = index;
+    todoButton.className = "todoProjectButton";
     bottomDisplay.append(todoButton);
     todoButton.append(`${textTitle} : ${textDate} `);
     todoButtonItems(todoButton, todos, index);
   });
+  getTodoPriorty();
 }
 function todoButtonItems(todoButton, todos) {
   todoButton.addEventListener("click", () => {
