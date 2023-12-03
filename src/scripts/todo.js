@@ -75,17 +75,17 @@ function createMiddleContentTodo() {
   });
   getTodoPriorty();
 }
-function todoButtonItems(todoButton, todos) {
+function todoButtonItems(todoButton, todos, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todos);
+    createTodoInformation(todos, index);
   });
 }
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
-function createTodoInformation(todos) {
+function createTodoInformation(todos, index) {
   const todoPage = document.getElementById("todoPage");
 
   const labelTitle = document.createElement("h5");
@@ -122,4 +122,19 @@ function createTodoInformation(todos) {
   labelDueDate.append(todoDueDate);
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
+  createDeleteButton(index, todoPage);
+}
+function createDeleteButton(index, todoPage) {
+  const delButton = document.createElement("button");
+  delButton.id = "delButton";
+  delButton.textContent = "Delete task";
+  delButton.addEventListener("click", () => {
+    delButtonAction(index);
+  });
+  todoPage.append(delButton);
+}
+function delButtonAction(index) {
+  myTodos.splice(index, 1);
+  displayMiddleContentTodos();
+  clearTodoPage();
 }
