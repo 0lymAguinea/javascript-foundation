@@ -1,6 +1,7 @@
 //Responsible to creating todo items
 export const myTodos = [];
 import { getTodoPriorty } from "./priority";
+import { displayEditForm } from "./editTodoPage";
 class Todo {
   constructor(title, description, dueDate, priority, note = []) {
     this.title = title;
@@ -123,10 +124,10 @@ function createTodoInformation(todos, index) {
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
   createDeleteButton(index, todoPage);
+  createEditButton(index, todoPage);
 }
 function createDeleteButton(index, todoPage) {
   const delButton = document.createElement("button");
-  delButton.id = "delButton";
   delButton.textContent = "Delete task";
   delButton.addEventListener("click", () => {
     delButtonAction(index);
@@ -137,4 +138,16 @@ function delButtonAction(index) {
   myTodos.splice(index, 1);
   displayMiddleContentTodos();
   clearTodoPage();
+}
+function createEditButton(index, todoPage) {
+  const editButton = document.createElement("button");
+  editButton.textContent = "Edit task";
+  editButton.addEventListener("click", () => {
+    editButtonAction(index);
+  });
+  todoPage.append(editButton);
+}
+function editButtonAction(index) {
+  clearTodoPage();
+  displayEditForm();
 }
