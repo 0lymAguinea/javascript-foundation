@@ -1,7 +1,7 @@
 //Responsible to creating todo items
 export const myTodos = [];
 import { getTodoPriorty } from "./priority";
-import { displayEditForm } from "./editTodoPage";
+import { displayEditForm } from "./createEditTodoPage";
 class Todo {
   constructor(title, description, dueDate, priority, note = []) {
     this.title = title;
