@@ -1,8 +1,8 @@
 //Responsible to creating todo items
 export const myTodos = [];
 import { getTodoPriorty } from "./priority";
-import { displayEditForm } from "./createEditTodoPage";
-class Todo {
+import createTodoPage from "./createTodoPage";
+export class Todo {
   constructor(title, description, dueDate, priority, note = []) {
     this.title = title;
     this.description = description;
@@ -124,7 +124,7 @@ function createTodoInformation(todos, index) {
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
   createDeleteButton(index, todoPage);
-  createEditButton(index, todoPage);
+  createEditButton(todos, index, todoPage);
 }
 function createDeleteButton(index, todoPage) {
   const delButton = document.createElement("button");
@@ -139,15 +139,50 @@ function delButtonAction(index) {
   displayMiddleContentTodos();
   clearTodoPage();
 }
-function createEditButton(index, todoPage) {
+function createEditButton(todos, index, todoPage) {
   const editButton = document.createElement("button");
   editButton.textContent = "Edit task";
   editButton.addEventListener("click", () => {
-    editButtonAction(index);
+    editButtonAction(todos, index);
   });
   todoPage.append(editButton);
 }
-function editButtonAction(index) {
+function editButtonAction(todos, index) {
   clearTodoPage();
-  displayEditForm();
+  createTodoPage();
+  getTodoFormToBeEdited(todos, index);
+}
+
+function getTodoFormToBeEdited(todos, index) {
+  const inputTitle = document.getElementById("title");
+  const inputDescription = document.getElementById("description");
+  const inputDueDate = document.getElementById("dueDate");
+  const inputPriority = document.getElementById("priority");
+  const inputNote = document.getElementById("note");
+  const submitButton = document.getElementById("submitButton");
+
+  inputTitle.value = todos.title;
+  inputDescription.value = todos.description;
+  inputDueDate.value = todos.dueDate;
+  inputPriority.value = todos.priority;
+  inputNote.value = todos.note;
+
+  submitButton.addEventListener("click", () => {
+    if (inputTitle.value === "" || inputDueDate.value === "") {
+      console.log("error");
+    } else {
+      myTodos.splice(index, 1);
+      addEditedTodotoMyTodos(
+        inputTitle.value,
+        inputDescription.value,
+        inputDueDate.value,
+        inputPriority.value,
+        inputNote.value
+      );
+      displayMiddleContentTodos();
+    }
+  });
+}
+function addEditedTodotoMyTodos(title, description, dueDate, priority, note) {
+  myTodos.push(new Todo(title, description, dueDate, priority, note));
 }
