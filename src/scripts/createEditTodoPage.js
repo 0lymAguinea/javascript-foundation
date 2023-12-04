@@ -3,7 +3,7 @@ export function displayEditForm() {
   createEditForm();
   createEditFormLabels();
   createEditFormInput();
-  inputEditSelectOption();
+  getCurrentInformation();
 }
 function createEditForm() {
   const todoPage = document.getElementById("todoPage");
@@ -55,24 +55,23 @@ function createEditFormInput() {
   const inputTitle = document.createElement("input");
   inputTitle.type = "text";
   inputTitle.name = "title";
-  inputTitle.id = "title";
-  inputTitle.placeholder = "Title";
+  inputTitle.id = "inputTitle";
 
   const inputDescription = document.createElement("input");
   inputDescription.type = "text";
   inputDescription.name = "description";
-  inputDescription.id = "description";
+  inputDescription.id = "inputDescription";
   inputDescription.placeholder = "Description";
 
   const inputDueDate = document.createElement("input");
   inputDueDate.type = "date";
   inputDueDate.name = "dueDate";
-  inputDueDate.id = "dueDate";
+  inputDueDate.id = "inputDueDate";
 
   const inputNote = document.createElement("input");
   inputNote.type = "text";
   inputNote.name = "note";
-  inputNote.id = "note";
+  inputNote.id = "inputNote";
   inputNote.placeholder = "Note";
 
   labelTitle.append(inputTitle);
@@ -87,7 +86,7 @@ function inputEditSelectOption() {
 
   const inputPriority = document.createElement("select");
   inputPriority.name = "priority";
-  inputPriority.id = "priority";
+  inputPriority.id = "inputPriority";
   const optionHighPriority = document.createElement("option");
   optionHighPriority.value = "High priority";
   optionHighPriority.name = "highPriority";
@@ -98,7 +97,7 @@ function inputEditSelectOption() {
   optionMediumPriority.text = "Medium priority";
   const optionLowPriority = document.createElement("option");
   optionLowPriority.value = "Low priority";
-  optionLowPriority.name = "mediumPriority";
+  optionLowPriority.name = "lowPriority";
   optionLowPriority.text = "Low priority";
 
   labelPriority.append(inputPriority);
@@ -114,4 +113,18 @@ function formEditSubmitButton() {
   submitButton.type = "button";
 
   labels.append(submitButton);
+}
+function getCurrentInformation() {
+  myTodos.forEach((todo, index) => {
+    const inputTitle = document.getElementById("inputTitle");
+    const inputDescription = document.getElementById("inputDescription");
+    const inputDueDate = document.getElementById("inputDueDate");
+    const inputPriority = document.getElementById("inputPriority");
+    const inputNote = document.getElementById("inputNote");
+    inputTitle.value = todo.title;
+    inputDescription.value = todo.description;
+    inputDueDate.value = todo.dueDate;
+    inputPriority.value = todo.priority;
+    inputNote.value = todo.note;
+  });
 }
