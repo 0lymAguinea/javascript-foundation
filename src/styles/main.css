@@ -19,7 +19,7 @@ body {
 }
 #mainContent {
   display: grid;
-  grid-template-rows: 2rem 1.5rem 2fr;
+  grid-template-rows: 2rem 2rem 2fr;
 }
 #mainContent button {
   border-radius: 5px;
@@ -54,27 +54,35 @@ body {
 }
 #bottomDisplay > button {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: end;
+  grid-template-columns: 2rem 1fr 2rem;
+  justify-items: center;
+}
+#bottomDisplay > button::before {
+  content: "";
 }
 
 #bottomDisplay > button::after {
   content: ">";
 }
+#bottomDisplay > button.taskCompleteTrue::before {
+  content: "✓";
+  color: rgb(9, 247, 9);
+}
+
+#addTodoButton,
+.todoProjectButton {
+  font-size: 1.1rem;
+}
 .todoProjectButton.high {
-  background-color: red;
+  background-color: rgb(226, 32, 32);
   color: white;
 }
 .todoProjectButton.medium {
-  background-color: rgb(221, 22, 22);
-  color: white;
-}
-.todoProjectButton.medium {
-  background-color: rgb(219, 164, 12);
+  background-color: rgb(223, 175, 44);
   color: white;
 }
 .todoProjectButton.low {
-  background-color: rgb(28, 143, 28);
+  background-color: rgb(16, 102, 16);
   color: white;
 }
 #labels {
