@@ -1,18 +1,31 @@
 //Responsible to creating todo items
 export const myTodos = [];
 import { getTodoPriorty } from "./priority";
+import { getTodosIsCheck } from "./isComplete";
 import createTodoPage from "./createTodoPage";
 export class Todo {
-  constructor(title, description, dueDate, priority, note = []) {
+  constructor(
+    title,
+    description,
+    dueDate,
+    priority,
+    note = [],
+    isComplete = false
+  ) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.note = note;
+    this.isComplete = isComplete;
   }
 
   addNote(note) {
     this.note.push(note);
+  }
+
+  addIsComplete(isComplete) {
+    this.isComplete.push(isComplete);
   }
 }
 
@@ -75,9 +88,11 @@ function createMiddleContentTodo() {
     todoButtonItems(todoButton, todos, index);
   });
   getTodoPriorty();
+  getTodosIsCheck();
 }
 function todoButtonItems(todoButton, todos, index) {
   todoButton.addEventListener("click", () => {
+    console.log(todos);
     clearTodoPage();
     createTodoInformation(todos, index);
   });
@@ -127,6 +142,7 @@ function createTodoInformation(todos, index) {
   labelNote.append(todoNote);
   createDeleteButton(index, todoPage);
   createEditButton(todos, index, todoPage);
+  createIsCompleteButton(todos, todoPage);
 }
 function createDeleteButton(index, todoPage) {
   const delButton = document.createElement("button");
@@ -152,7 +168,13 @@ function createEditButton(todos, index, todoPage) {
 function editButtonAction(todos, index) {
   clearTodoPage();
   createTodoPage();
+  changeTodoTitleToUpdate();
   getTodoFormToBeEdited(todos, index);
+}
+
+function changeTodoTitleToUpdate() {
+  const todoTitle = document.getElementById("todoTitle");
+  todoTitle.textContent = "Edit TODO";
 }
 
 function getTodoFormToBeEdited(todos, index) {
@@ -187,4 +209,26 @@ function getTodoFormToBeEdited(todos, index) {
 }
 function addEditedTodotoMyTodos(title, description, dueDate, priority, note) {
   myTodos.push(new Todo(title, description, dueDate, priority, note));
+}
+function createIsCompleteButton(todos, todoPage) {
+  const completeButton = document.createElement("button");
+  completeButton.textContent = "TODO complete";
+
+  completeButton.addEventListener("click", () => {
+    if (todos.isComplete === false) {
+      isCompleteActionTrue(todos);
+      getTodosIsCheck();
+    } else if (todos.isComplete === true) {
+      isCompleteActionFalse(todos);
+      getTodosIsCheck();
+    }
+  });
+
+  todoPage.append(completeButton);
+}
+function isCompleteActionTrue(todos) {
+  todos.isComplete = true;
+}
+function isCompleteActionFalse(todos) {
+  todos.isComplete = false;
 }
