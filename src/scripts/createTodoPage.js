@@ -1,9 +1,17 @@
 export default function createTodoPage() {
+  createTopTitleForm();
   createForm();
   createFormLabels();
   createFormInput();
 }
 
+function createTopTitleForm() {
+  const todoPage = document.getElementById("todoPage");
+  const todoTitle = document.createElement("h3");
+  todoTitle.id = "todoTitle";
+  todoTitle.textContent = "New TODO";
+  todoPage.append(todoTitle);
+}
 function createForm() {
   const todoPage = document.getElementById("todoPage");
   const form = document.createElement("form");
