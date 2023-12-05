@@ -88,7 +88,8 @@ function clearTodoPage() {
 }
 function createTodoInformation(todos, index) {
   const todoPage = document.getElementById("todoPage");
-
+  const todoInformationPage = document.createElement("div");
+  todoInformationPage.id = "todoInformationPage";
   const labelTitle = document.createElement("h5");
   const labelDescription = document.createElement("h5");
   const labelDueDate = document.createElement("h5");
@@ -112,11 +113,12 @@ function createTodoInformation(todos, index) {
   const todoNote = document.createElement("p");
   todoNote.textContent = todos.note;
 
-  todoPage.append(labelTitle);
-  todoPage.append(labelDescription);
-  todoPage.append(labelDueDate);
-  todoPage.append(labelPriority);
-  todoPage.append(labelNote);
+  todoPage.append(todoInformationPage);
+  todoInformationPage.append(labelTitle);
+  todoInformationPage.append(labelDescription);
+  todoInformationPage.append(labelDueDate);
+  todoInformationPage.append(labelPriority);
+  todoInformationPage.append(labelNote);
 
   labelTitle.append(todoTitle);
   labelDescription.append(todoDescription);
