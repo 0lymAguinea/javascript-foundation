@@ -56,6 +56,7 @@ body {
   display: grid;
   grid-template-columns: 2rem 1fr 2rem;
   justify-items: center;
+  margin-bottom: 0.2rem;
 }
 #bottomDisplay > button::before {
   content: "";
