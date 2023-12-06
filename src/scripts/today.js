@@ -1,10 +1,10 @@
-import { myTodos } from "./todo";
-import showDefaultContent from "./default";
+import { getTodayDate } from "./todayTodo";
+
 export default function showToday() {
   createTopDisplay();
   createMiddleDisplay();
   createBottomDisplay();
-  displayTodayTodo();
+  getTodayDate();
 }
 
 function createTopDisplay() {
@@ -13,7 +13,7 @@ function createTopDisplay() {
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
-  currentProjectLocation.textContent = "Today projects";
+  currentProjectLocation.textContent = "Today tasks";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.textContent = projectCount;
   mainContent.append(display);
@@ -33,20 +33,4 @@ function createBottomDisplay() {
   bottomDisplay.id = "bottomDisplay";
 
   mainContent.append(bottomDisplay);
-}
-
-function displayTodayTodo() {
-  const bottomDisplay = document.getElementById("bottomDisplay");
-  myTodos.forEach((todo, index) => {
-    const todoButton = document.createElement("button");
-    let textTitle = document.createElement("span");
-    let textDate = document.createElement("span");
-
-    textTitle = todo.title;
-    textDate = todo.dueDate;
-    todoButton.dataset.todoid = index;
-    todoButton.className = "todoProjectButton";
-    bottomDisplay.append(todoButton);
-    todoButton.append(`${textTitle} : ${textDate} `);
-  });
 }
