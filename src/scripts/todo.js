@@ -1,6 +1,6 @@
 //Responsible to creating todo items
 export const myTodos = [];
-import { getTodoPriorty } from "./priority";
+import { getTodoPriority } from "./priority";
 import { getTodosIsCheck } from "./isComplete";
 import createTodoPage from "./createTodoPage";
 export class Todo {
@@ -87,7 +87,7 @@ function createMiddleContentTodo() {
     todoButton.append(`${textTitle} : ${textDate} `);
     todoButtonItems(todoButton, todos, index);
   });
-  getTodoPriorty();
+  getTodoPriority();
   getTodosIsCheck();
 }
 function todoButtonItems(todoButton, todos, index) {
