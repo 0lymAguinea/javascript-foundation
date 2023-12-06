@@ -2,7 +2,6 @@ import showDefaultContent from "./scripts/default.js";
 import showToday from "./scripts/today.js";
 import showTomorrow from "./scripts/tomorrow.js";
 import { displayMiddleContentTodos } from "./scripts/todo.js";
-import { myTodos } from "./scripts/todo.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
   projectFolders.textContent = "My TODO List";
@@ -50,7 +49,6 @@ function projectButtonSelector() {
     clearMainContent();
     clearTodoPage();
     showToday();
-    myTodos;
   });
 
   tomorrowBtn.addEventListener("click", () => {
