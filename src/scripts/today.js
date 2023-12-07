@@ -1,5 +1,5 @@
 import { getTodayDate } from "./todayTodo";
-import { getTodayCount } from "./projectCounter";
+import { todayDateFilter } from "./projectCounter";
 
 export default function showToday() {
   createTopDisplay();
@@ -16,7 +16,7 @@ function createTopDisplay() {
   currentProjectLocation.textContent = "Today tasks";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = getTodayCount();
+  currentProjectCounts.textContent = todayDateFilter();
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
