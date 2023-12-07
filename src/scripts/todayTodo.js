@@ -1,6 +1,7 @@
 import { myTodos } from "./todo";
 import { getTodayTodoPriority } from "./priority";
 import { getTodayTodoIsCheck } from "./isComplete";
+import { createTodoInformation } from "./todo";
 
 export function getTodayDate() {
   const todayDate = formattedTodayDate();
@@ -28,8 +29,20 @@ function displayTodayTodo(todayDate) {
       todoButton.className = "todoProjectButton";
       bottomDisplay.append(todoButton);
       todoButton.append(`${textTitle} : ${textDate} `);
+      todoButtonItems(todoButton, todo, index);
     }
   });
   getTodayTodoPriority();
   getTodayTodoIsCheck();
+}
+function todoButtonItems(todoButton, todo, index) {
+  todoButton.addEventListener("click", (e) => {
+    clearTodoPage();
+    disableDueDateInput();
+    createTodoInformation(todo, index);
+  });
+}
+function clearTodoPage() {
+  const todoPage = document.getElementById("todoPage");
+  todoPage.innerHTML = "";
 }
