@@ -71,10 +71,6 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
   displayAllTaskCount();
   displayMiddleContentTodos();
 }
-function clearClearMiddleContentTodo() {
-  const mainContent = document.getElementById("mainContent");
-  mainContent.innerHTML = "";
-}
 export function displayMiddleContentTodos() {
   createMiddleContentTodo();
 }
