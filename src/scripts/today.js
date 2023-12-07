@@ -1,4 +1,5 @@
 import { getTodayDate } from "./todayTodo";
+import { getTodayCount } from "./projectCounter";
 
 export default function showToday() {
   createTopDisplay();
@@ -8,14 +9,14 @@ export default function showToday() {
 }
 
 function createTopDisplay() {
-  let projectCount = 0;
   const mainContent = document.getElementById("mainContent");
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
   currentProjectLocation.textContent = "Today tasks";
   const currentProjectCounts = document.createElement("h2");
-  currentProjectCounts.textContent = projectCount;
+  currentProjectCounts.id = "taskCount";
+  currentProjectCounts.textContent = getTodayCount();
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);

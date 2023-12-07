@@ -1,4 +1,5 @@
 import createTodoPage from "./createTodoPage";
+import { getAllTaskCount } from "./projectCounter.js";
 import displayTodo from "./todo.js";
 
 export default function showDefaultContent() {
@@ -11,14 +12,14 @@ function showDefaultDisplay() {
   createBottomDisplay();
 }
 function createTopDisplay() {
-  let projectCount = 0;
   const mainContent = document.getElementById("mainContent");
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
   currentProjectLocation.textContent = "All Projects";
   const currentProjectCounts = document.createElement("h2");
-  currentProjectCounts.textContent = projectCount;
+  currentProjectCounts.id = "taskCount";
+  currentProjectCounts.textContent = getAllTaskCount();
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);

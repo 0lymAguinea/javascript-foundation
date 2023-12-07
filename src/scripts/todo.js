@@ -3,6 +3,7 @@ export const myTodos = [];
 import { getTodoPriority } from "./priority";
 import { getTodosIsCheck } from "./isComplete";
 import createTodoPage from "./createTodoPage";
+import { displayAllTaskCount } from "./projectCounter";
 export class Todo {
   constructor(
     title,
@@ -66,7 +67,13 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
       note.value
     )
   );
+
+  displayAllTaskCount();
   displayMiddleContentTodos();
+}
+function clearClearMiddleContentTodo() {
+  const mainContent = document.getElementById("mainContent");
+  mainContent.innerHTML = "";
 }
 export function displayMiddleContentTodos() {
   createMiddleContentTodo();
@@ -92,7 +99,6 @@ function createMiddleContentTodo() {
 }
 function todoButtonItems(todoButton, todos, index) {
   todoButton.addEventListener("click", () => {
-    console.log(todos);
     clearTodoPage();
     createTodoInformation(todos, index);
   });
@@ -149,6 +155,7 @@ function createDeleteButton(index, todoPage) {
   delButton.textContent = "Delete task";
   delButton.addEventListener("click", () => {
     delButtonAction(index);
+    displayAllTaskCount();
   });
   todoPage.append(delButton);
 }
