@@ -4,6 +4,7 @@ import { getTodoPriority } from "./priority";
 import { getTodosIsCheck } from "./isComplete";
 import createTodoPage from "./createTodoPage";
 import { displayAllTaskCount } from "./projectCounter";
+import { getTodoFormToBeEdited } from "./editFormTodo";
 export class Todo {
   constructor(
     title,
@@ -103,7 +104,7 @@ function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
-function createTodoInformation(todos, index) {
+export function createTodoInformation(todos, index) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
   todoInformationPage.id = "todoInformationPage";
@@ -180,58 +181,22 @@ function changeTodoTitleToUpdate() {
   todoTitle.textContent = "Edit TODO";
 }
 
-function getTodoFormToBeEdited(todos, index) {
-  const inputTitle = document.getElementById("title");
-  const inputDescription = document.getElementById("description");
-  const inputDueDate = document.getElementById("dueDate");
-  const inputPriority = document.getElementById("priority");
-  const inputNote = document.getElementById("note");
-  const submitButton = document.getElementById("submitButton");
-
-  inputTitle.value = todos.title;
-  inputDescription.value = todos.description;
-  inputDueDate.value = todos.dueDate;
-  inputPriority.value = todos.priority;
-  inputNote.value = todos.note;
-
-  submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
-    } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      displayMiddleContentTodos();
-    }
-  });
-}
-function addEditedTodotoMyTodos(title, description, dueDate, priority, note) {
-  myTodos.push(new Todo(title, description, dueDate, priority, note));
-}
 function createIsCompleteButton(todos, todoPage) {
   const completeButton = document.createElement("button");
   completeButton.textContent = "TODO complete";
 
   completeButton.addEventListener("click", () => {
     if (todos.isComplete === false) {
-      isCompleteActionTrue(todos);
+      isCompleteAction(todos);
       getTodosIsCheck();
     } else if (todos.isComplete === true) {
-      isCompleteActionFalse(todos);
+      isCompleteAction(todos);
       getTodosIsCheck();
     }
   });
 
   todoPage.append(completeButton);
 }
-function isCompleteActionTrue(todos) {
-  todos.isComplete = true;
-}
-function isCompleteActionFalse(todos) {
-  todos.isComplete = false;
+function isCompleteAction(todos) {
+  todos.isComplete = !todos.isComplete;
 }
