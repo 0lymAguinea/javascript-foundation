@@ -116,7 +116,7 @@ function editButtonAction(todos, index) {
   clearTodoPage();
   createTodoPage();
   changeTodoTitleToUpdate();
-  getTodayFormEdited(todos, index); //imported
+  getTodayFormEdited(todos, index);
 }
 
 function changeTodoTitleToUpdate() {
