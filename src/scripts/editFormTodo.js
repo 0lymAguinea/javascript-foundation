@@ -1,6 +1,7 @@
 import { myTodos } from "./todo";
 import { Todo } from "./todo";
 import { displayMiddleContentTodos } from "./todo";
+import { getTodayDate } from "./todayTodo";
 
 export function getTodoFormToBeEdited(todos, index) {
   const {
@@ -86,7 +87,7 @@ export function getTodayFormEdited(todos, index) {
       );
       console.log("click");
       clearTodoPage();
-      displayMiddleContentTodos();
+      getTodayDate();
     }
   });
 }
