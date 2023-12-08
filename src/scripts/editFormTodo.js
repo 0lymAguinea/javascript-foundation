@@ -3,16 +3,30 @@ import { Todo } from "./todo";
 import { displayMiddleContentTodos } from "./todo";
 
 export function getTodoFormToBeEdited(todos, index) {
-  const inputTitle = document.getElementById("title");
-  const inputDescription = document.getElementById("description");
-  const inputDueDate = document.getElementById("dueDate");
-  const inputPriority = document.getElementById("priority");
-  const inputNote = document.getElementById("note");
-  inputTitle.value = todos.title;
-  inputDescription.value = todos.description;
-  inputDueDate.value = todos.dueDate;
-  inputPriority.value = todos.priority;
-  inputNote.value = todos.note;
+  const {
+    inputTitle,
+    inputDescription,
+    inputDueDate,
+    inputPriority,
+    inputNote,
+  } = getInputs();
+
+  inputDueDate.removeAttribute("disabled");
+
+  const defaultValues = {
+    title: todos.title,
+    description: todos.description,
+    dueDate: todos.dueDate,
+    priority: todos.priority,
+    note: todos.note,
+  };
+
+  // Assign the current values to the form inputs
+  inputTitle.value = defaultValues.title;
+  inputDescription.value = defaultValues.description;
+  inputDueDate.value = defaultValues.dueDate;
+  inputPriority.value = defaultValues.priority;
+  inputNote.value = defaultValues.note;
 
   submitButton.addEventListener("click", () => {
     if (inputTitle.value === "" || inputDueDate.value === "") {
@@ -33,17 +47,30 @@ export function getTodoFormToBeEdited(todos, index) {
   });
 }
 export function getTodayFormEdited(todos, index) {
-  const inputTitle = document.getElementById("title");
-  const inputDescription = document.getElementById("description");
-  const inputDueDate = document.getElementById("dueDate");
+  const {
+    inputTitle,
+    inputDescription,
+    inputDueDate,
+    inputPriority,
+    inputNote,
+  } = getInputs();
+
   disabledTodayDueDate();
-  const inputPriority = document.getElementById("priority");
-  const inputNote = document.getElementById("note");
-  inputTitle.value = todos.title;
-  inputDescription.value = todos.description;
-  inputDueDate.value = todos.dueDate;
-  inputPriority.value = todos.priority;
-  inputNote.value = todos.note;
+
+  const defaultValues = {
+    title: todos.title,
+    description: todos.description,
+    dueDate: todos.dueDate,
+    priority: todos.priority,
+    note: todos.note,
+  };
+
+  // Assign the current values to the form inputs
+  inputTitle.value = defaultValues.title;
+  inputDescription.value = defaultValues.description;
+  inputDueDate.value = defaultValues.dueDate;
+  inputPriority.value = defaultValues.priority;
+  inputNote.value = defaultValues.note;
 
   submitButton.addEventListener("click", () => {
     if (inputTitle.value === "" || inputDueDate.value === "") {
@@ -63,18 +90,27 @@ export function getTodayFormEdited(todos, index) {
     }
   });
 }
+function getInputs() {
+  const inputTitle = document.getElementById("title");
+  const inputDescription = document.getElementById("description");
+  const inputDueDate = document.getElementById("dueDate");
+  disabledTodayDueDate();
+  const inputPriority = document.getElementById("priority");
+  const inputNote = document.getElementById("note");
+  return {
+    inputTitle,
+    inputDescription,
+    inputDueDate,
+    inputPriority,
+    inputNote,
+  };
+}
 
 function disabledTodayDueDate() {
   const dueDate = document.getElementById("dueDate");
   dueDate.disabled = true;
 }
-function formattedTodayDate() {
-  const getDate = new Date();
-  const year = getDate.getFullYear().toString();
-  const month = (getDate.getMonth() + 1).toString().padStart(2, "0");
-  const day = getDate.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
