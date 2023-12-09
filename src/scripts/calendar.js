@@ -1,7 +1,10 @@
-export default function showTomorrow() {
+import { displayCalendar } from "./calendarTodo";
+
+export default function showCalendar() {
   createTopDisplay();
   createMiddleDisplay();
   createBottomDisplay();
+  displayCalendar();
 }
 
 function createTopDisplay() {
@@ -10,7 +13,7 @@ function createTopDisplay() {
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
-  currentProjectLocation.textContent = "Tomorrow projects";
+  currentProjectLocation.textContent = "Calendar";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.textContent = projectCount;
   mainContent.append(display);
