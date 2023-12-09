@@ -1,5 +1,6 @@
 //Responsible to creating todo items
 export const myTodos = [];
+export const todoState = [true, false, "calendar"];
 import { getTodoPriority } from "./priority";
 import { getTodosIsCheck } from "./isComplete";
 import { displayAllTaskCount } from "./projectCounter";
@@ -96,7 +97,7 @@ function createMiddleContentTodo() {
 function todoButtonItems(todoButton, todos, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todos, index, false);
+    createTodoInformation(todos, index, todoState[1]);
   });
 }
 function clearTodoPage() {

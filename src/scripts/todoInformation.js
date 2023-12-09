@@ -9,7 +9,8 @@ import { getTodayTodoIsCheck } from "./isComplete";
 import { displayAllTaskCount } from "./projectCounter";
 import { displayTodayCount } from "./projectCounter";
 import { getTodayDate } from "./todayTodo";
-export function createTodoInformation(todos, index, isToday) {
+import { calendarTodoIsCheck } from "./isComplete";
+export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
   todoInformationPage.id = "todoInformationPage";
@@ -49,55 +50,62 @@ export function createTodoInformation(todos, index, isToday) {
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
 
-  createDeleteButton(index, todoPage, isToday);
-  createEditButton(todos, index, todoPage, isToday);
-  createIsCompleteButton(todos, todoPage, isToday);
+  createDeleteButton(index, todoPage, todoStatus);
+  createEditButton(todos, index, todoPage, todoStatus);
+  createIsCompleteButton(todos, todoPage, todoStatus);
 }
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
 
-export function createDeleteButton(index, todoPage, isToday) {
+export function createDeleteButton(index, todoPage, todoStatus) {
   const delButton = document.createElement("button");
   delButton.textContent = "Delete task";
   delButton.addEventListener("click", () => {
-    delButtonAction(index, isToday);
-    if (isToday) {
+    delButtonAction(index, todoStatus);
+    if (todoStatus === true) {
       displayTodayCount();
-    } else {
+    } else if (todoStatus === "calendar") {
+      console.log("display calendar counts");
+    } else if (todoStatus === false) {
       displayAllTaskCount();
     }
   });
   todoPage.append(delButton);
 }
 
-export function delButtonAction(index, isToday) {
-  myTodos.splice(index, 1);
-  if (isToday) {
+export function delButtonAction(index, todoStatus) {
+  if (todoStatus === true) {
+    myTodos.splice(index, 1);
     getTodayDate();
-  } else {
+  } else if (todoStatus === "calendar") {
+    console.log("delete clicked");
+  } else if (todoStatus === false) {
+    myTodos.splice(index, 1);
     displayMiddleContentTodos();
   }
   clearTodoPage();
 }
 
-export function createEditButton(todos, index, todoPage, isToday) {
+export function createEditButton(todos, index, todoPage, todoStatus) {
   const editButton = document.createElement("button");
   editButton.textContent = "Edit task";
   editButton.addEventListener("click", () => {
-    editButtonAction(todos, index, isToday);
+    editButtonAction(todos, index, todoStatus);
   });
   todoPage.append(editButton);
 }
 
-export function editButtonAction(todos, index, isToday) {
+export function editButtonAction(todos, index, todoStatus) {
   clearTodoPage();
   createTodoPage();
   changeTodoTitleToUpdate();
-  if (isToday) {
+  if (todoStatus === true) {
     getTodayFormEdited(todos, index);
-  } else {
+  } else if (todoStatus === "calendar") {
+    console.log("edit clicked");
+  } else if (todoStatus === false) {
     getTodoFormToBeEdited(todos, index);
   }
 }
@@ -107,15 +115,17 @@ export function changeTodoTitleToUpdate() {
   todoTitle.textContent = "Edit TODO";
 }
 
-export function createIsCompleteButton(todos, todoPage, isToday) {
+export function createIsCompleteButton(todos, todoPage, todoStatus) {
   const completeButton = document.createElement("button");
   completeButton.textContent = "TODO complete";
 
   completeButton.addEventListener("click", () => {
     isCompleteAction(todos);
-    if (isToday) {
+    if (todoStatus === true) {
       getTodayTodoIsCheck();
-    } else {
+    } else if (todoStatus === "calendar") {
+      calendarTodoIsCheck();
+    } else if (todoStatus === false) {
       getTodosIsCheck();
     }
   });
