@@ -10,6 +10,9 @@ export function getTodayTodoIsCheck() {
   const todayDate = formattedTodayDate();
   dateFilterPriority(todayDate);
 }
+export function calendarTodoIsCheck() {
+  calendarPicked();
+}
 function formattedTodayDate() {
   const getDate = new Date();
   const year = getDate.getFullYear().toString();
@@ -25,7 +28,19 @@ function dateFilterPriority(todayDate) {
     }
   });
 }
-
+function calendarPicked() {
+  const input = document.getElementById("calendar");
+  const pickedDate = input.value;
+  calendarTodoIscomplete(pickedDate);
+}
+function calendarTodoIscomplete(pickedDate) {
+  myTodos.forEach((todo, index) => {
+    if (todo.dueDate === pickedDate) {
+      const isComplete = todo.isComplete;
+      todoChecker(isComplete, index);
+    }
+  });
+}
 function todoChecker(isComplete, index) {
   if (isComplete) {
     taskCompleteStatus(index, true);

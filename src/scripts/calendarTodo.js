@@ -1,6 +1,10 @@
-import { pick } from "lodash";
+import { getTodoPriority } from "./priority";
+import { getTodosIsCheck } from "./isComplete";
+import { calendarTodoIsCheck } from "./isComplete";
 import { myTodos } from "./todo";
 import { createTodoInformation } from "./todoInformation";
+import { todoState } from "./todo";
+
 export function displayCalendar() {
   const middleDisplay = document.getElementById("middleDisplay");
   const labelElement = calendarLabel();
@@ -45,11 +49,13 @@ function displayCalendarPickedTodo(pickedDate) {
       todoButtonItems(todoButton, todo, index);
     }
   });
+  //getTodoPriority();
+  calendarTodoIsCheck();
 }
 function todoButtonItems(todoButton, todo, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todo, index, false);
+    createTodoInformation(todo, index, todoState[2]);
   });
 }
 function clearTodoPage() {
