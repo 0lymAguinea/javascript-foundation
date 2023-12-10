@@ -1,5 +1,4 @@
 import { displayCalendar } from "./calendarTodo";
-
 export default function showCalendar() {
   createTopDisplay();
   createMiddleDisplay();
@@ -8,14 +7,14 @@ export default function showCalendar() {
 }
 
 function createTopDisplay() {
-  let projectCount = 0;
   const mainContent = document.getElementById("mainContent");
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
   currentProjectLocation.textContent = "Calendar";
   const currentProjectCounts = document.createElement("h2");
-  currentProjectCounts.textContent = projectCount;
+
+  currentProjectCounts.id = "taskCount";
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
