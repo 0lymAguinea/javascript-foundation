@@ -1,8 +1,53 @@
 import { myTodos } from "./todo";
+import { Todo } from "./todo";
 import { getTodayTodoPriority } from "./priority";
 import { getTodayTodoIsCheck } from "./isComplete";
 import { createTodoInformation } from "./todoInformation";
+import { displayTodayCount } from "./projectCounter";
 const TODAY_TODO = "todayTodo";
+
+export default function displayTodayTodoForm() {
+  getTodoForm();
+}
+
+function getTodoForm() {
+  const inputTitle = document.getElementById("title");
+  const inputDescription = document.getElementById("description");
+  const inputDueDate = document.getElementById("dueDate");
+  inputDueDate.value = formattedTodayDate();
+  inputDueDate.disabled = true;
+  const inputPriority = document.getElementById("priority");
+  const inputNote = document.getElementById("note");
+  const submitButton = document.getElementById("submitButton");
+
+  submitButton.addEventListener("click", () => {
+    if (inputTitle.value === "") {
+      console.log("ERROR");
+    } else {
+      addTodoToMyTodos(
+        inputTitle,
+        inputDescription,
+        inputDueDate,
+        inputPriority,
+        inputNote
+      );
+    }
+  });
+}
+function addTodoToMyTodos(title, description, dueDate, priority, note) {
+  myTodos.push(
+    new Todo(
+      title.value,
+      description.value,
+      dueDate.value,
+      priority.value,
+      note.value
+    )
+  );
+
+  displayTodayCount();
+  getTodayDate();
+}
 export function getTodayDate() {
   const todayDate = formattedTodayDate();
   displayTodayTodo(todayDate);
