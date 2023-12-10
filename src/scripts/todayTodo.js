@@ -2,8 +2,7 @@ import { myTodos } from "./todo";
 import { getTodayTodoPriority } from "./priority";
 import { getTodayTodoIsCheck } from "./isComplete";
 import { createTodoInformation } from "./todoInformation";
-import { todoState } from "./todo";
-
+const TODAY_TODO = "todayTodo";
 export function getTodayDate() {
   const todayDate = formattedTodayDate();
   displayTodayTodo(todayDate);
@@ -40,7 +39,7 @@ function displayTodayTodo(todayDate) {
 function todoButtonItems(todoButton, todo, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todo, index, todoState[0]);
+    createTodoInformation(todo, index, TODAY_TODO);
   });
 }
 function clearTodoPage() {

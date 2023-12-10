@@ -1,10 +1,11 @@
 //Responsible to creating todo items
 export const myTodos = [];
-export const todoState = [true, false, "calendar"];
 import { getTodoPriority } from "./priority";
 import { getTodosIsCheck } from "./isComplete";
 import { displayAllTaskCount } from "./projectCounter";
 import { createTodoInformation } from "./todoInformation";
+
+const DEFAULT_TODO = "defaultTodo";
 export class Todo {
   constructor(
     title,
@@ -97,7 +98,7 @@ function createMiddleContentTodo() {
 function todoButtonItems(todoButton, todos, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todos, index, todoState[1]);
+    createTodoInformation(todos, index, DEFAULT_TODO);
   });
 }
 function clearTodoPage() {

@@ -1,9 +1,8 @@
-import { getTodoPriority } from "./priority";
-import { getTodosIsCheck } from "./isComplete";
 import { calendarTodoIsCheck } from "./isComplete";
 import { myTodos } from "./todo";
 import { createTodoInformation } from "./todoInformation";
-import { todoState } from "./todo";
+
+const CALENDAR_SELECTED_TODO = "calendarSelected";
 
 export function displayCalendar() {
   const middleDisplay = document.getElementById("middleDisplay");
@@ -55,7 +54,7 @@ function displayCalendarPickedTodo(pickedDate) {
 function todoButtonItems(todoButton, todo, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoInformation(todo, index, todoState[2]);
+    createTodoInformation(todo, index, CALENDAR_SELECTED_TODO);
   });
 }
 function clearTodoPage() {
