@@ -2,7 +2,8 @@ import { myTodos } from "./todo";
 import { Todo } from "./todo";
 import { displayMiddleContentTodos } from "./todo";
 import { getTodayDate } from "./todayTodo";
-
+import { getDateSelected } from "./todoInformation";
+import { displayCalendarPickedTodo } from "./calendarTodo";
 export function getTodoFormToBeEdited(todos, index) {
   const {
     inputTitle,
@@ -41,7 +42,7 @@ export function getTodoFormToBeEdited(todos, index) {
         inputPriority.value,
         inputNote.value
       );
-      console.log("click");
+
       clearTodoPage();
       displayMiddleContentTodos();
     }
@@ -56,7 +57,7 @@ export function getTodayFormEdited(todos, index) {
     inputNote,
   } = getInputs();
 
-  disabledTodayDueDate();
+  disabledDueDate();
 
   const defaultValues = {
     title: todos.title,
@@ -85,9 +86,51 @@ export function getTodayFormEdited(todos, index) {
         inputPriority.value,
         inputNote.value
       );
-      console.log("click");
       clearTodoPage();
       getTodayDate();
+    }
+  });
+}
+export function getSelectedFormEdited(todos, index) {
+  const {
+    inputTitle,
+    inputDescription,
+    inputDueDate,
+    inputPriority,
+    inputNote,
+  } = getInputs();
+
+  disabledDueDate();
+
+  const defaultValues = {
+    title: todos.title,
+    description: todos.description,
+    dueDate: todos.dueDate,
+    priority: todos.priority,
+    note: todos.note,
+  };
+
+  // Assign the current values to the form inputs
+  inputTitle.value = defaultValues.title;
+  inputDescription.value = defaultValues.description;
+  inputDueDate.value = defaultValues.dueDate;
+  inputPriority.value = defaultValues.priority;
+  inputNote.value = defaultValues.note;
+
+  submitButton.addEventListener("click", () => {
+    if (inputTitle.value === "" || inputDueDate.value === "") {
+      console.log("error");
+    } else {
+      myTodos.splice(index, 1);
+      addEditedTodotoMyTodos(
+        inputTitle.value,
+        inputDescription.value,
+        inputDueDate.value,
+        inputPriority.value,
+        inputNote.value
+      );
+      clearTodoPage();
+      displayCalendarPickedTodo(getDateSelected());
     }
   });
 }
@@ -95,7 +138,7 @@ function getInputs() {
   const inputTitle = document.getElementById("title");
   const inputDescription = document.getElementById("description");
   const inputDueDate = document.getElementById("dueDate");
-  disabledTodayDueDate();
+  disabledDueDate();
   const inputPriority = document.getElementById("priority");
   const inputNote = document.getElementById("note");
   return {
@@ -107,7 +150,7 @@ function getInputs() {
   };
 }
 
-function disabledTodayDueDate() {
+function disabledDueDate() {
   const dueDate = document.getElementById("dueDate");
   dueDate.disabled = true;
 }

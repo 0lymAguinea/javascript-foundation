@@ -12,7 +12,7 @@ import { getTodayDate } from "./todayTodo";
 import { calendarTodoIsCheck } from "./isComplete";
 import { displayCalendarPickedTodo } from "./calendarTodo";
 import { displayCalendarCount } from "./projectCounter";
-
+import { getSelectedFormEdited } from "./editFormTodo";
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -77,8 +77,7 @@ export function createDeleteButton(index, todoPage, todoStatus) {
   });
   todoPage.append(delButton);
 }
-
-function getDateSelected() {
+export function getDateSelected() {
   const input = document.getElementById("calendar");
   return input.value;
 }
@@ -110,8 +109,8 @@ export function editButtonAction(todos, index, todoStatus) {
   changeTodoTitleToUpdate();
   if (todoStatus === "todayTodo") {
     getTodayFormEdited(todos, index);
-  } else if (todoStatus === "calendar") {
-    console.log("edit clicked");
+  } else if (todoStatus === "calendarSelected") {
+    getSelectedFormEdited(todos, index);
   } else if (todoStatus === "defaultTodo") {
     getTodoFormToBeEdited(todos, index);
   }
