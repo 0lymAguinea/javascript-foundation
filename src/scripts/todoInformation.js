@@ -10,6 +10,9 @@ import { displayAllTaskCount } from "./projectCounter";
 import { displayTodayCount } from "./projectCounter";
 import { getTodayDate } from "./todayTodo";
 import { calendarTodoIsCheck } from "./isComplete";
+import { displayCalendarPickedTodo } from "./calendarTodo";
+import { displayCalendarCount } from "./projectCounter";
+
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -66,8 +69,8 @@ export function createDeleteButton(index, todoPage, todoStatus) {
     delButtonAction(index, todoStatus);
     if (todoStatus === "todayTodo") {
       displayTodayCount();
-    } else if (todoStatus === "calendar") {
-      console.log("display calendar counts");
+    } else if (todoStatus === "calendarSelected") {
+      displayCalendarCount();
     } else if (todoStatus === "defaultTodo") {
       displayAllTaskCount();
     }
@@ -75,14 +78,18 @@ export function createDeleteButton(index, todoPage, todoStatus) {
   todoPage.append(delButton);
 }
 
+function getDateSelected() {
+  const input = document.getElementById("calendar");
+  return input.value;
+}
+
 export function delButtonAction(index, todoStatus) {
+  myTodos.splice(index, 1);
   if (todoStatus === "todayTodo") {
-    myTodos.splice(index, 1);
     getTodayDate();
-  } else if (todoStatus === "calendar") {
-    console.log("delete clicked");
+  } else if (todoStatus === "calendarSelected") {
+    displayCalendarPickedTodo(getDateSelected());
   } else if (todoStatus === "defaultTodo") {
-    myTodos.splice(index, 1);
     displayMiddleContentTodos();
   }
   clearTodoPage();
