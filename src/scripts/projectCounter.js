@@ -9,6 +9,10 @@ export function displayTodayCount() {
   const todayCount = document.getElementById("taskCount");
   todayCount.textContent = todayDateFilter();
 }
+export function displayCalendarCount() {
+  const selectedCount = document.getElementById("taskCount");
+  selectedCount.textContent = calendarSelectedCount();
+}
 
 export function displayAllTaskCount() {
   const allTasks = document.getElementById("taskCount");
@@ -28,4 +32,18 @@ function formattedTodayDate() {
 function displayTodayCountFiltered(todayDate) {
   const todayTaskCount = myTodos.filter((todo) => todo.dueDate === todayDate);
   return todayTaskCount.length;
+}
+
+export function calendarSelectedCount() {
+  const pickedDate = formattedSelectDate();
+  return displayCalendarPickedTodoCount(pickedDate);
+}
+function formattedSelectDate() {
+  const input = document.getElementById("calendar");
+  const pickedDate = input.value;
+  return pickedDate;
+}
+function displayCalendarPickedTodoCount(pickedDate) {
+  const pickedCount = myTodos.filter((todo) => todo.dueDate === pickedDate);
+  return pickedCount.length;
 }
