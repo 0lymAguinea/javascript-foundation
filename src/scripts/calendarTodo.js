@@ -1,4 +1,5 @@
 import { calendarTodoIsCheck } from "./isComplete";
+import { getCalendarTodoPriority } from "./priority";
 import { myTodos } from "./todo";
 import { createTodoInformation } from "./todoInformation";
 
@@ -48,7 +49,7 @@ function displayCalendarPickedTodo(pickedDate) {
       todoButtonItems(todoButton, todo, index);
     }
   });
-  //getTodoPriority();
+  getCalendarTodoPriority();
   calendarTodoIsCheck();
 }
 function todoButtonItems(todoButton, todo, index) {

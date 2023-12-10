@@ -35,6 +35,21 @@ function dateFilterPriority(todayDate) {
   });
 }
 
+export function getCalendarTodoPriority() {
+  const input = document.getElementById("calendar");
+  const pickedDate = input.value;
+  calendearTodoFilterPriority(pickedDate);
+}
+
+function calendearTodoFilterPriority(pickedDate) {
+  myTodos.forEach((todo, index) => {
+    if (todo.dueDate === pickedDate) {
+      const priority = todo.priority;
+      filterPriority(priority, index);
+    }
+  });
+}
+
 function filterPriority(priority, index) {
   switch (priority) {
     case HIGH_PRIORITY:
