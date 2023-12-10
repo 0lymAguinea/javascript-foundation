@@ -2,6 +2,7 @@ import { calendarTodoIsCheck } from "./isComplete";
 import { getCalendarTodoPriority } from "./priority";
 import { myTodos } from "./todo";
 import { createTodoInformation } from "./todoInformation";
+import { displayCalendarCount } from "./projectCounter";
 
 const CALENDAR_SELECTED_TODO = "calendarSelected";
 
@@ -30,9 +31,11 @@ function calendarPicked(input) {
   input.addEventListener("change", () => {
     const pickedDate = input.value;
     displayCalendarPickedTodo(pickedDate);
+    displayCalendarCount();
   });
 }
-function displayCalendarPickedTodo(pickedDate) {
+
+export function displayCalendarPickedTodo(pickedDate) {
   const bottomDisplay = document.getElementById("bottomDisplay");
   bottomDisplay.innerHTML = "";
   myTodos.forEach((todo, index) => {
