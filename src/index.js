@@ -14,13 +14,13 @@ function myProjects() {
   today.textContent = "Today";
   today.id = "todayBtn";
 
-  const tomorrow = document.createElement("button");
-  tomorrow.textContent = "Tomorrow";
-  tomorrow.id = "tomorrowBtn";
+  const calendar = document.createElement("button");
+  calendar.textContent = "Calendar";
+  calendar.id = "calendarBtn";
 
   projectFolders.append(projects);
   projectFolders.append(today);
-  projectFolders.append(tomorrow);
+  projectFolders.append(calendar);
   projectButtonSelector();
 }
 
@@ -37,7 +37,7 @@ function clearTodoPage() {
 function projectButtonSelector() {
   const projectsBtn = document.getElementById("projectsBtn");
   const todayBtn = document.getElementById("todayBtn");
-  const tomorrowBtn = document.getElementById("tomorrowBtn");
+  const calendarBtn = document.getElementById("calendarBtn");
 
   projectsBtn.addEventListener("click", () => {
     clearMainContent();
@@ -51,7 +51,7 @@ function projectButtonSelector() {
     showToday();
   });
 
-  tomorrowBtn.addEventListener("click", () => {
+  calendarBtn.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showCalendar();
