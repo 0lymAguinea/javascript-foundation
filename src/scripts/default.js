@@ -16,7 +16,7 @@ function createTopDisplay() {
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
-  currentProjectLocation.textContent = "All Projects";
+  currentProjectLocation.textContent = "All Tasks";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
   currentProjectCounts.textContent = getAllTaskCount();
