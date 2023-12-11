@@ -2,9 +2,10 @@ import { myTodos, Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { getLowPriorityTodoPriority } from "./features/priority";
 import { lowPriorityIsCheck } from "./features/isComplete";
-import { displayLowPriorityCount } from "./features/projectCounter";
-const LOW_PRIORITY = "Low priority";
-const LOW_PRIORITY_TODO = "lowPriorityTodo";
+import { displayPriorityCount } from "./features/projectCounter";
+
+export const LOW_PRIORITY = "Low priority";
+export const LOW_PRIORITY_TODO = "lowPriorityTodo";
 
 export default function displayLowPriorityTodoForm() {
   getTodoForm();
@@ -44,7 +45,7 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
       note.value
     )
   );
-  displayLowPriorityCount();
+  displayPriorityCount(LOW_PRIORITY);
   displayLowPriority();
 }
 

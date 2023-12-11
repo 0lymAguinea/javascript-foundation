@@ -1,14 +1,12 @@
 import { myTodos } from "./todo";
-import { getTodoPriority } from "./features/priority";
-import { getTodosIsCheck } from "./features/isComplete";
 import { highPriorirityIsCheck } from "./features/isComplete";
 import { getHighPriorityTodoPriority } from "./features/priority";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
-import { displayHighPriortyCount } from "./features/projectCounter";
+import { displayPriorityCount } from "./features/projectCounter";
 import { Todo } from "./todo";
 
-const HIGH_PRIORITY = "High priority";
-const HIGH_PRIORITY_TODO = "highPriorityTodo";
+export const HIGH_PRIORITY = "High priority";
+export const HIGH_PRIORITY_TODO = "highPriorityTodo";
 
 export default function displayHighPriorityTodoForm() {
   getTodoForm();
@@ -48,7 +46,7 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
       note.value
     )
   );
-  displayHighPriortyCount();
+  displayPriorityCount(HIGH_PRIORITY);
   displayHighPriority();
 }
 

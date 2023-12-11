@@ -3,9 +3,10 @@ import { Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { mediumPriorirityIsCheck } from "./features/isComplete";
 import { getMediumPriorityTodoPriority } from "./features/priority";
-import { displayMediumPriortyCount } from "./features/projectCounter";
-const MEDIUM_PRIORITY = "Medium priority";
-const MEDIUM_PRIORITY_TODO = "mediumPriorityTodo";
+import { displayPriorityCount } from "./features/projectCounter";
+
+export const MEDIUM_PRIORITY = "Medium priority";
+export const MEDIUM_PRIORITY_TODO = "mediumPriorityTodo";
 
 export default function displayMediumPriorityTodoForm() {
   getTodoForm();
@@ -44,7 +45,7 @@ function addTodoToMyTodos(title, description, dueDate, priority, note) {
       note.value
     )
   );
-  displayMediumPriortyCount();
+  displayPriorityCount(MEDIUM_PRIORITY);
   displayMediumPriority();
 }
 export function displayMediumPriority() {

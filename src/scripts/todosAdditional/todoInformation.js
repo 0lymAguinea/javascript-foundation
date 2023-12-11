@@ -14,17 +14,22 @@ import { displayCalendarPickedTodo } from "../calendarTodo";
 import { displayCalendarCount } from "../features/projectCounter";
 import { getSelectedFormEdited } from "./editFormTodo";
 import { displayHighPriority } from "../highPriortyTodo";
-import { displayHighPriortyCount } from "../features/projectCounter";
 import { getHighPriorityFormEdited } from "./editFormTodo";
 import { highPriorirityIsCheck } from "../features/isComplete";
 import { displayMediumPriority } from "../mediumPriorityTodo";
-import { displayMediumPriortyCount } from "../features/projectCounter";
 import { getMediumPriorityFormEdited } from "./editFormTodo";
 import { mediumPriorirityIsCheck } from "../features/isComplete";
 import { displayLowPriority } from "../lowPriorityTodo";
-import { displayLowPriorityCount } from "../features/projectCounter";
 import { getLowPriorityFormEdited } from "./editFormTodo";
 import { lowPriorityIsCheck } from "../features/isComplete";
+import { DEFAULT_TODO } from "../todo";
+import { TODAY_TODO } from "../todayTodo";
+import { CALENDAR_SELECTED_TODO } from "../calendarTodo";
+import { HIGH_PRIORITY, HIGH_PRIORITY_TODO } from "../highPriortyTodo";
+import { MEDIUM_PRIORITY, MEDIUM_PRIORITY_TODO } from "../mediumPriorityTodo";
+import { LOW_PRIORITY, LOW_PRIORITY_TODO } from "../lowPriorityTodo";
+import { displayPriorityCount } from "../features/projectCounter";
+
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -79,18 +84,18 @@ export function createDeleteButton(index, todoPage, todoStatus) {
   delButton.textContent = "Delete task";
   delButton.addEventListener("click", () => {
     delButtonAction(index, todoStatus);
-    if (todoStatus === "todayTodo") {
-      displayTodayCount();
-    } else if (todoStatus === "calendarSelected") {
-      displayCalendarCount();
-    } else if (todoStatus === "defaultTodo") {
+    if (todoStatus === DEFAULT_TODO) {
       displayAllTaskCount();
-    } else if (todoStatus === "highPriorityTodo") {
-      displayHighPriortyCount();
-    } else if (todoStatus === "mediumPriorityTodo") {
-      displayMediumPriortyCount();
-    } else if (todoStatus === "lowPriorityTodo") {
-      displayLowPriorityCount();
+    } else if (todoStatus === TODAY_TODO) {
+      displayTodayCount();
+    } else if (todoStatus === CALENDAR_SELECTED_TODO) {
+      displayCalendarCount();
+    } else if (todoStatus === HIGH_PRIORITY_TODO) {
+      displayPriorityCount(HIGH_PRIORITY);
+    } else if (todoStatus === MEDIUM_PRIORITY_TODO) {
+      displayPriorityCount(MEDIUM_PRIORITY);
+    } else if (todoStatus === LOW_PRIORITY_TODO) {
+      displayPriorityCount(LOW_PRIORITY);
     }
   });
   todoPage.append(delButton);
@@ -102,17 +107,17 @@ export function getDateSelected() {
 
 export function delButtonAction(index, todoStatus) {
   myTodos.splice(index, 1);
-  if (todoStatus === "todayTodo") {
-    getTodayDate();
-  } else if (todoStatus === "calendarSelected") {
-    displayCalendarPickedTodo(getDateSelected());
-  } else if (todoStatus === "defaultTodo") {
+  if (todoStatus === DEFAULT_TODO) {
     displayMiddleContentTodos();
-  } else if (todoStatus === "highPriorityTodo") {
+  } else if (todoStatus === TODAY_TODO) {
+    getTodayDate();
+  } else if (todoStatus === CALENDAR_SELECTED_TODO) {
+    displayCalendarPickedTodo(getDateSelected());
+  } else if (todoStatus === HIGH_PRIORITY_TODO) {
     displayHighPriority();
-  } else if (todoStatus === "mediumPriorityTodo") {
+  } else if (todoStatus === MEDIUM_PRIORITY_TODO) {
     displayMediumPriority();
-  } else if (todoStatus === "lowPriorityTodo") {
+  } else if (todoStatus === LOW_PRIORITY_TODO) {
     displayLowPriority();
   }
   clearTodoPage();
@@ -131,17 +136,17 @@ export function editButtonAction(todos, index, todoStatus) {
   clearTodoPage();
   createTodoPage();
   changeTodoTitleToUpdate();
-  if (todoStatus === "todayTodo") {
-    getTodayFormEdited(todos, index);
-  } else if (todoStatus === "calendarSelected") {
-    getSelectedFormEdited(todos, index);
-  } else if (todoStatus === "defaultTodo") {
+  if (todoStatus === DEFAULT_TODO) {
     getTodoFormToBeEdited(todos, index);
-  } else if (todoStatus === "highPriorityTodo") {
+  } else if (todoStatus === TODAY_TODO) {
+    getTodayFormEdited(todos, index);
+  } else if (todoStatus === CALENDAR_SELECTED_TODO) {
+    getSelectedFormEdited(todos, index);
+  } else if (todoStatus === HIGH_PRIORITY_TODO) {
     getHighPriorityFormEdited(todos, index);
-  } else if (todoStatus === "mediumPriorityTodo") {
+  } else if (todoStatus === MEDIUM_PRIORITY_TODO) {
     getMediumPriorityFormEdited(todos, index);
-  } else if (todoStatus === "lowPriorityTodo") {
+  } else if (todoStatus === LOW_PRIORITY_TODO) {
     getLowPriorityFormEdited(todos, index);
   }
 }
@@ -157,17 +162,17 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
 
   completeButton.addEventListener("click", () => {
     isCompleteAction(todos);
-    if (todoStatus === "todayTodo") {
-      getTodayTodoIsCheck();
-    } else if (todoStatus === "calendarSelected") {
-      calendarTodoIsCheck();
-    } else if (todoStatus === "defaultTodo") {
+    if (todoStatus === DEFAULT_TODO) {
       getTodosIsCheck();
-    } else if (todoStatus === "highPriorityTodo") {
+    } else if (todoStatus === CALENDAR_SELECTED_TODO) {
+      calendarTodoIsCheck();
+    } else if (todoStatus === TODAY_TODO) {
+      getTodayTodoIsCheck();
+    } else if (todoStatus === HIGH_PRIORITY_TODO) {
       highPriorirityIsCheck();
-    } else if (todoStatus === "mediumPriorityTodo") {
+    } else if (todoStatus === MEDIUM_PRIORITY_TODO) {
       mediumPriorirityIsCheck();
-    } else if (todoStatus === "lowPriorityTodo") {
+    } else if (todoStatus === LOW_PRIORITY_TODO) {
       lowPriorityIsCheck();
     }
   });

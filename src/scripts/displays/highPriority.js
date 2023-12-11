@@ -1,8 +1,9 @@
 import displayHighPriorityTodoForm, {
   displayHighPriority,
 } from "../highPriortyTodo";
-import { getHighPriorityCount } from "../features/projectCounter";
+import { getPriorityCount } from "../features/projectCounter";
 import createTodoPage from "../todosAdditional/createTodoPage";
+import { HIGH_PRIORITY } from "../highPriortyTodo";
 
 export default function showHighPriorities() {
   createTopDisplay();
@@ -19,7 +20,7 @@ function createTopDisplay() {
   currentProjectLocation.textContent = "High priorities";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = getHighPriorityCount();
+  currentProjectCounts.textContent = getPriorityCount(HIGH_PRIORITY);
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);

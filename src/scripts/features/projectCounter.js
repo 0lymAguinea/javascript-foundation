@@ -48,29 +48,12 @@ function displayCalendarPickedTodoCount(pickedDate) {
   return pickedCount.length;
 }
 
-export function displayHighPriortyCount() {
+export function displayPriorityCount(priority) {
   const taskCount = document.getElementById("taskCount");
-  taskCount.textContent = getHighPriorityCount();
+  taskCount.textContent = getPriorityCount(priority);
 }
 
-export function getHighPriorityCount() {
-  const count = myTodos.filter((todo) => todo.priority === "High priority");
-  return count.length;
-}
-export function displayMediumPriortyCount() {
-  const taskCount = document.getElementById("taskCount");
-  taskCount.textContent = getMediumPriorityCount();
-}
-
-export function getMediumPriorityCount() {
-  const count = myTodos.filter((todo) => todo.priority === "Medium priority");
-  return count.length;
-}
-export function displayLowPriorityCount() {
-  const taskCount = document.getElementById("taskCount");
-  taskCount.textContent = getLowPriorityCount();
-}
-export function getLowPriorityCount() {
-  const count = myTodos.filter((todo) => todo.priority === "Low priority");
+export function getPriorityCount(priority) {
+  const count = myTodos.filter((todo) => todo.priority === priority);
   return count.length;
 }

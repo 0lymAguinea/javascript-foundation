@@ -1,7 +1,8 @@
 import { displayMediumPriority } from "../mediumPriorityTodo";
-import { getMediumPriorityCount } from "../features/projectCounter";
+import { getPriorityCount } from "../features/projectCounter";
 import displayMediumPriorityTodoForm from "../mediumPriorityTodo";
 import createTodoPage from "../todosAdditional/createTodoPage";
+import { MEDIUM_PRIORITY } from "../mediumPriorityTodo";
 export default function showMediumPriorities() {
   createTopDisplay();
   createMiddleDisplay();
@@ -17,7 +18,7 @@ function createTopDisplay() {
   currentProjectLocation.textContent = "Medium priorities";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = getMediumPriorityCount();
+  currentProjectCounts.textContent = getPriorityCount(MEDIUM_PRIORITY);
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
