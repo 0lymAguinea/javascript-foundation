@@ -1,4 +1,4 @@
-import { myTodos } from "./todo";
+import { myTodos } from "../todo";
 
 const HIGH_PRIORITY = "High priority";
 const MEDIUM_PRIORITY = "Medium priority";

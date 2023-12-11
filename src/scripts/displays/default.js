@@ -1,6 +1,6 @@
-import createTodoPage from "./createTodoPage";
-import { getAllTaskCount } from "./projectCounter.js";
-import displayTodo from "./todo.js";
+import createTodoPage from "../todosAdditional/createTodoPage.js";
+import { getAllTaskCount } from "../features/projectCounter.js";
+import displayTodo from "../todo.js";
 
 export default function showDefaultContent() {
   showDefaultDisplay();

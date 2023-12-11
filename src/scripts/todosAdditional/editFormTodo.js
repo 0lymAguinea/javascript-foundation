@@ -1,9 +1,9 @@
-import { myTodos } from "./todo";
-import { Todo } from "./todo";
-import { displayMiddleContentTodos } from "./todo";
-import { getTodayDate } from "./todayTodo";
+import { myTodos } from "../todo";
+import { Todo } from "../todo";
+import { displayMiddleContentTodos } from "../todo";
+import { getTodayDate } from "../todayTodo";
 import { getDateSelected } from "./todoInformation";
-import { displayCalendarPickedTodo } from "./calendarTodo";
+import { displayCalendarPickedTodo } from "../calendarTodo";
 export function getTodoFormToBeEdited(todos, index) {
   const {
     inputTitle,

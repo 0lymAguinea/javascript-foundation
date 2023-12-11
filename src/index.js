@@ -1,8 +1,8 @@
-import showDefaultContent from "./scripts/default.js";
-import showToday from "./scripts/today.js";
-import showCalendar from "./scripts/calendar.js";
+import showDefaultContent from "./scripts/displays/default.js";
+import showToday from "./scripts/displays/today.js";
+import showCalendar from "./scripts/displays/calendar.js";
 import { displayMiddleContentTodos } from "./scripts/todo.js";
-import showHighPriorities from "./scripts/highPriority.js";
+import showHighPriorities from "./scripts/displays/highPriority.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
 

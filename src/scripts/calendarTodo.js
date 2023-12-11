@@ -1,8 +1,8 @@
-import { calendarTodoIsCheck } from "./isComplete";
-import { getCalendarTodoPriority } from "./priority";
+import { calendarTodoIsCheck } from "./features/isComplete";
+import { getCalendarTodoPriority } from "./features/priority";
 import { myTodos } from "./todo";
-import { createTodoInformation } from "./todoInformation";
-import { displayCalendarCount } from "./projectCounter";
+import { createTodoInformation } from "./todosAdditional/todoInformation";
+import { displayCalendarCount } from "./features/projectCounter";
 
 const CALENDAR_SELECTED_TODO = "calendarSelected";
 

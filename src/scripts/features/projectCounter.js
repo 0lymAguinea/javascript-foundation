@@ -1,4 +1,4 @@
-import { myTodos } from "./todo";
+import { myTodos } from "../todo";
 
 export function getAllTaskCount() {
   const allCount = myTodos.length;

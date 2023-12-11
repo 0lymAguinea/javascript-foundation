@@ -1,9 +1,9 @@
 import { myTodos } from "./todo";
 import { Todo } from "./todo";
-import { getTodayTodoPriority } from "./priority";
-import { getTodayTodoIsCheck } from "./isComplete";
-import { createTodoInformation } from "./todoInformation";
-import { displayTodayCount } from "./projectCounter";
+import { getTodayTodoPriority } from "./features/priority";
+import { getTodayTodoIsCheck } from "./features/isComplete";
+import { createTodoInformation } from "./todosAdditional/todoInformation";
+import { displayTodayCount } from "./features/projectCounter";
 const TODAY_TODO = "todayTodo";
 
 export default function displayTodayTodoForm() {

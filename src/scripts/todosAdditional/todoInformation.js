@@ -1,17 +1,17 @@
 // todoUtils.js
-import { myTodos } from "./todo";
-import { displayMiddleContentTodos } from "./todo";
+import { myTodos } from "../todo";
+import { displayMiddleContentTodos } from "../todo";
 import createTodoPage from "./createTodoPage";
 import { getTodoFormToBeEdited } from "./editFormTodo";
 import { getTodayFormEdited } from "./editFormTodo";
-import { getTodosIsCheck } from "./isComplete";
-import { getTodayTodoIsCheck } from "./isComplete";
-import { displayAllTaskCount } from "./projectCounter";
-import { displayTodayCount } from "./projectCounter";
-import { getTodayDate } from "./todayTodo";
-import { calendarTodoIsCheck } from "./isComplete";
-import { displayCalendarPickedTodo } from "./calendarTodo";
-import { displayCalendarCount } from "./projectCounter";
+import { getTodosIsCheck } from "../features/isComplete";
+import { getTodayTodoIsCheck } from "../features/isComplete";
+import { displayAllTaskCount } from "../features/projectCounter";
+import { displayTodayCount } from "../features/projectCounter";
+import { getTodayDate } from "../todayTodo";
+import { calendarTodoIsCheck } from "../features/isComplete";
+import { displayCalendarPickedTodo } from "../calendarTodo";
+import { displayCalendarCount } from "../features/projectCounter";
 import { getSelectedFormEdited } from "./editFormTodo";
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");

@@ -1,12 +1,9 @@
-import { getTodayDate } from "./todayTodo";
-import { todayDateFilter } from "./projectCounter";
-import createTodoPage from "./createTodoPage";
-import displayTodayTodoForm from "./todayTodo";
-export default function showToday() {
+import { displayHighPriority } from "../highPriortyTodo";
+export default function showHighPriorities() {
   createTopDisplay();
   createMiddleDisplay();
   createBottomDisplay();
-  getTodayDate();
+  displayHighPriority();
 }
 
 function createTopDisplay() {
@@ -14,10 +11,10 @@ function createTopDisplay() {
   const display = document.createElement("div");
   display.id = "currentProjectContainer";
   const currentProjectLocation = document.createElement("h2");
-  currentProjectLocation.textContent = "Today tasks";
+  currentProjectLocation.textContent = "High priorities";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = todayDateFilter();
+  currentProjectCounts.textContent = 0;
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
@@ -29,11 +26,11 @@ function createMiddleDisplay() {
 
   const addTodayButton = document.createElement("button");
   addTodayButton.id = "addTodayButton";
-  addTodayButton.textContent = "New Today TODO";
+  addTodayButton.textContent = "New High Priority TODO";
 
   mainContent.append(middleDisplay);
   middleDisplay.append(addTodayButton);
-  displayTodoForm();
+  //displayTodoForm();
 }
 function createBottomDisplay() {
   const mainContent = document.getElementById("mainContent");
@@ -41,17 +38,4 @@ function createBottomDisplay() {
   bottomDisplay.id = "bottomDisplay";
 
   mainContent.append(bottomDisplay);
-}
-function clearTodoPage() {
-  const todoPage = document.getElementById("todoPage");
-  todoPage.innerHTML = "";
-}
-
-function displayTodoForm() {
-  const addTodayButton = document.getElementById("addTodayButton");
-  addTodayButton.addEventListener("click", () => {
-    clearTodoPage();
-    createTodoPage();
-    displayTodayTodoForm();
-  });
 }

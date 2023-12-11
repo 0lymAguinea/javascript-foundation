@@ -1,9 +1,9 @@
 //Responsible to creating todo items
 export const myTodos = [];
-import { getTodoPriority } from "./priority";
-import { getTodosIsCheck } from "./isComplete";
-import { displayAllTaskCount } from "./projectCounter";
-import { createTodoInformation } from "./todoInformation";
+import { getTodoPriority } from "./features/priority";
+import { getTodosIsCheck } from "./features/isComplete";
+import { displayAllTaskCount } from "./features/projectCounter";
+import { createTodoInformation } from "./todosAdditional/todoInformation";
 
 const DEFAULT_TODO = "defaultTodo";
 export class Todo {
