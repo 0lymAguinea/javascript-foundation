@@ -1,8 +1,10 @@
-import { displayMediumPriority } from "../mediumPriorityTodo";
-import { getPriorityCount } from "../features/projectCounter";
-import displayMediumPriorityTodoForm from "../mediumPriorityTodo";
 import createTodoPage from "../todosAdditional/createTodoPage";
-import { MEDIUM_PRIORITY } from "../mediumPriorityTodo";
+import displayMediumPriorityTodoForm, {
+  displayMediumPriority,
+  MEDIUM_PRIORITY,
+} from "../mediumPriorityTodo";
+import { getPriorityCount } from "../features/projectCounter";
+
 export default function showMediumPriorities() {
   createTopDisplay();
   createMiddleDisplay();

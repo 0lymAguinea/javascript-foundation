@@ -6,6 +6,7 @@ import { displayAllTaskCount } from "./features/projectCounter";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 
 export const DEFAULT_TODO = "defaultTodo";
+
 export class Todo {
   constructor(
     title,

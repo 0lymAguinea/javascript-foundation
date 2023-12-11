@@ -1,5 +1,4 @@
-import { myTodos } from "./todo";
-import { Todo } from "./todo";
+import { myTodos, Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { mediumPriorirityIsCheck } from "./features/isComplete";
 import { getPriorityTodoPriority } from "./features/priority";

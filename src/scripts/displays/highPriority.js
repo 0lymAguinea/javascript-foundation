@@ -1,9 +1,9 @@
+import createTodoPage from "../todosAdditional/createTodoPage";
 import displayHighPriorityTodoForm, {
   displayHighPriority,
+  HIGH_PRIORITY,
 } from "../highPriortyTodo";
 import { getPriorityCount } from "../features/projectCounter";
-import createTodoPage from "../todosAdditional/createTodoPage";
-import { HIGH_PRIORITY } from "../highPriortyTodo";
 
 export default function showHighPriorities() {
   createTopDisplay();

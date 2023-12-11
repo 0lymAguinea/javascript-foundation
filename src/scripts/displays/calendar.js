@@ -1,4 +1,5 @@
 import { displayCalendar } from "../calendarTodo";
+
 export default function showCalendar() {
   createTopDisplay();
   createMiddleDisplay();

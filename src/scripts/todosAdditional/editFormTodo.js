@@ -1,12 +1,11 @@
-import { myTodos } from "../todo";
-import { Todo } from "../todo";
-import { displayMiddleContentTodos } from "../todo";
+import { myTodos, Todo, displayMiddleContentTodos } from "../todo";
 import { getTodayDate } from "../todayTodo";
 import { getDateSelected } from "./todoInformation";
 import { displayCalendarPickedTodo } from "../calendarTodo";
 import { displayHighPriority } from "../highPriortyTodo";
 import { displayMediumPriority } from "../mediumPriorityTodo";
 import { displayLowPriority } from "../lowPriorityTodo";
+
 export function getTodoFormToBeEdited(todos, index) {
   const {
     inputTitle,

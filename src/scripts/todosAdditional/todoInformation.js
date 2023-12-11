@@ -1,34 +1,48 @@
 // todoUtils.js
-import { myTodos } from "../todo";
-import { displayMiddleContentTodos } from "../todo";
 import createTodoPage from "./createTodoPage";
-import { getTodoFormToBeEdited } from "./editFormTodo";
-import { getTodayFormEdited } from "./editFormTodo";
-import { getTodosIsCheck } from "../features/isComplete";
-import { getTodayTodoIsCheck } from "../features/isComplete";
-import { displayAllTaskCount } from "../features/projectCounter";
-import { displayTodayCount } from "../features/projectCounter";
-import { getTodayDate } from "../todayTodo";
-import { calendarTodoIsCheck } from "../features/isComplete";
-import { displayCalendarPickedTodo } from "../calendarTodo";
-import { displayCalendarCount } from "../features/projectCounter";
-import { getSelectedFormEdited } from "./editFormTodo";
-import { displayHighPriority } from "../highPriortyTodo";
-import { getHighPriorityFormEdited } from "./editFormTodo";
-import { highPriorirityIsCheck } from "../features/isComplete";
-import { displayMediumPriority } from "../mediumPriorityTodo";
-import { getMediumPriorityFormEdited } from "./editFormTodo";
-import { mediumPriorirityIsCheck } from "../features/isComplete";
-import { displayLowPriority } from "../lowPriorityTodo";
-import { getLowPriorityFormEdited } from "./editFormTodo";
-import { lowPriorityIsCheck } from "../features/isComplete";
-import { DEFAULT_TODO } from "../todo";
-import { TODAY_TODO } from "../todayTodo";
-import { CALENDAR_SELECTED_TODO } from "../calendarTodo";
-import { HIGH_PRIORITY, HIGH_PRIORITY_TODO } from "../highPriortyTodo";
-import { MEDIUM_PRIORITY, MEDIUM_PRIORITY_TODO } from "../mediumPriorityTodo";
-import { LOW_PRIORITY, LOW_PRIORITY_TODO } from "../lowPriorityTodo";
-import { displayPriorityCount } from "../features/projectCounter";
+import { myTodos, displayMiddleContentTodos, DEFAULT_TODO } from "../todo";
+import {
+  getTodoFormToBeEdited,
+  getTodayFormEdited,
+  getSelectedFormEdited,
+  getHighPriorityFormEdited,
+  getMediumPriorityFormEdited,
+  getLowPriorityFormEdited,
+} from "./editFormTodo";
+import {
+  getTodosIsCheck,
+  getTodayTodoIsCheck,
+  calendarTodoIsCheck,
+  highPriorirityIsCheck,
+  mediumPriorirityIsCheck,
+  lowPriorityIsCheck,
+} from "../features/isComplete";
+import {
+  displayAllTaskCount,
+  displayTodayCount,
+  displayCalendarCount,
+  displayPriorityCount,
+} from "../features/projectCounter";
+import { getTodayDate, TODAY_TODO } from "../todayTodo";
+import {
+  displayCalendarPickedTodo,
+  CALENDAR_SELECTED_TODO,
+} from "../calendarTodo";
+import {
+  displayHighPriority,
+  HIGH_PRIORITY,
+  HIGH_PRIORITY_TODO,
+} from "../highPriortyTodo";
+import {
+  displayMediumPriority,
+  MEDIUM_PRIORITY,
+  MEDIUM_PRIORITY_TODO,
+} from "../mediumPriorityTodo";
+import {
+  displayLowPriority,
+  LOW_PRIORITY,
+  LOW_PRIORITY_TODO,
+} from "../lowPriorityTodo";
 
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");

@@ -3,6 +3,7 @@ import { getTodayTodoPriority } from "./features/priority";
 import { getTodayTodoIsCheck } from "./features/isComplete";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { displayTodayCount } from "./features/projectCounter";
+
 export const TODAY_TODO = "todayTodo";
 
 export default function displayTodayTodoForm() {

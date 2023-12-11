@@ -1,7 +1,7 @@
-import { getTodayDate } from "../todayTodo";
-import { todayDateFilter } from "../features/projectCounter";
 import createTodoPage from "../todosAdditional/createTodoPage";
-import displayTodayTodoForm from "../todayTodo";
+import displayTodayTodoForm, { getTodayDate } from "../todayTodo";
+import { todayDateFilter } from "../features/projectCounter";
+
 export default function showToday() {
   createTopDisplay();
   createMiddleDisplay();

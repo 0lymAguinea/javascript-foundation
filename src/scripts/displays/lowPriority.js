@@ -1,8 +1,10 @@
 import createTodoPage from "../todosAdditional/createTodoPage";
-import { displayLowPriority } from "../lowPriorityTodo";
+import displayLowPriorityTodoForm, {
+  displayLowPriority,
+  LOW_PRIORITY,
+} from "../lowPriorityTodo";
 import { getPriorityCount } from "../features/projectCounter";
-import displayLowPriorityTodoForm from "../lowPriorityTodo";
-import { LOW_PRIORITY } from "../lowPriorityTodo";
+
 export default function showLowPriorities() {
   createTopDisplay();
   createMiddleDisplay();

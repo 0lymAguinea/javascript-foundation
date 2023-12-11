@@ -1,9 +1,8 @@
-import { myTodos } from "./todo";
+import { myTodos, Todo } from "./todo";
 import { highPriorirityIsCheck } from "./features/isComplete";
 import { getPriorityTodoPriority } from "./features/priority";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { displayPriorityCount } from "./features/projectCounter";
-import { Todo } from "./todo";
 
 export const HIGH_PRIORITY = "High priority";
 export const HIGH_PRIORITY_TODO = "highPriorityTodo";
