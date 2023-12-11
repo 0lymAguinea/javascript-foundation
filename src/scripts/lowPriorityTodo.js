@@ -1,9 +1,53 @@
-import { myTodos } from "./todo";
-import { getTodoPriority } from "./features/priority";
-import { getTodosIsCheck } from "./features/isComplete";
+import { myTodos, Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
+import { getLowPriorityTodoPriority } from "./features/priority";
+import { lowPriorityIsCheck } from "./features/isComplete";
+import { displayLowPriorityCount } from "./features/projectCounter";
 const LOW_PRIORITY = "Low priority";
 const LOW_PRIORITY_TODO = "lowPriorityTodo";
+
+export default function displayLowPriorityTodoForm() {
+  getTodoForm();
+}
+
+function getTodoForm() {
+  const inputTitle = document.getElementById("title");
+  const inputDescription = document.getElementById("description");
+  const inputDueDate = document.getElementById("dueDate");
+  const inputPriority = document.getElementById("priority");
+  const inputNote = document.getElementById("note");
+  inputPriority.value = "Low priority";
+  inputPriority.disabled = true;
+  const submitButton = document.getElementById("submitButton");
+
+  submitButton.addEventListener("click", () => {
+    if (inputTitle.value === "") {
+      console.log("ERROR");
+    } else {
+      addTodoToMyTodos(
+        inputTitle,
+        inputDescription,
+        inputDueDate,
+        inputPriority,
+        inputNote
+      );
+    }
+  });
+}
+function addTodoToMyTodos(title, description, dueDate, priority, note) {
+  myTodos.push(
+    new Todo(
+      title.value,
+      description.value,
+      dueDate.value,
+      priority.value,
+      note.value
+    )
+  );
+  displayLowPriorityCount();
+  displayLowPriority();
+}
+
 export function displayLowPriority() {
   const bottomDisplay = document.getElementById("bottomDisplay");
   bottomDisplay.innerHTML = "";
@@ -12,6 +56,8 @@ export function displayLowPriority() {
       displayLowPriorities(todo, index);
     }
   });
+  lowPriorityIsCheck();
+  getLowPriorityTodoPriority();
 }
 
 function displayLowPriorities(todo, index) {
@@ -29,7 +75,7 @@ function displayLowPriorities(todo, index) {
 function todoButtonItems(todoButton, todo, index) {
   todoButton.addEventListener("click", () => {
     clearTodoPage();
-    //createTodoInformation(todo, index, HIGH_PRIORITY_TODO);
+    createTodoInformation(todo, index, LOW_PRIORITY_TODO);
   });
 }
 function clearTodoPage() {

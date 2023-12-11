@@ -66,3 +66,11 @@ export function getMediumPriorityCount() {
   const count = myTodos.filter((todo) => todo.priority === "Medium priority");
   return count.length;
 }
+export function displayLowPriorityCount() {
+  const taskCount = document.getElementById("taskCount");
+  taskCount.textContent = getLowPriorityCount();
+}
+export function getLowPriorityCount() {
+  const count = myTodos.filter((todo) => todo.priority === "Low priority");
+  return count.length;
+}

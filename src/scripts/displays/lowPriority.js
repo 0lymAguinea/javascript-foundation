@@ -1,4 +1,7 @@
+import createTodoPage from "../todosAdditional/createTodoPage";
 import { displayLowPriority } from "../lowPriorityTodo";
+import { getLowPriorityCount } from "../features/projectCounter";
+import displayLowPriorityTodoForm from "../lowPriorityTodo";
 export default function showLowPriorities() {
   createTopDisplay();
   createMiddleDisplay();
@@ -14,7 +17,7 @@ function createTopDisplay() {
   currentProjectLocation.textContent = "Low priorities";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = 0;
+  currentProjectCounts.textContent = getLowPriorityCount();
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
@@ -24,13 +27,13 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addTodayButton = document.createElement("button");
-  addTodayButton.id = "addTodayButton";
-  addTodayButton.textContent = "New Low Priority TODO";
+  const addLowPriorityButton = document.createElement("button");
+  addLowPriorityButton.id = "addLowPriorityButton";
+  addLowPriorityButton.textContent = "New Low Priority TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addTodayButton);
-  //displayTodoForm();
+  middleDisplay.append(addLowPriorityButton);
+  displayTodoForm();
 }
 function createBottomDisplay() {
   const mainContent = document.getElementById("mainContent");
@@ -38,4 +41,16 @@ function createBottomDisplay() {
   bottomDisplay.id = "bottomDisplay";
 
   mainContent.append(bottomDisplay);
+}
+function displayTodoForm() {
+  const addLowPriorityButton = document.getElementById("addLowPriorityButton");
+  addLowPriorityButton.addEventListener("click", () => {
+    clearTodoPage();
+    createTodoPage();
+    displayLowPriorityTodoForm();
+  });
+}
+function clearTodoPage() {
+  const todoPage = document.getElementById("todoPage");
+  todoPage.innerHTML = "";
 }

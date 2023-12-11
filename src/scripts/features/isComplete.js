@@ -19,6 +19,9 @@ export function highPriorirityIsCheck() {
 export function mediumPriorirityIsCheck() {
   mediumPriority();
 }
+export function lowPriorityIsCheck() {
+  lowPriority();
+}
 function formattedTodayDate() {
   const getDate = new Date();
   const year = getDate.getFullYear().toString();
@@ -58,6 +61,14 @@ function highPriority() {
 function mediumPriority() {
   myTodos.forEach((todo, index) => {
     if (todo.priority === "Medium priority") {
+      const isComplete = todo.isComplete;
+      todoChecker(isComplete, index);
+    }
+  });
+}
+function lowPriority() {
+  myTodos.forEach((todo, index) => {
+    if (todo.priority === "Low priority") {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);
     }

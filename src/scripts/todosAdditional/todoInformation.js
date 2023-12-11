@@ -21,6 +21,10 @@ import { displayMediumPriority } from "../mediumPriorityTodo";
 import { displayMediumPriortyCount } from "../features/projectCounter";
 import { getMediumPriorityFormEdited } from "./editFormTodo";
 import { mediumPriorirityIsCheck } from "../features/isComplete";
+import { displayLowPriority } from "../lowPriorityTodo";
+import { displayLowPriorityCount } from "../features/projectCounter";
+import { getLowPriorityFormEdited } from "./editFormTodo";
+import { lowPriorityIsCheck } from "../features/isComplete";
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -85,6 +89,8 @@ export function createDeleteButton(index, todoPage, todoStatus) {
       displayHighPriortyCount();
     } else if (todoStatus === "mediumPriorityTodo") {
       displayMediumPriortyCount();
+    } else if (todoStatus === "lowPriorityTodo") {
+      displayLowPriorityCount();
     }
   });
   todoPage.append(delButton);
@@ -106,6 +112,8 @@ export function delButtonAction(index, todoStatus) {
     displayHighPriority();
   } else if (todoStatus === "mediumPriorityTodo") {
     displayMediumPriority();
+  } else if (todoStatus === "lowPriorityTodo") {
+    displayLowPriority();
   }
   clearTodoPage();
 }
@@ -133,6 +141,8 @@ export function editButtonAction(todos, index, todoStatus) {
     getHighPriorityFormEdited(todos, index);
   } else if (todoStatus === "mediumPriorityTodo") {
     getMediumPriorityFormEdited(todos, index);
+  } else if (todoStatus === "lowPriorityTodo") {
+    getLowPriorityFormEdited(todos, index);
   }
 }
 
@@ -157,6 +167,8 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
       highPriorirityIsCheck();
     } else if (todoStatus === "mediumPriorityTodo") {
       mediumPriorirityIsCheck();
+    } else if (todoStatus === "lowPriorityTodo") {
+      lowPriorityIsCheck();
     }
   });
 
