@@ -2,7 +2,7 @@ import { myTodos } from "./todo";
 import { Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { mediumPriorirityIsCheck } from "./features/isComplete";
-import { getMediumPriorityTodoPriority } from "./features/priority";
+import { getPriorityTodoPriority } from "./features/priority";
 import { displayPriorityCount } from "./features/projectCounter";
 
 export const MEDIUM_PRIORITY = "Medium priority";
@@ -17,9 +17,10 @@ function getTodoForm() {
   const inputDueDate = document.getElementById("dueDate");
   const inputPriority = document.getElementById("priority");
   const inputNote = document.getElementById("note");
+  const submitButton = document.getElementById("submitButton");
+
   inputPriority.value = "Medium priority";
   inputPriority.disabled = true;
-  const submitButton = document.getElementById("submitButton");
 
   submitButton.addEventListener("click", () => {
     if (inputTitle.value === "") {
@@ -56,7 +57,7 @@ export function displayMediumPriority() {
       displayMediumPriorities(todo, index);
     }
   });
-  getMediumPriorityTodoPriority();
+  getPriorityTodoPriority(MEDIUM_PRIORITY);
   mediumPriorirityIsCheck();
 }
 

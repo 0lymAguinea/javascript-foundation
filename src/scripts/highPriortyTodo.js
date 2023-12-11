@@ -1,6 +1,6 @@
 import { myTodos } from "./todo";
 import { highPriorirityIsCheck } from "./features/isComplete";
-import { getHighPriorityTodoPriority } from "./features/priority";
+import { getPriorityTodoPriority } from "./features/priority";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { displayPriorityCount } from "./features/projectCounter";
 import { Todo } from "./todo";
@@ -18,9 +18,10 @@ function getTodoForm() {
   const inputDueDate = document.getElementById("dueDate");
   const inputPriority = document.getElementById("priority");
   const inputNote = document.getElementById("note");
+  const submitButton = document.getElementById("submitButton");
+
   inputPriority.value = "High priority";
   inputPriority.disabled = true;
-  const submitButton = document.getElementById("submitButton");
 
   submitButton.addEventListener("click", () => {
     if (inputTitle.value === "") {
@@ -58,7 +59,7 @@ export function displayHighPriority() {
       displayHighPriorities(todo, index);
     }
   });
-  getHighPriorityTodoPriority();
+  getPriorityTodoPriority(HIGH_PRIORITY);
   highPriorirityIsCheck();
 }
 

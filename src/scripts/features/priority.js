@@ -49,27 +49,9 @@ function calendearTodoFilterPriority(pickedDate) {
     }
   });
 }
-
-export function getHighPriorityTodoPriority() {
+export function getPriorityTodoPriority(priority) {
   myTodos.forEach((todo, index) => {
-    if (todo.priority === "High priority") {
-      const priority = todo.priority;
-      filterPriority(priority, index);
-    }
-  });
-}
-
-export function getMediumPriorityTodoPriority() {
-  myTodos.forEach((todo, index) => {
-    if (todo.priority === "Medium priority") {
-      const priority = todo.priority;
-      filterPriority(priority, index);
-    }
-  });
-}
-export function getLowPriorityTodoPriority() {
-  myTodos.forEach((todo, index) => {
-    if (todo.priority === "Low priority") {
+    if (todo.priority === priority) {
       const priority = todo.priority;
       filterPriority(priority, index);
     }
