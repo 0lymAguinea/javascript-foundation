@@ -69,8 +69,8 @@ function projectButtonSelector() {
 
   projectsBtn.addEventListener("click", () => {
     clearMainContent();
+    clearTodoPage();
     showDefaultContent();
-    displayMiddleContentTodos();
   });
 
   todayBtn.addEventListener("click", () => {

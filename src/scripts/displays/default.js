@@ -1,7 +1,7 @@
 import createTodoPage from "../todosAdditional/createTodoPage.js";
 import { getAllTaskCount } from "../features/projectCounter.js";
 import displayTodo from "../todo.js";
-
+import { displayMiddleContentTodos } from "../todo.js";
 export default function showDefaultContent() {
   showDefaultDisplay();
 }
@@ -10,6 +10,7 @@ function showDefaultDisplay() {
   createTopDisplay();
   createMiddleDisplay();
   createBottomDisplay();
+  displayMiddleContentTodos();
 }
 function createTopDisplay() {
   const mainContent = document.getElementById("mainContent");
