@@ -1,5 +1,4 @@
-import { myTodos } from "./todo";
-import { Todo } from "./todo";
+import { myTodos, Todo } from "./todo";
 import { getTodayTodoPriority } from "./features/priority";
 import { getTodayTodoIsCheck } from "./features/isComplete";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
@@ -14,11 +13,12 @@ function getTodoForm() {
   const inputTitle = document.getElementById("title");
   const inputDescription = document.getElementById("description");
   const inputDueDate = document.getElementById("dueDate");
-  inputDueDate.value = formattedTodayDate();
-  inputDueDate.disabled = true;
   const inputPriority = document.getElementById("priority");
   const inputNote = document.getElementById("note");
   const submitButton = document.getElementById("submitButton");
+
+  inputDueDate.value = formattedTodayDate();
+  inputDueDate.disabled = true;
 
   submitButton.addEventListener("click", () => {
     if (inputTitle.value === "") {
