@@ -4,7 +4,7 @@ import { myTodos } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { displayCalendarCount } from "./features/projectCounter";
 
-const CALENDAR_SELECTED_TODO = "calendarSelected";
+export const CALENDAR_SELECTED_TODO = "calendarSelected";
 
 export function displayCalendar() {
   const middleDisplay = document.getElementById("middleDisplay");

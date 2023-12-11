@@ -5,7 +5,7 @@ import { getTodosIsCheck } from "./features/isComplete";
 import { displayAllTaskCount } from "./features/projectCounter";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 
-const DEFAULT_TODO = "defaultTodo";
+export const DEFAULT_TODO = "defaultTodo";
 export class Todo {
   constructor(
     title,
