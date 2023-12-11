@@ -13,14 +13,14 @@ export function getTodayTodoIsCheck() {
 export function calendarTodoIsCheck() {
   calendarPicked();
 }
-export function highPriorirityIsCheck() {
-  highPriority();
+export function highPriorirityIsCheck(priority) {
+  filterPriorities(priority);
 }
-export function mediumPriorirityIsCheck() {
-  mediumPriority();
+export function mediumPriorirityIsCheck(priority) {
+  filterPriorities(priority);
 }
-export function lowPriorityIsCheck() {
-  lowPriority();
+export function lowPriorityIsCheck(priority) {
+  filterPriorities(priority);
 }
 function formattedTodayDate() {
   const getDate = new Date();
@@ -50,25 +50,9 @@ function calendarTodoIscomplete(pickedDate) {
     }
   });
 }
-function highPriority() {
+function filterPriorities(priority) {
   myTodos.forEach((todo, index) => {
-    if (todo.priority === "High priority") {
-      const isComplete = todo.isComplete;
-      todoChecker(isComplete, index);
-    }
-  });
-}
-function mediumPriority() {
-  myTodos.forEach((todo, index) => {
-    if (todo.priority === "Medium priority") {
-      const isComplete = todo.isComplete;
-      todoChecker(isComplete, index);
-    }
-  });
-}
-function lowPriority() {
-  myTodos.forEach((todo, index) => {
-    if (todo.priority === "Low priority") {
+    if (todo.priority === priority) {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);
     }

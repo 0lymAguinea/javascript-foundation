@@ -59,7 +59,7 @@ export function displayHighPriority() {
     }
   });
   getPriorityTodoPriority(HIGH_PRIORITY);
-  highPriorirityIsCheck();
+  highPriorirityIsCheck(HIGH_PRIORITY);
 }
 
 function displayHighPriorities(todo, index) {

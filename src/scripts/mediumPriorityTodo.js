@@ -57,7 +57,7 @@ export function displayMediumPriority() {
     }
   });
   getPriorityTodoPriority(MEDIUM_PRIORITY);
-  mediumPriorirityIsCheck();
+  mediumPriorirityIsCheck(MEDIUM_PRIORITY);
 }
 
 function displayMediumPriorities(todo, index) {

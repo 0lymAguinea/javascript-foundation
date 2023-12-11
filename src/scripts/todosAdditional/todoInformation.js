@@ -183,11 +183,11 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
     } else if (todoStatus === TODAY_TODO) {
       getTodayTodoIsCheck();
     } else if (todoStatus === HIGH_PRIORITY_TODO) {
-      highPriorirityIsCheck();
+      highPriorirityIsCheck(HIGH_PRIORITY);
     } else if (todoStatus === MEDIUM_PRIORITY_TODO) {
-      mediumPriorirityIsCheck();
+      mediumPriorirityIsCheck(MEDIUM_PRIORITY);
     } else if (todoStatus === LOW_PRIORITY_TODO) {
-      lowPriorityIsCheck();
+      lowPriorityIsCheck(LOW_PRIORITY);
     }
   });
 
