@@ -13,6 +13,10 @@ import { calendarTodoIsCheck } from "../features/isComplete";
 import { displayCalendarPickedTodo } from "../calendarTodo";
 import { displayCalendarCount } from "../features/projectCounter";
 import { getSelectedFormEdited } from "./editFormTodo";
+import { displayHighPriority } from "../highPriortyTodo";
+import { displayHighPriortyCount } from "../features/projectCounter";
+import { highPriorityFormEdited } from "./editFormTodo";
+import { highPriorirityIsCheck } from "../features/isComplete";
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -73,6 +77,8 @@ export function createDeleteButton(index, todoPage, todoStatus) {
       displayCalendarCount();
     } else if (todoStatus === "defaultTodo") {
       displayAllTaskCount();
+    } else if (todoStatus === "highPriorityTodo") {
+      displayHighPriortyCount();
     }
   });
   todoPage.append(delButton);
@@ -90,6 +96,8 @@ export function delButtonAction(index, todoStatus) {
     displayCalendarPickedTodo(getDateSelected());
   } else if (todoStatus === "defaultTodo") {
     displayMiddleContentTodos();
+  } else if (todoStatus === "highPriorityTodo") {
+    displayHighPriority();
   }
   clearTodoPage();
 }
@@ -113,6 +121,8 @@ export function editButtonAction(todos, index, todoStatus) {
     getSelectedFormEdited(todos, index);
   } else if (todoStatus === "defaultTodo") {
     getTodoFormToBeEdited(todos, index);
+  } else if (todoStatus === "highPriorityTodo") {
+    highPriorityFormEdited(todos, index);
   }
 }
 
@@ -133,6 +143,8 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
       calendarTodoIsCheck();
     } else if (todoStatus === "defaultTodo") {
       getTodosIsCheck();
+    } else if (todoStatus === "highPriorityTodo") {
+      highPriorirityIsCheck();
     }
   });
 

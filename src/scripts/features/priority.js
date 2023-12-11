@@ -50,6 +50,15 @@ function calendearTodoFilterPriority(pickedDate) {
   });
 }
 
+export function getHighPriorityTodoPriority() {
+  myTodos.forEach((todo, index) => {
+    if (todo.priority === "High priority") {
+      const priority = todo.priority;
+      filterPriority(priority, index);
+    }
+  });
+}
+
 function filterPriority(priority, index) {
   switch (priority) {
     case HIGH_PRIORITY:

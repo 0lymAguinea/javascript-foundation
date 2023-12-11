@@ -42,12 +42,14 @@ body {
   padding-right: 1rem;
 }
 #addTodoButton,
-#addTodayButton {
+#addTodayButton,
+#addHighPriorityButton {
   display: flex;
   width: 100%;
 }
 #addTodoButton::before,
-#addTodayButton::before {
+#addTodayButton::before,
+#addHighPriorityButton::before {
   content: "+";
 }
 #bottomDisplay {
@@ -74,6 +76,7 @@ body {
 
 #addTodoButton,
 #addTodayButton,
+#addHighPriorityButton,
 #middleDisplay {
   font-size: 1.3rem;
   min-height: 0.4rem;

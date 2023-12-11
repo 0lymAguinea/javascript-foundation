@@ -47,3 +47,13 @@ function displayCalendarPickedTodoCount(pickedDate) {
   const pickedCount = myTodos.filter((todo) => todo.dueDate === pickedDate);
   return pickedCount.length;
 }
+
+export function getHighPriorityCount() {
+  const count = myTodos.filter((todo) => todo.priority === "High priority");
+  return count.length;
+}
+
+export function displayHighPriortyCount() {
+  const taskCount = document.getElementById("taskCount");
+  taskCount.textContent = getHighPriorityCount();
+}

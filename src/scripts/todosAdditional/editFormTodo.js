@@ -4,6 +4,7 @@ import { displayMiddleContentTodos } from "../todo";
 import { getTodayDate } from "../todayTodo";
 import { getDateSelected } from "./todoInformation";
 import { displayCalendarPickedTodo } from "../calendarTodo";
+import { displayHighPriority } from "../highPriortyTodo";
 export function getTodoFormToBeEdited(todos, index) {
   const {
     inputTitle,
@@ -14,6 +15,7 @@ export function getTodoFormToBeEdited(todos, index) {
   } = getInputs();
 
   inputDueDate.removeAttribute("disabled");
+  inputPriority.removeAttribute("disabled");
 
   const defaultValues = {
     title: todos.title,
@@ -134,6 +136,52 @@ export function getSelectedFormEdited(todos, index) {
     }
   });
 }
+
+export function highPriorityFormEdited(todos, index) {
+  const {
+    inputTitle,
+    inputDescription,
+    inputDueDate,
+    inputPriority,
+    inputNote,
+  } = getInputs();
+
+  inputDueDate.removeAttribute("disabled");
+  disabledPriorty();
+
+  const defaultValues = {
+    title: todos.title,
+    description: todos.description,
+    dueDate: todos.dueDate,
+    priority: todos.priority,
+    note: todos.note,
+  };
+
+  // Assign the current values to the form inputs
+  inputTitle.value = defaultValues.title;
+  inputDescription.value = defaultValues.description;
+  inputDueDate.value = defaultValues.dueDate;
+  inputPriority.value = defaultValues.priority;
+  inputNote.value = defaultValues.note;
+
+  submitButton.addEventListener("click", () => {
+    if (inputTitle.value === "" || inputDueDate.value === "") {
+      console.log("error");
+    } else {
+      myTodos.splice(index, 1);
+      addEditedTodotoMyTodos(
+        inputTitle.value,
+        inputDescription.value,
+        inputDueDate.value,
+        inputPriority.value,
+        inputNote.value
+      );
+      clearTodoPage();
+      displayHighPriority();
+    }
+  });
+}
+
 function getInputs() {
   const inputTitle = document.getElementById("title");
   const inputDescription = document.getElementById("description");
@@ -153,6 +201,11 @@ function getInputs() {
 function disabledDueDate() {
   const dueDate = document.getElementById("dueDate");
   dueDate.disabled = true;
+}
+
+function disabledPriorty() {
+  const priority = document.getElementById("priority");
+  priority.disabled = true;
 }
 
 function clearTodoPage() {
