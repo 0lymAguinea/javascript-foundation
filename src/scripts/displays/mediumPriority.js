@@ -1,4 +1,7 @@
 import { displayMediumPriority } from "../mediumPriorityTodo";
+import { getMediumPriorityCount } from "../features/projectCounter";
+import displayMediumPriorityTodoForm from "../mediumPriorityTodo";
+import createTodoPage from "../todosAdditional/createTodoPage";
 export default function showMediumPriorities() {
   createTopDisplay();
   createMiddleDisplay();
@@ -14,7 +17,7 @@ function createTopDisplay() {
   currentProjectLocation.textContent = "Medium priorities";
   const currentProjectCounts = document.createElement("h2");
   currentProjectCounts.id = "taskCount";
-  currentProjectCounts.textContent = 0;
+  currentProjectCounts.textContent = getMediumPriorityCount();
   mainContent.append(display);
   display.append(currentProjectLocation);
   display.append(currentProjectCounts);
@@ -24,13 +27,13 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addTodayButton = document.createElement("button");
-  addTodayButton.id = "addTodayButton";
-  addTodayButton.textContent = "New Medium Priority TODO";
+  const addMediumPriorityButton = document.createElement("button");
+  addMediumPriorityButton.id = "addMediumPriorityButton";
+  addMediumPriorityButton.textContent = "New Medium Priority TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addTodayButton);
-  //displayTodoForm();
+  middleDisplay.append(addMediumPriorityButton);
+  displayTodoForm();
 }
 function createBottomDisplay() {
   const mainContent = document.getElementById("mainContent");
@@ -38,4 +41,18 @@ function createBottomDisplay() {
   bottomDisplay.id = "bottomDisplay";
 
   mainContent.append(bottomDisplay);
+}
+function displayTodoForm() {
+  const addMediumPriorityButton = document.getElementById(
+    "addMediumPriorityButton"
+  );
+  addMediumPriorityButton.addEventListener("click", () => {
+    clearTodoPage();
+    createTodoPage();
+    displayMediumPriorityTodoForm();
+  });
+}
+function clearTodoPage() {
+  const todoPage = document.getElementById("todoPage");
+  todoPage.innerHTML = "";
 }

@@ -15,8 +15,12 @@ import { displayCalendarCount } from "../features/projectCounter";
 import { getSelectedFormEdited } from "./editFormTodo";
 import { displayHighPriority } from "../highPriortyTodo";
 import { displayHighPriortyCount } from "../features/projectCounter";
-import { highPriorityFormEdited } from "./editFormTodo";
+import { getHighPriorityFormEdited } from "./editFormTodo";
 import { highPriorirityIsCheck } from "../features/isComplete";
+import { displayMediumPriority } from "../mediumPriorityTodo";
+import { displayMediumPriortyCount } from "../features/projectCounter";
+import { getMediumPriorityFormEdited } from "./editFormTodo";
+import { mediumPriorirityIsCheck } from "../features/isComplete";
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -79,6 +83,8 @@ export function createDeleteButton(index, todoPage, todoStatus) {
       displayAllTaskCount();
     } else if (todoStatus === "highPriorityTodo") {
       displayHighPriortyCount();
+    } else if (todoStatus === "mediumPriorityTodo") {
+      displayMediumPriortyCount();
     }
   });
   todoPage.append(delButton);
@@ -98,6 +104,8 @@ export function delButtonAction(index, todoStatus) {
     displayMiddleContentTodos();
   } else if (todoStatus === "highPriorityTodo") {
     displayHighPriority();
+  } else if (todoStatus === "mediumPriorityTodo") {
+    displayMediumPriority();
   }
   clearTodoPage();
 }
@@ -122,7 +130,9 @@ export function editButtonAction(todos, index, todoStatus) {
   } else if (todoStatus === "defaultTodo") {
     getTodoFormToBeEdited(todos, index);
   } else if (todoStatus === "highPriorityTodo") {
-    highPriorityFormEdited(todos, index);
+    getHighPriorityFormEdited(todos, index);
+  } else if (todoStatus === "mediumPriorityTodo") {
+    getMediumPriorityFormEdited(todos, index);
   }
 }
 
@@ -145,6 +155,8 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
       getTodosIsCheck();
     } else if (todoStatus === "highPriorityTodo") {
       highPriorirityIsCheck();
+    } else if (todoStatus === "mediumPriorityTodo") {
+      mediumPriorirityIsCheck();
     }
   });
 

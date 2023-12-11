@@ -43,13 +43,15 @@ body {
 }
 #addTodoButton,
 #addTodayButton,
-#addHighPriorityButton {
+#addHighPriorityButton,
+#addMediumPriorityButton {
   display: flex;
   width: 100%;
 }
 #addTodoButton::before,
 #addTodayButton::before,
-#addHighPriorityButton::before {
+#addHighPriorityButton::before,
+#addMediumPriorityButton::before {
   content: "+";
 }
 #bottomDisplay {
@@ -77,6 +79,7 @@ body {
 #addTodoButton,
 #addTodayButton,
 #addHighPriorityButton,
+#addMediumPriorityButton,
 #middleDisplay {
   font-size: 1.3rem;
   min-height: 0.4rem;

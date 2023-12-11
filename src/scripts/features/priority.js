@@ -59,6 +59,15 @@ export function getHighPriorityTodoPriority() {
   });
 }
 
+export function getMediumPriorityTodoPriority() {
+  myTodos.forEach((todo, index) => {
+    if (todo.priority === "Medium priority") {
+      const priority = todo.priority;
+      filterPriority(priority, index);
+    }
+  });
+}
+
 function filterPriority(priority, index) {
   switch (priority) {
     case HIGH_PRIORITY:

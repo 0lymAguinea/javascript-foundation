@@ -16,6 +16,9 @@ export function calendarTodoIsCheck() {
 export function highPriorirityIsCheck() {
   highPriority();
 }
+export function mediumPriorirityIsCheck() {
+  mediumPriority();
+}
 function formattedTodayDate() {
   const getDate = new Date();
   const year = getDate.getFullYear().toString();
@@ -47,6 +50,14 @@ function calendarTodoIscomplete(pickedDate) {
 function highPriority() {
   myTodos.forEach((todo, index) => {
     if (todo.priority === "High priority") {
+      const isComplete = todo.isComplete;
+      todoChecker(isComplete, index);
+    }
+  });
+}
+function mediumPriority() {
+  myTodos.forEach((todo, index) => {
+    if (todo.priority === "Medium priority") {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);
     }
