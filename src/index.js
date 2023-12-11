@@ -3,6 +3,7 @@ import showToday from "./scripts/displays/today.js";
 import showCalendar from "./scripts/displays/calendar.js";
 import { displayMiddleContentTodos } from "./scripts/todo.js";
 import showHighPriorities from "./scripts/displays/highPriority.js";
+import showMediumPriorities from "./scripts/displays/mediumPriority.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
 
@@ -93,6 +94,12 @@ function priorityButtonSelector() {
     clearMainContent();
     clearTodoPage();
     showHighPriorities();
+  });
+
+  mediumPriorityButton.addEventListener("click", () => {
+    clearMainContent();
+    clearTodoPage();
+    showMediumPriorities();
   });
 }
 function pageContents() {
