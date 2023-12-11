@@ -27,12 +27,12 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addLowPriorityButton = document.createElement("button");
-  addLowPriorityButton.id = "addLowPriorityButton";
-  addLowPriorityButton.textContent = "New Low Priority TODO";
+  const addTodoButton = document.createElement("button");
+  addTodoButton.id = "addTodoButton";
+  addTodoButton.textContent = "New Low Priority TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addLowPriorityButton);
+  middleDisplay.append(addTodoButton);
   displayTodoForm();
 }
 function createBottomDisplay() {
@@ -43,8 +43,8 @@ function createBottomDisplay() {
   mainContent.append(bottomDisplay);
 }
 function displayTodoForm() {
-  const addLowPriorityButton = document.getElementById("addLowPriorityButton");
-  addLowPriorityButton.addEventListener("click", () => {
+  const addTodoButton = document.getElementById("addTodoButton");
+  addTodoButton.addEventListener("click", () => {
     clearTodoPage();
     createTodoPage();
     displayLowPriorityTodoForm();

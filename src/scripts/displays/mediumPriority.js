@@ -27,12 +27,12 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addMediumPriorityButton = document.createElement("button");
-  addMediumPriorityButton.id = "addMediumPriorityButton";
-  addMediumPriorityButton.textContent = "New Medium Priority TODO";
+  const addTodoButton = document.createElement("button");
+  addTodoButton.id = "addTodoButton";
+  addTodoButton.textContent = "New Medium Priority TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addMediumPriorityButton);
+  middleDisplay.append(addTodoButton);
   displayTodoForm();
 }
 function createBottomDisplay() {
@@ -43,10 +43,8 @@ function createBottomDisplay() {
   mainContent.append(bottomDisplay);
 }
 function displayTodoForm() {
-  const addMediumPriorityButton = document.getElementById(
-    "addMediumPriorityButton"
-  );
-  addMediumPriorityButton.addEventListener("click", () => {
+  const addTodoButton = document.getElementById("addTodoButton");
+  addTodoButton.addEventListener("click", () => {
     clearTodoPage();
     createTodoPage();
     displayMediumPriorityTodoForm();

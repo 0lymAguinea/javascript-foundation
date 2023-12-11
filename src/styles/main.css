@@ -41,19 +41,11 @@ body {
 #currentProjectContainer > h2 {
   padding-right: 1rem;
 }
-#addTodoButton,
-#addTodayButton,
-#addHighPriorityButton,
-#addMediumPriorityButton,
-#addLowPriorityButton {
+#addTodoButton {
   display: flex;
   width: 100%;
 }
-#addTodoButton::before,
-#addTodayButton::before,
-#addHighPriorityButton::before,
-#addMediumPriorityButton::before,
-#addLowPriorityButton::before {
+#addTodoButton::before {
   content: "+";
 }
 #bottomDisplay {
@@ -78,12 +70,7 @@ body {
   color: rgb(9, 247, 9);
 }
 
-#addTodoButton,
-#addTodayButton,
-#addHighPriorityButton,
-#addMediumPriorityButton,
-#middleDisplay,
-#addLowPriorityButton {
+#addTodoButton {
   font-size: 1.3rem;
   min-height: 0.4rem;
 }

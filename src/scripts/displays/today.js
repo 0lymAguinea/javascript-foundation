@@ -27,12 +27,12 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addTodayButton = document.createElement("button");
-  addTodayButton.id = "addTodayButton";
-  addTodayButton.textContent = "New Today TODO";
+  const addTodoButton = document.createElement("button");
+  addTodoButton.id = "addTodoButton";
+  addTodoButton.textContent = "New Today TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addTodayButton);
+  middleDisplay.append(addTodoButton);
   displayTodoForm();
 }
 function createBottomDisplay() {
@@ -48,8 +48,8 @@ function clearTodoPage() {
 }
 
 function displayTodoForm() {
-  const addTodayButton = document.getElementById("addTodayButton");
-  addTodayButton.addEventListener("click", () => {
+  const addTodoButton = document.getElementById("addTodoButton");
+  addTodoButton.addEventListener("click", () => {
     clearTodoPage();
     createTodoPage();
     displayTodayTodoForm();

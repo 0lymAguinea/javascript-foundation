@@ -1,7 +1,9 @@
-import { displayHighPriority } from "../highPriortyTodo";
+import displayHighPriorityTodoForm, {
+  displayHighPriority,
+} from "../highPriortyTodo";
 import { getHighPriorityCount } from "../features/projectCounter";
-import displayHighPriorityTodoForm from "../highPriortyTodo";
 import createTodoPage from "../todosAdditional/createTodoPage";
+
 export default function showHighPriorities() {
   createTopDisplay();
   createMiddleDisplay();
@@ -27,12 +29,12 @@ function createMiddleDisplay() {
   const middleDisplay = document.createElement("div");
   middleDisplay.id = "middleDisplay";
 
-  const addHighPriorityButton = document.createElement("button");
-  addHighPriorityButton.id = "addHighPriorityButton";
-  addHighPriorityButton.textContent = "New High Priority TODO";
+  const addTodoButton = document.createElement("button");
+  addTodoButton.id = "addTodoButton";
+  addTodoButton.textContent = "New High Priority TODO";
 
   mainContent.append(middleDisplay);
-  middleDisplay.append(addHighPriorityButton);
+  middleDisplay.append(addTodoButton);
   displayTodoForm();
 }
 function createBottomDisplay() {
@@ -43,10 +45,8 @@ function createBottomDisplay() {
   mainContent.append(bottomDisplay);
 }
 function displayTodoForm() {
-  const addHighPriorityButton = document.getElementById(
-    "addHighPriorityButton"
-  );
-  addHighPriorityButton.addEventListener("click", () => {
+  const addTodoButton = document.getElementById("addTodoButton");
+  addTodoButton.addEventListener("click", () => {
     clearTodoPage();
     createTodoPage();
     displayHighPriorityTodoForm();
