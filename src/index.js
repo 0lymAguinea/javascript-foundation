@@ -2,8 +2,12 @@ import showDefaultContent from "./scripts/default.js";
 import showToday from "./scripts/today.js";
 import showCalendar from "./scripts/calendar.js";
 import { displayMiddleContentTodos } from "./scripts/todo.js";
+import showHighPriorities from "./scripts/highPriority.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
+
+  const projectFolder = document.createElement("div");
+  projectFolder.id = "projectFolder";
   projectFolders.textContent = "My TODO List";
 
   const projects = document.createElement("button");
@@ -18,10 +22,32 @@ function myProjects() {
   calendar.textContent = "Calendar";
   calendar.id = "calendarBtn";
 
-  projectFolders.append(projects);
-  projectFolders.append(today);
-  projectFolders.append(calendar);
+  const priorityFolder = document.createElement("div");
+  priorityFolder.id = "priorityFolder";
+
+  const highPriorityButton = document.createElement("button");
+  highPriorityButton.textContent = "High priority";
+  highPriorityButton.id = "highPriorityButton";
+
+  const mediumPriorityButton = document.createElement("button");
+  mediumPriorityButton.textContent = "Medium priority";
+  mediumPriorityButton.id = "mediumPriorityButton";
+
+  const lowPriorityButton = document.createElement("button");
+  lowPriorityButton.textContent = "Low priority";
+  lowPriorityButton.id = "lowPriorityButton";
+
+  projectFolders.append(projectFolder);
+  projectFolder.append(projects);
+  projectFolder.append(today);
+  projectFolder.append(calendar);
+
+  projectFolders.append(priorityFolder);
+  priorityFolder.append(highPriorityButton);
+  priorityFolder.append(mediumPriorityButton);
+  priorityFolder.append(lowPriorityButton);
   projectButtonSelector();
+  priorityButtonSelector();
 }
 
 function clearMainContent() {
@@ -57,13 +83,24 @@ function projectButtonSelector() {
     showCalendar();
   });
 }
+
+function priorityButtonSelector() {
+  const highPriorityButton = document.getElementById("highPriorityButton");
+  const mediumPriorityButton = document.getElementById("mediumPriorityButton");
+  const lowPriorityButton = document.getElementById("lowPriorityButton");
+
+  highPriorityButton.addEventListener("click", () => {
+    clearMainContent();
+    clearTodoPage();
+    showHighPriorities();
+  });
+}
 function pageContents() {
   let middileContent = showDefaultContent();
   //let rightContent = createTodoPage();
 
   return { middileContent };
 }
-
 myProjects();
 pageContents();
 //displayTodo();
