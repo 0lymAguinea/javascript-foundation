@@ -33,9 +33,11 @@ export function getTodoFormToBeEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(
@@ -45,7 +47,6 @@ export function getTodoFormToBeEdited(todos, index) {
         inputPriority.value,
         inputNote.value
       );
-
       clearTodoPage();
       displayMiddleContentTodos();
     }
@@ -77,9 +78,11 @@ export function getTodayFormEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(
@@ -120,9 +123,11 @@ export function getSelectedFormEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(
@@ -165,9 +170,11 @@ export function getHighPriorityFormEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(
@@ -210,9 +217,11 @@ export function getMediumPriorityFormEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(
@@ -255,9 +264,11 @@ export function getLowPriorityFormEdited(todos, index) {
   inputPriority.value = defaultValues.priority;
   inputNote.value = defaultValues.note;
 
+  const submitButton = document.getElementById("submitButton");
+  submitButton.textContent = "Save changes";
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("error");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       myTodos.splice(index, 1);
       addEditedTodotoMyTodos(

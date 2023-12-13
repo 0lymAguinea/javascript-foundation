@@ -22,8 +22,7 @@ function getTodoForm() {
   inputDueDate.disabled = true;
 
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "") {
-      console.log("ERROR");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       addTodoToMyTodos(
         inputTitle,

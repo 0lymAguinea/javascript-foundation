@@ -46,8 +46,7 @@ function getTodoForm() {
   const submitButton = document.getElementById("submitButton");
 
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value === "" || inputDueDate.value === "") {
-      console.log("ERROR");
+    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
       addTodoToMyTodos(
         inputTitle,
