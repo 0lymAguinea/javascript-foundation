@@ -8,20 +8,22 @@ import showLowPriorities from "./scripts/displays/lowPriority.js";
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
 
+  const projectTitle = document.createElement("h2");
+  projectTitle.textContent = "My TODO List";
+
   const projectFolder = document.createElement("div");
   projectFolder.id = "projectFolder";
-  projectFolders.textContent = "My TODO List";
 
   const projects = document.createElement("button");
-  projects.textContent = "Projects";
+  projects.innerHTML = `<i class="fa-solid fa-list-check"></i> Projects`;
   projects.id = "projectsBtn";
 
   const today = document.createElement("button");
-  today.textContent = "Today";
+  today.innerHTML = `<i class="fa-solid fa-person-running"></i> Today`;
   today.id = "todayBtn";
 
   const calendar = document.createElement("button");
-  calendar.textContent = "Calendar";
+  calendar.innerHTML = `<i class="fa-solid fa-calendar-days"></i> Calendar`;
   calendar.id = "calendarBtn";
 
   const priorityFolder = document.createElement("div");
@@ -39,15 +41,18 @@ function myProjects() {
   lowPriorityButton.textContent = "Low priority";
   lowPriorityButton.id = "lowPriorityButton";
 
+  projectFolders.append(projectTitle);
   projectFolders.append(projectFolder);
+  projectFolders.append(priorityFolder);
+
   projectFolder.append(projects);
   projectFolder.append(today);
   projectFolder.append(calendar);
 
-  projectFolders.append(priorityFolder);
   priorityFolder.append(highPriorityButton);
   priorityFolder.append(mediumPriorityButton);
   priorityFolder.append(lowPriorityButton);
+
   projectButtonSelector();
   priorityButtonSelector();
 }
