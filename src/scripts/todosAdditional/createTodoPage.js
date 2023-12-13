@@ -18,6 +18,10 @@ function createForm() {
   form.id = "createTodoForm";
   form.method = "post";
   todoPage.append(form);
+  form.innerHTML += "</form>";
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
 }
 function createFormLabels() {
   const form = document.querySelector("form");
@@ -70,6 +74,9 @@ function createFormInput() {
   inputTitle.name = "title";
   inputTitle.id = "title";
   inputTitle.placeholder = "Title";
+  inputTitle.setAttribute("required", "");
+  inputTitle.required = true;
+  inputTitle.minLength = 3;
 
   const inputDescription = document.createElement("input");
   inputDescription.type = "text";
@@ -82,6 +89,8 @@ function createFormInput() {
   inputDueDate.name = "dueDate";
   inputDueDate.id = "dueDate";
   inputDueDate.min = formattedTodayDate();
+  inputDueDate.setAttribute("required", "");
+  inputDueDate.required = true;
 
   const inputNote = document.createElement("input");
   inputNote.type = "text";
@@ -125,7 +134,7 @@ function formSubmitButton() {
   const submitButton = document.createElement("button");
   submitButton.textContent = "Add";
   submitButton.id = "submitButton";
-  submitButton.type = "button";
+  submitButton.type = "submit";
 
   labels.append(submitButton);
 }
