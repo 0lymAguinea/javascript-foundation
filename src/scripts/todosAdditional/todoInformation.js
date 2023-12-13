@@ -84,18 +84,23 @@ export function createTodoInformation(todos, index, todoStatus) {
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
 
-  createDeleteButton(index, todoPage, todoStatus);
-  createEditButton(todos, index, todoPage, todoStatus);
-  createIsCompleteButton(todos, todoPage, todoStatus);
+  const informationButtons = document.createElement("div");
+  informationButtons.id = "informationButtons";
+  todoPage.append(informationButtons);
+
+  createDeleteButton(index, informationButtons, todoStatus);
+  createEditButton(todos, index, informationButtons, todoStatus);
+  createIsCompleteButton(todos, informationButtons, todoStatus);
 }
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
 
-export function createDeleteButton(index, todoPage, todoStatus) {
+export function createDeleteButton(index, informationButtons, todoStatus) {
   const delButton = document.createElement("button");
   delButton.textContent = "Delete task";
+  delButton.id = "delButton";
   delButton.addEventListener("click", () => {
     delButtonAction(index, todoStatus);
     if (todoStatus === DEFAULT_TODO) {
@@ -112,7 +117,7 @@ export function createDeleteButton(index, todoPage, todoStatus) {
       displayPriorityCount(LOW_PRIORITY);
     }
   });
-  todoPage.append(delButton);
+  informationButtons.append(delButton);
 }
 export function getDateSelected() {
   const input = document.getElementById("calendar");
@@ -137,13 +142,14 @@ export function delButtonAction(index, todoStatus) {
   clearTodoPage();
 }
 
-export function createEditButton(todos, index, todoPage, todoStatus) {
+export function createEditButton(todos, index, informationButtons, todoStatus) {
   const editButton = document.createElement("button");
+  editButton.id = "editButton";
   editButton.textContent = "Edit task";
   editButton.addEventListener("click", () => {
     editButtonAction(todos, index, todoStatus);
   });
-  todoPage.append(editButton);
+  informationButtons.append(editButton);
 }
 
 export function editButtonAction(todos, index, todoStatus) {
@@ -170,9 +176,10 @@ export function changeTodoTitleToUpdate() {
   todoTitle.textContent = "Edit TODO";
 }
 
-export function createIsCompleteButton(todos, todoPage, todoStatus) {
+export function createIsCompleteButton(todos, informationButtons, todoStatus) {
   const completeButton = document.createElement("button");
   completeButton.textContent = "TODO complete";
+  completeButton.id = "completeButton";
 
   completeButton.addEventListener("click", () => {
     isCompleteAction(todos);
@@ -191,7 +198,7 @@ export function createIsCompleteButton(todos, todoPage, todoStatus) {
     }
   });
 
-  todoPage.append(completeButton);
+  informationButtons.append(completeButton);
 }
 
 export function isCompleteAction(todos) {

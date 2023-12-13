@@ -34,7 +34,6 @@ body {
 #mainContent button {
   border-radius: 5px;
 }
-
 #todoPage {
   background-color: rgb(236, 233, 233);
   border-radius: 5px;
@@ -109,12 +108,22 @@ body {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
 }
+#todoInformation {
+  font-size: 2rem;
+}
 #todoPage > #todoInformationPage {
   color: rgb(71, 70, 70);
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  text-overflow: ellipsis;
 }
 #todoInformationPage > h5 > p {
   font-size: 1.5rem;
   color: black;
+}
+#informationButtons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 #labelTitle::before,
 #labelDueDate::before {
@@ -148,4 +157,38 @@ body {
   grid-template-columns: 10% 90%;
   align-content: center;
   max-height: 100%;
+}
+#submitButton,
+#editButton {
+  background-color: yellow;
+  color: black;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+#editButton {
+  border: yellow;
+}
+#completeButton {
+  background-color: green;
+  color: black;
+  border: green;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+button {
+  font-weight: bold;
+}
+#delButton {
+  background-color: red;
+  color: black;
+  border: red;
+  border-radius: 5px;
+}
+input,
+select {
+  border-radius: 5px;
+  border: black solid 1px;
+}
+input:invalid {
+  border: 1px solid red;
 }
