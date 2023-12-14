@@ -1,7 +1,6 @@
-import { myTodos } from "../todo";
-
 export function getAllTaskCount() {
-  const allCount = myTodos.length;
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  const allCount = storedTodo.length;
   return allCount;
 }
 
@@ -30,7 +29,10 @@ function formattedTodayDate() {
   return `${year}-${month}-${day}`;
 }
 function displayTodayCountFiltered(todayDate) {
-  const todayTaskCount = myTodos.filter((todo) => todo.dueDate === todayDate);
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  const todayTaskCount = storedTodo.filter(
+    (todo) => todo.dueDate === todayDate
+  );
   return todayTaskCount.length;
 }
 
@@ -44,7 +46,8 @@ function formattedSelectDate() {
   return pickedDate;
 }
 function displayCalendarPickedTodoCount(pickedDate) {
-  const pickedCount = myTodos.filter((todo) => todo.dueDate === pickedDate);
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  const pickedCount = storedTodo.filter((todo) => todo.dueDate === pickedDate);
   return pickedCount.length;
 }
 
@@ -54,6 +57,7 @@ export function displayPriorityCount(priority) {
 }
 
 export function getPriorityCount(priority) {
-  const count = myTodos.filter((todo) => todo.priority === priority);
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  const count = storedTodo.filter((todo) => todo.priority === priority);
   return count.length;
 }

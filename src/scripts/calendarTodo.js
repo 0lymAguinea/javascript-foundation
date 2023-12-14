@@ -1,6 +1,5 @@
 import { calendarTodoIsCheck } from "./features/isComplete";
 import { getCalendarTodoPriority } from "./features/priority";
-import { myTodos } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { displayCalendarCount } from "./features/projectCounter";
 
@@ -36,19 +35,22 @@ function calendarPicked(input) {
 }
 
 export function displayCalendarPickedTodo(pickedDate) {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   const bottomDisplay = document.getElementById("bottomDisplay");
   bottomDisplay.innerHTML = "";
-  myTodos.forEach((todo, index) => {
+
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === pickedDate) {
       const todoButton = document.createElement("button");
       let textTitle = document.createElement("span");
       let textDate = document.createElement("span");
-      textTitle = todo.title;
-      textDate = todo.dueDate;
+      textTitle.textContent = todo.title;
+      textDate.textContent = todo.dueDate;
       todoButton.dataset.todoid = index;
       todoButton.className = "todoProjectButton";
       bottomDisplay.append(todoButton);
-      todoButton.append(`${textTitle} : ${textDate} `);
+      todoButton.append(`${textTitle.textContent} : ${textDate.textContent} `);
       todoButtonItems(todoButton, todo, index);
     }
   });

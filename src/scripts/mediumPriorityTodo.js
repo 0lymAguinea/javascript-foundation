@@ -1,4 +1,4 @@
-import { myTodos, Todo } from "./todo";
+import { Todo } from "./todo";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
 import { mediumPriorirityIsCheck } from "./features/isComplete";
 import { getPriorityTodoPriority } from "./features/priority";
@@ -24,7 +24,7 @@ function getTodoForm() {
   submitButton.addEventListener("click", () => {
     if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
-      addTodoToMyTodos(
+      addTodoToStorage(
         inputTitle,
         inputDescription,
         inputDueDate,
@@ -34,23 +34,36 @@ function getTodoForm() {
     }
   });
 }
-function addTodoToMyTodos(title, description, dueDate, priority, note) {
-  myTodos.push(
-    new Todo(
-      title.value,
-      description.value,
-      dueDate.value,
-      priority.value,
-      note.value
-    )
+function addTodoToStorage(
+  inputTitle,
+  inputDescription,
+  inputDueDate,
+  inputPriority,
+  inputNote
+) {
+  const newTodo = new Todo(
+    inputTitle.value,
+    inputDescription.value,
+    inputDueDate.value,
+    inputPriority.value,
+    [inputNote.value]
   );
+
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(storedTodo));
+
   displayPriorityCount(MEDIUM_PRIORITY);
   displayMediumPriority();
 }
+
 export function displayMediumPriority() {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   const bottomDisplay = document.getElementById("bottomDisplay");
   bottomDisplay.innerHTML = "";
-  myTodos.forEach((todo, index) => {
+
+  storedTodo.forEach((todo, index) => {
     if (todo.priority === MEDIUM_PRIORITY) {
       displayMediumPriorities(todo, index);
     }
@@ -63,12 +76,14 @@ function displayMediumPriorities(todo, index) {
   const todoButton = document.createElement("button");
   let textTitle = document.createElement("span");
   let textDate = document.createElement("span");
-  textTitle = todo.title;
-  textDate = todo.dueDate;
+
+  textTitle.textContent = todo.title;
+  textDate.textContent = todo.dueDate;
+
   todoButton.dataset.todoid = index;
   todoButton.className = "todoProjectButton";
   bottomDisplay.append(todoButton);
-  todoButton.append(`${textTitle} : ${textDate} `);
+  todoButton.append(`${textTitle.textContent} : ${textDate.textContent} `);
   todoButtonItems(todoButton, todo, index);
 }
 function todoButtonItems(todoButton, todo, index) {

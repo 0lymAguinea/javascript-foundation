@@ -1,4 +1,4 @@
-import { myTodos, Todo } from "./todo";
+import { Todo } from "./todo";
 import { getTodayTodoPriority } from "./features/priority";
 import { getTodayTodoIsCheck } from "./features/isComplete";
 import { createTodoInformation } from "./todosAdditional/todoInformation";
@@ -24,7 +24,7 @@ function getTodoForm() {
   submitButton.addEventListener("click", () => {
     if (inputTitle.value.length < 3 || inputDueDate.value === "") {
     } else {
-      addTodoToMyTodos(
+      addTodoToStorage(
         inputTitle,
         inputDescription,
         inputDueDate,
@@ -34,20 +34,29 @@ function getTodoForm() {
     }
   });
 }
-function addTodoToMyTodos(title, description, dueDate, priority, note) {
-  myTodos.push(
-    new Todo(
-      title.value,
-      description.value,
-      dueDate.value,
-      priority.value,
-      note.value
-    )
+function addTodoToStorage(
+  inputTitle,
+  inputDescription,
+  inputDueDate,
+  inputPriority,
+  inputNote
+) {
+  const newTodo = new Todo(
+    inputTitle.value,
+    inputDescription.value,
+    inputDueDate.value,
+    inputPriority.value,
+    [inputNote.value]
   );
+
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(storedTodo));
 
   displayTodayCount();
   getTodayDate();
 }
+
 export function getTodayDate() {
   const todayDate = formattedTodayDate();
   displayTodayTodo(todayDate);
@@ -61,19 +70,23 @@ function formattedTodayDate() {
 }
 
 function displayTodayTodo(todayDate) {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   const bottomDisplay = document.getElementById("bottomDisplay");
   bottomDisplay.innerHTML = "";
-  myTodos.forEach((todo, index) => {
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === todayDate) {
       const todoButton = document.createElement("button");
       let textTitle = document.createElement("span");
       let textDate = document.createElement("span");
-      textTitle = todo.title;
-      textDate = todo.dueDate;
+
+      textTitle.textContent = todo.title;
+      textDate.textContent = todo.dueDate;
       todoButton.dataset.todoid = index;
+
       todoButton.className = "todoProjectButton";
       bottomDisplay.append(todoButton);
-      todoButton.append(`${textTitle} : ${textDate} `);
+      todoButton.append(`${textTitle.textContent} : ${textDate.textContent} `);
       todoButtonItems(todoButton, todo, index);
     }
   });
