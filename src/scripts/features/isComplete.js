@@ -1,5 +1,3 @@
-import { myTodos } from "../todo";
-
 export function getTodosIsCheck() {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
   storedTodo.forEach((todo, index) => {

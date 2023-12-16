@@ -1,5 +1,3 @@
-//Responsible to creating todo items
-export const myTodos = [];
 import { getTodoPriority } from "./features/priority";
 import { getTodosIsCheck } from "./features/isComplete";
 import { displayAllTaskCount } from "./features/projectCounter";
