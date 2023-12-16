@@ -2,10 +2,12 @@ import createTodoPage from "../todosAdditional/createTodoPage.js";
 import displayTodo, { displayMiddleContentTodos } from "../todo.js";
 import { getAllTaskCount } from "../features/projectCounter.js";
 
+//Exported to index.js to be called as the default display
 export default function showDefaultContent() {
   showDefaultDisplay();
 }
 
+//Handles calling the top,middle and bottom display in the middle located at middleDisplay.
 function showDefaultDisplay() {
   createTopDisplay();
   createMiddleDisplay();
@@ -49,12 +51,12 @@ function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
-
+//Handles the creation of the form for adding new todos
 function displayTodoForm() {
   const addTodoButton = document.getElementById("addTodoButton");
   addTodoButton.addEventListener("click", () => {
     clearTodoPage();
-    createTodoPage();
-    displayTodo();
+    createTodoPage(); //Call the form for creating new todos
+    displayTodo(); //Get the form for the data to be entered
   });
 }

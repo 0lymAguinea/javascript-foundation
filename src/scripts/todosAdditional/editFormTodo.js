@@ -15,9 +15,11 @@ export function getTodoFormToBeEdited(todos, index) {
     inputNote,
   } = getInputs();
 
+  //Removed the disabled attributes
   inputDueDate.removeAttribute("disabled");
   inputPriority.removeAttribute("disabled");
 
+  //Get the current values
   const defaultValues = {
     title: todos.title,
     description: todos.description,
@@ -41,11 +43,13 @@ export function getTodoFormToBeEdited(todos, index) {
   submitButton.addEventListener("click", () => {
     if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
       if (index >= 0 && index < storedTodo.length) {
+        //Directly overwrites the storedTodo values based on its index
         storedTodo[index].title = inputTitle.value;
         storedTodo[index].description = inputDescription.value;
         storedTodo[index].dueDate = inputDueDate.value;
         storedTodo[index].priority = inputPriority.value;
         storedTodo[index].note = inputNote.value;
+        //Saved the edited to localStorage
         localStorage.setItem("todos", JSON.stringify(storedTodo));
 
         clearTodoPage();
@@ -309,6 +313,7 @@ export function getLowPriorityFormEdited(todos, index) {
   });
 }
 
+//Common elements
 function getInputs() {
   const inputTitle = document.getElementById("title");
   const inputDescription = document.getElementById("description");

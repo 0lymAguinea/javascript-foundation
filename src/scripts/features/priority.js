@@ -2,11 +2,12 @@ const HIGH_PRIORITY = "High priority";
 const MEDIUM_PRIORITY = "Medium priority";
 const LOW_PRIORITY = "Low priority";
 
+//Handles the adding of background color based on the todo's priority value
 function addPriorityButtonClass(index, priorityClass) {
   const button = document.querySelector(`[data-todoid="${index}"]`);
   button.classList.add(priorityClass);
 }
-
+//For the todo.js
 export function getTodoPriority() {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
   storedTodo.forEach((todo, index) => {
@@ -14,7 +15,7 @@ export function getTodoPriority() {
     filterPriority(priority, index);
   });
 }
-
+//For the todayTodo.js
 export function getTodayTodoPriority() {
   const getDate = new Date();
   const year = getDate.getFullYear().toString();
@@ -34,7 +35,7 @@ function dateFilterPriority(todayDate) {
     }
   });
 }
-
+//For the calendar.js
 export function getCalendarTodoPriority() {
   const input = document.getElementById("calendar");
   const pickedDate = input.value;
@@ -50,6 +51,8 @@ function calendearTodoFilterPriority(pickedDate) {
     }
   });
 }
+
+//Get either the high,medium, low priority
 export function getPriorityTodoPriority(priority) {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
   storedTodo.forEach((todo, index) => {
@@ -59,7 +62,7 @@ export function getPriorityTodoPriority(priority) {
     }
   });
 }
-
+//Switch case for high, medium, low priority
 function filterPriority(priority, index) {
   switch (priority) {
     case HIGH_PRIORITY:

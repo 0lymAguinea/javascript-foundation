@@ -2,6 +2,7 @@ import createTodoPage from "../todosAdditional/createTodoPage";
 import displayTodayTodoForm, { getTodayDate } from "../todayTodo";
 import { todayDateFilter } from "../features/projectCounter";
 
+//Exported to index.js to be called as the today display
 export default function showToday() {
   createTopDisplay();
   createMiddleDisplay();
@@ -46,7 +47,7 @@ function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
-
+//Handles the creation of the form for adding new todos
 function displayTodoForm() {
   const addTodoButton = document.getElementById("addTodoButton");
   addTodoButton.addEventListener("click", () => {

@@ -4,7 +4,7 @@ export default function createTodoPage() {
   createFormLabels();
   createFormInput();
 }
-
+//Responsible for the creation of the form
 function createTopTitleForm() {
   const todoPage = document.getElementById("todoPage");
   const todoTitle = document.createElement("h3");

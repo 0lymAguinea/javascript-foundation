@@ -43,7 +43,7 @@ import {
   LOW_PRIORITY,
   LOW_PRIORITY_TODO,
 } from "../lowPriorityTodo";
-
+//Handles the creation and display of the todo information.
 export function createTodoInformation(todos, index, todoStatus) {
   const todoPage = document.getElementById("todoPage");
   const todoInformationPage = document.createElement("div");
@@ -84,6 +84,7 @@ export function createTodoInformation(todos, index, todoStatus) {
   labelPriority.append(todoPriority);
   labelNote.append(todoNote);
 
+  //Group the delete,edit,create buttons in a div
   const informationButtons = document.createElement("div");
   informationButtons.id = "informationButtons";
   todoPage.append(informationButtons);
@@ -102,7 +103,10 @@ export function createDeleteButton(index, informationButtons, todoStatus) {
   delButton.textContent = "Delete task";
   delButton.id = "delButton";
   delButton.addEventListener("click", () => {
+    //Handles removal and updating the middleDisplay
     delButtonAction(index, todoStatus);
+
+    //Handles updating the counts of todos
     if (todoStatus === DEFAULT_TODO) {
       displayAllTaskCount();
     } else if (todoStatus === TODAY_TODO) {
@@ -126,9 +130,10 @@ export function getDateSelected() {
 
 export function delButtonAction(index, todoStatus) {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
-
+  //Remove todo item
   removeTodoItem(storedTodo, index);
 
+  //Refresh the middleContent after deleting todo
   if (todoStatus === DEFAULT_TODO) {
     displayMiddleContentTodos();
   } else if (todoStatus === TODAY_TODO) {
@@ -147,6 +152,7 @@ export function delButtonAction(index, todoStatus) {
 function removeTodoItem(storedTodo, index) {
   if (index >= 0 && index < storedTodo.length) {
     storedTodo.splice(index, 1);
+    //Set the new todo after deleting it
     localStorage.setItem("todos", JSON.stringify(storedTodo));
   }
 }
@@ -164,6 +170,9 @@ export function editButtonAction(todos, index, todoStatus) {
   clearTodoPage();
   createTodoPage();
   changeTodoTitleToUpdate();
+
+  //Get the values of the array and use its value as the default values
+  //Each todo have its own form due to some inputs are disabled to be edited at their own todo other than default todo(todo.js)
   if (todoStatus === DEFAULT_TODO) {
     getTodoFormToBeEdited(todos, index);
   } else if (todoStatus === TODAY_TODO) {
@@ -212,6 +221,9 @@ export function createIsCompleteButton(informationButtons, todoStatus, index) {
 }
 
 export function isCompleteAction(storedTodo, index) {
+  //Check the boolean value then change it either true or false
   storedTodo[index].isComplete = !storedTodo[index].isComplete;
+
+  //Saved the changed value to localStorage
   localStorage.setItem("todos", JSON.stringify(storedTodo));
 }

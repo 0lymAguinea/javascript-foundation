@@ -1,5 +1,6 @@
 export function getTodosIsCheck() {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  //Get each todo's isComplete value
   storedTodo.forEach((todo, index) => {
     const isComplete = todo.isComplete;
     todoChecker(isComplete, index);
@@ -67,7 +68,9 @@ function todoChecker(isComplete, index) {
     taskCompleteStatus(index, false);
   }
 }
+//Toggle the checker at the left side of the todo buttons at middleContents
 function taskCompleteStatus(index, status) {
   const button = document.querySelector(`[data-todoid="${index}"]`);
+  //If status is true, add the class. If false, remove the class
   button.classList.toggle("taskCompleteTrue", status);
 }

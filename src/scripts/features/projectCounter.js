@@ -1,26 +1,32 @@
+//function starts at "display" handles the creating and delete todos at todoInformation.js
+//function start at "get" are for getting the todo counts after navigating todos at left display
+
+//Task counter for todo.js
 export function getAllTaskCount() {
   const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
   const allCount = storedTodo.length;
   return allCount;
 }
-
+//Task counter for todayTodo.js
 export function displayTodayCount() {
   const todayCount = document.getElementById("taskCount");
   todayCount.textContent = todayDateFilter();
 }
+//Task counter for calendar.js
 export function displayCalendarCount() {
   const selectedCount = document.getElementById("taskCount");
   selectedCount.textContent = calendarSelectedCount();
 }
-
 export function displayAllTaskCount() {
   const allTasks = document.getElementById("taskCount");
   allTasks.textContent = getAllTaskCount();
 }
+//Filter dates to be today only
 export function todayDateFilter() {
   const todayDate = formattedTodayDate();
   return displayTodayCountFiltered(todayDate);
 }
+//Get the current date
 function formattedTodayDate() {
   const getDate = new Date();
   const year = getDate.getFullYear().toString();
@@ -35,7 +41,7 @@ function displayTodayCountFiltered(todayDate) {
   );
   return todayTaskCount.length;
 }
-
+//Handles the counting of the selected date
 export function calendarSelectedCount() {
   const pickedDate = formattedSelectDate();
   return displayCalendarPickedTodoCount(pickedDate);
@@ -50,7 +56,7 @@ function displayCalendarPickedTodoCount(pickedDate) {
   const pickedCount = storedTodo.filter((todo) => todo.dueDate === pickedDate);
   return pickedCount.length;
 }
-
+//Get either the high, medium, low priority task counts
 export function displayPriorityCount(priority) {
   const taskCount = document.getElementById("taskCount");
   taskCount.textContent = getPriorityCount(priority);
