@@ -1,6 +1,6 @@
 // todoUtils.js
 import createTodoPage from "./createTodoPage";
-import { myTodos, displayMiddleContentTodos, DEFAULT_TODO } from "../todo";
+import { displayMiddleContentTodos, DEFAULT_TODO } from "../todo";
 import {
   getTodoFormToBeEdited,
   getTodayFormEdited,
@@ -125,7 +125,10 @@ export function getDateSelected() {
 }
 
 export function delButtonAction(index, todoStatus) {
-  myTodos.splice(index, 1);
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
+  removeTodoItem(storedTodo, index);
+
   if (todoStatus === DEFAULT_TODO) {
     displayMiddleContentTodos();
   } else if (todoStatus === TODAY_TODO) {
@@ -141,7 +144,12 @@ export function delButtonAction(index, todoStatus) {
   }
   clearTodoPage();
 }
-
+function removeTodoItem(storedTodo, index) {
+  if (index >= 0 && index < storedTodo.length) {
+    storedTodo.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(storedTodo));
+  }
+}
 export function createEditButton(todos, index, informationButtons, todoStatus) {
   const editButton = document.createElement("button");
   editButton.id = "editButton";
