@@ -36,19 +36,23 @@ export function getTodoFormToBeEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        displayMiddleContentTodos();
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      displayMiddleContentTodos();
     }
   });
 }
@@ -81,22 +85,27 @@ export function getTodayFormEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        getTodayDate();
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      getTodayDate();
     }
   });
 }
+
 export function getSelectedFormEdited(todos, index) {
   const {
     inputTitle,
@@ -126,19 +135,23 @@ export function getSelectedFormEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        displayCalendarPickedTodo(getDateSelected());
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      displayCalendarPickedTodo(getDateSelected());
     }
   });
 }
@@ -173,19 +186,23 @@ export function getHighPriorityFormEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        displayHighPriority();
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      displayHighPriority();
     }
   });
 }
@@ -220,19 +237,23 @@ export function getMediumPriorityFormEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        displayMediumPriority();
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      displayMediumPriority();
     }
   });
 }
@@ -267,19 +288,23 @@ export function getLowPriorityFormEdited(todos, index) {
   const submitButton = document.getElementById("submitButton");
   submitButton.textContent = "Save changes";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   submitButton.addEventListener("click", () => {
-    if (inputTitle.value.length < 3 || inputDueDate.value === "") {
+    if (inputTitle.value.length >= 3 && inputDueDate.value !== "") {
+      if (index >= 0 && index < storedTodo.length) {
+        storedTodo[index].title = inputTitle.value;
+        storedTodo[index].description = inputDescription.value;
+        storedTodo[index].dueDate = inputDueDate.value;
+        storedTodo[index].priority = inputPriority.value;
+        storedTodo[index].note = inputNote.value;
+        localStorage.setItem("todos", JSON.stringify(storedTodo));
+
+        clearTodoPage();
+        displayLowPriority();
+      } else {
+      }
     } else {
-      myTodos.splice(index, 1);
-      addEditedTodotoMyTodos(
-        inputTitle.value,
-        inputDescription.value,
-        inputDueDate.value,
-        inputPriority.value,
-        inputNote.value
-      );
-      clearTodoPage();
-      displayLowPriority();
     }
   });
 }
@@ -313,7 +338,4 @@ function disabledPriorty() {
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
-}
-function addEditedTodotoMyTodos(title, description, dueDate, priority, note) {
-  myTodos.push(new Todo(title, description, dueDate, priority, note));
 }
