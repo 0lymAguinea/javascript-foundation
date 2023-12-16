@@ -1,7 +1,8 @@
 import { myTodos } from "../todo";
 
 export function getTodosIsCheck() {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     const isComplete = todo.isComplete;
     todoChecker(isComplete, index);
   });
@@ -30,7 +31,8 @@ function formattedTodayDate() {
   return `${year}-${month}-${day}`;
 }
 function dateFilterPriority(todayDate) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === todayDate) {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);
@@ -43,7 +45,8 @@ function calendarPicked() {
   calendarTodoIscomplete(pickedDate);
 }
 function calendarTodoIscomplete(pickedDate) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === pickedDate) {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);
@@ -51,7 +54,8 @@ function calendarTodoIscomplete(pickedDate) {
   });
 }
 function filterPriorities(priority) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.priority === priority) {
       const isComplete = todo.isComplete;
       todoChecker(isComplete, index);

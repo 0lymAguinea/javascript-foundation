@@ -90,7 +90,7 @@ export function createTodoInformation(todos, index, todoStatus) {
 
   createDeleteButton(index, informationButtons, todoStatus);
   createEditButton(todos, index, informationButtons, todoStatus);
-  createIsCompleteButton(todos, informationButtons, todoStatus);
+  createIsCompleteButton(informationButtons, todoStatus, index);
 }
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
@@ -184,13 +184,15 @@ export function changeTodoTitleToUpdate() {
   todoTitle.textContent = "Edit TODO";
 }
 
-export function createIsCompleteButton(todos, informationButtons, todoStatus) {
+export function createIsCompleteButton(informationButtons, todoStatus, index) {
   const completeButton = document.createElement("button");
   completeButton.textContent = "TODO complete";
   completeButton.id = "completeButton";
 
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+
   completeButton.addEventListener("click", () => {
-    isCompleteAction(todos);
+    isCompleteAction(storedTodo, index);
     if (todoStatus === DEFAULT_TODO) {
       getTodosIsCheck();
     } else if (todoStatus === CALENDAR_SELECTED_TODO) {
@@ -209,6 +211,7 @@ export function createIsCompleteButton(todos, informationButtons, todoStatus) {
   informationButtons.append(completeButton);
 }
 
-export function isCompleteAction(todos) {
-  todos.isComplete = !todos.isComplete;
+export function isCompleteAction(storedTodo, index) {
+  storedTodo[index].isComplete = !storedTodo[index].isComplete;
+  localStorage.setItem("todos", JSON.stringify(storedTodo));
 }
