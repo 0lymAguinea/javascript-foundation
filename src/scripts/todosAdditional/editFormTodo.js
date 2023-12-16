@@ -1,4 +1,4 @@
-import { myTodos, Todo, displayMiddleContentTodos } from "../todo";
+import { displayMiddleContentTodos } from "../todo";
 import { getTodayDate } from "../todayTodo";
 import { getDateSelected } from "./todoInformation";
 import { displayCalendarPickedTodo } from "../calendarTodo";
