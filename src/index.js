@@ -1,7 +1,6 @@
 import showDefaultContent from "./scripts/displays/default.js";
 import showToday from "./scripts/displays/today.js";
 import showCalendar from "./scripts/displays/calendar.js";
-import { displayMiddleContentTodos } from "./scripts/todo.js";
 import showHighPriorities from "./scripts/displays/highPriority.js";
 import showMediumPriorities from "./scripts/displays/mediumPriority.js";
 import showLowPriorities from "./scripts/displays/lowPriority.js";
@@ -114,12 +113,6 @@ function priorityButtonSelector() {
     showLowPriorities();
   });
 }
-function pageContents() {
-  let middileContent = showDefaultContent();
-  //let rightContent = createTodoPage();
 
-  return { middileContent };
-}
 myProjects();
-pageContents();
-//displayTodo();
+showDefaultContent();
