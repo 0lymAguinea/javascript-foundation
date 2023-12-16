@@ -1,5 +1,3 @@
-import { myTodos } from "../todo";
-
 const HIGH_PRIORITY = "High priority";
 const MEDIUM_PRIORITY = "Medium priority";
 const LOW_PRIORITY = "Low priority";
@@ -10,7 +8,8 @@ function addPriorityButtonClass(index, priorityClass) {
 }
 
 export function getTodoPriority() {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     const priority = todo.priority;
     filterPriority(priority, index);
   });
@@ -27,7 +26,8 @@ export function getTodayTodoPriority() {
 }
 
 function dateFilterPriority(todayDate) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === todayDate) {
       const priority = todo.priority;
       filterPriority(priority, index);
@@ -42,7 +42,8 @@ export function getCalendarTodoPriority() {
 }
 
 function calendearTodoFilterPriority(pickedDate) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.dueDate === pickedDate) {
       const priority = todo.priority;
       filterPriority(priority, index);
@@ -50,7 +51,8 @@ function calendearTodoFilterPriority(pickedDate) {
   });
 }
 export function getPriorityTodoPriority(priority) {
-  myTodos.forEach((todo, index) => {
+  const storedTodo = JSON.parse(localStorage.getItem("todos")) || [];
+  storedTodo.forEach((todo, index) => {
     if (todo.priority === priority) {
       const priority = todo.priority;
       filterPriority(priority, index);
