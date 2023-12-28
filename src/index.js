@@ -1,28 +1,24 @@
 import todayWeather from "./scripts/today";
 import tomorrowWeather from "./scripts/tomorrow";
 import overmorrowWeather from "./scripts/overmorrow";
+import { tempUnit } from "./scripts/tempUnitChange";
+import getDates from "./scripts/getDates";
 
 function displayCurrentLocation(location) {
   const currentLocation = document.getElementById("currentLocation");
   currentLocation.textContent = location;
 }
-function tempUnit(data, weatherTemp) {
-  const select = document.getElementById("tempUnitSelect");
-  if (select.value === "Fahrenheit") {
-    weatherTemp.textContent = data.current.temp_f;
-  } else {
-    weatherTemp.textContent = data.current.temp_c;
-  }
-}
 
 async function currentWeather(data) {
   try {
+    const region = document.querySelector("#region");
     const weatherTemp = document.querySelector(".weatherTemp");
     const tempName = document.querySelector(".tempName");
     const tempIcon = document.querySelector("#tempIcon");
 
     tempUnit(data, weatherTemp);
 
+    region.textContent = data.location.region;
     tempName.textContent = data.current.condition.text;
     tempIcon.src = data.current.condition.icon;
   } catch (err) {
@@ -63,21 +59,5 @@ function getSearchData() {
   });
 }
 
-function getDates() {
-  const todayDate = document.getElementById("todayDate");
-  const tomorrowDate = document.getElementById("tomorrowDate");
-  const overmorrowDate = document.getElementById("overmorrowDate");
-
-  const today = new Date();
-  const tomorrow = new Date(today);
-  const overmorrow = new Date(today);
-
-  tomorrow.setDate(today.getDate() + 1);
-  overmorrow.setDate(today.getDate() + 2);
-
-  todayDate.textContent = today.toDateString();
-  tomorrowDate.textContent = tomorrow.toDateString();
-  overmorrowDate.textContent = overmorrow.toDateString();
-}
 getSearchData();
 getDates();
