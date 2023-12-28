@@ -21,27 +21,11 @@ export function currentTemp(data, weatherTemp) {
 
   currentUnitChange(data, weatherTemp, select);
 }
-
-export function todayTempUnit(data, todayTemp) {
+// For today, tomorrow, and overmorrow avg temp
+export function daysTempUnit(data, daysTemp, daysIndex) {
   const select = document.getElementById("tempUnitSelect");
   const unit = select.value === "Fahrenheit" ? "f" : "c";
-  todayTemp.textContent = data.forecast.forecastday[0].day[`avgtemp_${unit}`];
-
-  unitChange(data, todayTemp, 0, select);
-}
-
-export function tomorrowTempUnit(data, tomorrowTemp) {
-  const select = document.getElementById("tempUnitSelect");
-  const unit = select.value === "Fahrenheit" ? "f" : "c";
-  tomorrowTemp.textContent =
-    data.forecast.forecastday[1].day[`avgtemp_${unit}`];
-  unitChange(data, tomorrowTemp, 1, select);
-}
-
-export function overmorrowTempUnit(data, overmorrowTemp) {
-  const select = document.getElementById("tempUnitSelect");
-  const unit = select.value === "Fahrenheit" ? "f" : "c";
-  overmorrowTemp.textContent =
-    data.forecast.forecastday[2].day[`avgtemp_${unit}`];
-  unitChange(data, overmorrowTemp, 2, select);
+  daysTemp.textContent =
+    data.forecast.forecastday[daysIndex].day[`avgtemp_${unit}`];
+  unitChange(data, daysTemp, daysIndex, select);
 }

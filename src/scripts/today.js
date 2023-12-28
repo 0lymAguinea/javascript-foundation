@@ -1,11 +1,11 @@
-import { todayTempUnit } from "./tempUnitChange";
+import { daysTempUnit } from "./tempUnitChange";
 
 export default function todayWeather(data) {
   try {
     const todayTemp = document.querySelector(".todayTemp");
     const todayIcon = document.querySelector("#todayIcon");
 
-    todayTempUnit(data, todayTemp);
+    daysTempUnit(data, todayTemp, 0);
 
     todayIcon.src = data.current.condition.icon;
   } catch (err) {
