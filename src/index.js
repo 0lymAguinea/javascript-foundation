@@ -1,7 +1,7 @@
 import todayWeather from "./scripts/today";
 import tomorrowWeather from "./scripts/tomorrow";
 import overmorrowWeather from "./scripts/overmorrow";
-import { tempUnit } from "./scripts/tempUnitChange";
+import { currentTemp } from "./scripts/tempUnitChange";
 import getDates from "./scripts/getDates";
 
 function displayCurrentLocation(location) {
@@ -16,7 +16,7 @@ async function currentWeather(data) {
     const tempName = document.querySelector(".tempName");
     const tempIcon = document.querySelector("#tempIcon");
 
-    tempUnit(data, weatherTemp);
+    currentTemp(data, weatherTemp);
 
     region.textContent = data.location.region;
     tempName.textContent = data.current.condition.text;
