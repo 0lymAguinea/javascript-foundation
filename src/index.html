@@ -7,10 +7,40 @@
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <div class="content">
-      <aside id="projectFolders"></aside>
-      <main id="mainContent"></main>
-      <div id="todoPage"></div>
+    <form action="#">
+      <div class="searchInput">
+        <input
+          type="search"
+          name="searchLocation"
+          id="searchLocation"
+          placeholder="Search location"
+        />
+        <button type="button" id="searchLocationBtn">Search</button>
+      </div>
+
+      <div class="tempDropDown">
+        <select name="tempUnit" id="tempUnitSelect">
+          <option value="Celcius">°C</option>
+          <option value="Fahrenheit">°F</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="currentLocationWeather">
+      <h2 id="currentLocation"></h2>
+      <div class="bottomInfo">
+        <div class="weatherTemp"></div>
+        <div class="tempNameImg">
+          <p class="tempName"></p>
+          <img src="" id="tempIcon" />
+        </div>
+      </div>
+    </div>
+
+    <div class="forecastCards">
+      <div class="todayCard">Today</div>
+      <div class="tomorrowCard">Tomorrow</div>
+      <div class="overmorrowCard">Overmorrow</div>
     </div>
     <script
       src="https://kit.fontawesome.com/d2958a6cf6.js"

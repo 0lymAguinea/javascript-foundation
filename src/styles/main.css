@@ -6,3 +6,30 @@
 body {
   font-family: sans-serif;
 }
+
+form {
+  display: flex;
+}
+.forecastCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.currentLocationWeather {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.bottomInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.weatherTemp {
+  font-size: 1.5rem;
+}
+
+.tempNameImg {
+  display: grid;
+  grid-template-rows: 1fr;
+}
