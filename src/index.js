@@ -6,13 +6,23 @@ function displayCurrentLocation(location) {
   const currentLocation = document.getElementById("currentLocation");
   currentLocation.textContent = location;
 }
+function tempUnit(data, weatherTemp) {
+  const select = document.getElementById("tempUnitSelect");
+  if (select.value === "Fahrenheit") {
+    weatherTemp.textContent = data.current.temp_f;
+  } else {
+    weatherTemp.textContent = data.current.temp_c;
+  }
+}
+
 async function currentWeather(data) {
   try {
     const weatherTemp = document.querySelector(".weatherTemp");
     const tempName = document.querySelector(".tempName");
     const tempIcon = document.querySelector("#tempIcon");
 
-    weatherTemp.textContent = data.current.temp_c;
+    tempUnit(data, weatherTemp);
+
     tempName.textContent = data.current.condition.text;
     tempIcon.src = data.current.condition.icon;
   } catch (err) {
@@ -27,14 +37,17 @@ async function getWeatherLocation(location) {
       { mode: "cors" }
     );
     const weatherData = await weatherLocation.json();
-    currentWeather(weatherData);
-    todayWeather(weatherData);
-    tomorrowWeather(weatherData);
-    overmorrowWeather(weatherData);
+    Promise.all([
+      currentWeather(weatherData),
+      todayWeather(weatherData),
+      tomorrowWeather(weatherData),
+      overmorrowWeather(weatherData),
+    ]);
   } catch (err) {
     console.error(err);
   }
 }
+
 function getSearchData() {
   const searchInput = document.querySelector("#searchLocation");
   const searchLocationBtn = document.getElementById("searchLocationBtn");
@@ -49,6 +62,7 @@ function getSearchData() {
     }
   });
 }
+
 function getDates() {
   const todayDate = document.getElementById("todayDate");
   const tomorrowDate = document.getElementById("tomorrowDate");

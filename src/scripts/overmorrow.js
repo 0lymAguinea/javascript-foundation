@@ -1,9 +1,21 @@
+function tempUnit(data, overmorrowTemp) {
+  const select = document.getElementById("tempUnitSelect");
+  if (select.value === "Fahrenheit") {
+    overmorrowTemp.textContent = data.forecast.forecastday[2].day.avgtemp_f;
+  } else {
+    overmorrowTemp.textContent = data.forecast.forecastday[2].day.avgtemp_c;
+  }
+}
+
 export default function overmorrowWeather(data) {
-  const overmorrowTemp = document.querySelector(".overmorrowTemp");
-  const overmorrowIcon = document.querySelector("#overmorrowIcon");
+  try {
+    const overmorrowTemp = document.querySelector(".overmorrowTemp");
+    const overmorrowIcon = document.querySelector("#overmorrowIcon");
 
-  console.log(data.forecast.forecastday[2].day.avgtemp_c);
+    tempUnit(data, overmorrowTemp);
 
-  overmorrowTemp.textContent = data.forecast.forecastday[2].day.avgtemp_c;
-  overmorrowIcon.src = data.forecast.forecastday[2].day.condition.icon;
+    overmorrowIcon.src = data.forecast.forecastday[2].day.condition.icon;
+  } catch (err) {
+    console.error(err);
+  }
 }

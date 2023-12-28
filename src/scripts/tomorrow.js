@@ -1,9 +1,21 @@
+function tempUnit(data, tomorrowTemp) {
+  const select = document.getElementById("tempUnitSelect");
+  if (select.value === "Fahrenheit") {
+    tomorrowTemp.textContent = data.forecast.forecastday[1].day.avgtemp_f;
+  } else {
+    tomorrowTemp.textContent = data.forecast.forecastday[1].day.avgtemp_c;
+  }
+}
+
 export default function tomorrowWeather(data) {
-  const tomorrowTemp = document.querySelector(".tomorrowTemp");
-  const tomorrowIcon = document.querySelector("#tomorrowIcon");
+  try {
+    const tomorrowTemp = document.querySelector(".tomorrowTemp");
+    const tomorrowIcon = document.querySelector("#tomorrowIcon");
 
-  console.log(data.forecast.forecastday[1].day.avgtemp_c);
+    tempUnit(data, tomorrowTemp);
 
-  tomorrowTemp.textContent = data.forecast.forecastday[1].day.avgtemp_c;
-  tomorrowIcon.src = data.forecast.forecastday[1].day.condition.icon;
+    tomorrowIcon.src = data.forecast.forecastday[1].day.condition.icon;
+  } catch (err) {
+    console.error(err);
+  }
 }
