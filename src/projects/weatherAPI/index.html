@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OlymFans</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <form action="#">
+      <div class="searchInput">
+        <input
+          type="search"
+          name="searchLocation"
+          id="searchLocation"
+          placeholder="Search location"
+        />
+        <button type="button" id="searchLocationBtn">Search</button>
+      </div>
+
+      <div class="tempDropDown">
+        <select name="tempUnit" id="tempUnitSelect">
+          <option value="Celcius" selected>°C</option>
+          <option value="Fahrenheit">°F</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="currentLocationWeather">
+      <h2 id="currentLocation"></h2>
+      <h3 id="region"></h3>
+      <div class="bottomInfo">
+        <div class="weatherTemp"></div>
+        <div class="tempNameImg">
+          <p class="tempName"></p>
+          <img src="" id="tempIcon" />
+        </div>
+      </div>
+    </div>
+
+    <div class="forecastCards">
+      <div id="todayCard">
+        <h2 id="todayDate">Today</h2>
+        <div class="todayBottomInfo">
+          <p class="todayTemp"></p>
+          <img src="" id="todayIcon" />
+        </div>
+      </div>
+      <div class="tomorrowCard">
+        <h2 id="tomorrowDate">Tomorrow</h2>
+        <div class="tomorrowBottomInfo">
+          <p class="tomorrowTemp"></p>
+          <img src="" id="tomorrowIcon" />
+        </div>
+      </div>
+      <div class="overmorrowCard">
+        <h2 id="overmorrowDate">Overmorrow</h2>
+        <div class="overmorrowBottomInfo">
+          <p class="overmorrowTemp"></p>
+          <img src="" id="overmorrowIcon" />
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/d2958a6cf6.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

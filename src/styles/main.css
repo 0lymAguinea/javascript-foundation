@@ -6,33 +6,3 @@
 body {
   font-family: sans-serif;
 }
-
-form {
-  display: flex;
-}
-.forecastCards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 0 15rem;
-  gap: 10px;
-}
-.currentLocationWeather {
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  min-height: 7.8rem;
-}
-.bottomInfo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.weatherTemp {
-  font-size: 1.5rem;
-}
-#todayCard {
-  height: 100px;
-  border: 1px solid black;
-  border-radius: 5px;
-}
