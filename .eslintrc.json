@@ -11,6 +11,12 @@
   },
   "rules": {
     "no-console": "off",
-    "no-param-reassign": [2, { "props": false }]
+    "no-param-reassign": [2, { "props": false }],
+    "no-restricted-syntax": [
+      "error",
+      "FunctionExpression",
+      "WithStatement",
+      "BinaryExpression[operator='in']"
+    ]
   }
 }
