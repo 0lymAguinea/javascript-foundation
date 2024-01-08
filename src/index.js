@@ -63,12 +63,39 @@ class LinkedList {
     }
     return temp;
   }
+
+  // Get the node by the index
+  at(index) {
+    let curretNode = this.head;
+    let count = 1;
+    while (curretNode) {
+      if (count === index) {
+        return curretNode;
+      }
+      count += 1;
+      curretNode = curretNode.next;
+    }
+    return -1;
+  }
+
+  // Remove last element from the list
+  pop() {
+    let temp = this.head;
+    if (temp === null || temp.next === null) return null;
+    while (temp.next.next != null) {
+      temp = temp.next;
+    }
+    temp.next = null;
+    return temp;
+  }
 }
 
 const myLinkedList = new LinkedList();
 
 myLinkedList.prepend("head");
+myLinkedList.append(1);
 myLinkedList.append(2);
+myLinkedList.append(3);
 myLinkedList.append("last");
 
-console.log(myLinkedList.getTail());
+console.log(myLinkedList.head);
