@@ -43,17 +43,32 @@ class LinkedList {
   getSize() {
     let temp = this.head;
     let count = 0;
-    while (temp != null) {
+    while (temp !== null) {
       count += 1;
       temp = temp.next;
     }
     return count;
   }
+
+  // Get first node in the list
+  getHead() {
+    return this.head;
+  }
+
+  // Get last node in the list
+  getTail() {
+    let temp = this.head;
+    while (temp !== null && temp.next !== null) {
+      temp = temp.next;
+    }
+    return temp;
+  }
 }
 
 const myLinkedList = new LinkedList();
 
-myLinkedList.prepend(1);
+myLinkedList.prepend("head");
 myLinkedList.append(2);
+myLinkedList.append("last");
 
-console.log(myLinkedList.head);
+console.log(myLinkedList.getTail());
