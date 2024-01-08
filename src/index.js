@@ -128,14 +128,57 @@ class LinkedList {
     str += "null";
     return str;
   }
+
+  // Insert a node at the given index
+  insertAt(value, index) {
+    const newNode = new Node(value);
+    let temp = this.head;
+    let count = 0;
+
+    if (index === 0) {
+      newNode.next = temp;
+      temp = newNode;
+      return newNode;
+    }
+
+    while (temp && count < index - 1) {
+      temp = temp.next;
+      count += 1;
+    }
+
+    if (!temp) return temp;
+
+    newNode.next = temp.next;
+    temp.next = newNode;
+
+    return newNode;
+  }
+
+  // Remove node by index
+  removeAt(index) {
+    let temp = this.head;
+
+    if (!temp) return null;
+
+    if (index === 0) {
+      temp = temp.next;
+    }
+
+    for (let i = 0; temp !== null && i < index - 1; i += 1) {
+      temp = temp.next;
+    }
+    if (temp == null || temp.next == null) return null;
+
+    const { next } = temp.next;
+
+    temp.next = next;
+  }
 }
 
 const myLinkedList = new LinkedList();
-
 myLinkedList.prepend("head");
 myLinkedList.append(1);
 myLinkedList.append(2);
 myLinkedList.append(3);
 myLinkedList.append("last");
-
-console.log(myLinkedList.toString());
+console.log(myLinkedList);
