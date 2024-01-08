@@ -67,7 +67,7 @@ class LinkedList {
   // Get the node by the index
   at(index) {
     let curretNode = this.head;
-    let count = 1;
+    let count = 0;
     while (curretNode) {
       if (count === index) {
         return curretNode;
@@ -88,6 +88,46 @@ class LinkedList {
     temp.next = null;
     return temp;
   }
+
+  // Return true if value is in the list, otherwise return false
+  contains(value) {
+    let temp = this.head;
+    if (temp === null) return null;
+    while (temp) {
+      if (temp.value === value) {
+        return true;
+      }
+      temp = temp.next;
+    }
+    return false;
+  }
+
+  // Return the index of the node containing value
+  find(value) {
+    let temp = this.head;
+    let count = 0;
+    while (temp) {
+      if (temp.value === value) {
+        return count;
+      }
+      count += 1;
+      temp = temp.next;
+    }
+    return null;
+  }
+
+  // Transform linkedlist object to string
+  toString() {
+    let temp = this.head;
+    let str = "";
+    while (temp) {
+      str += `(${temp.value}) -> `;
+      temp = temp.next;
+    }
+
+    str += "null";
+    return str;
+  }
 }
 
 const myLinkedList = new LinkedList();
@@ -98,4 +138,4 @@ myLinkedList.append(2);
 myLinkedList.append(3);
 myLinkedList.append("last");
 
-console.log(myLinkedList.head);
+console.log(myLinkedList.toString());
