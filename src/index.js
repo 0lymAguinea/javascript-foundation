@@ -1,76 +1,48 @@
-// eslint-disable-next-line max-classes-per-file
-class HashMap {
-  constructor() {
-    this.map = {};
-  }
-
-  // Hash a key
-  hash(key) {
-    let hash = 0;
-    for (let i = 0; i < key.length; i += 1) {
-      const char = key.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash &= hash; // Convert to 32-bit integer
-    }
-    return hash;
-  }
-
-  // Create a key value pair
-  set(key, value) {
-    const hashedKey = this.hash(key);
-    this.map[hashedKey] = value;
-    return this.map;
-  }
-
-  // Return the value of the key
-  get(key) {
-    const hashedKey = this.hash(key);
-    if (Object.prototype.hasOwnProperty.call(this.map, hashedKey)) {
-      return this.map[hashedKey];
-    }
-    return null;
-  }
-
-  // Return true if key is in the map
-  has(key) {
-    const hashedKey = this.hash(key);
-    return Object.prototype.hasOwnProperty.call(this.map, hashedKey);
-  }
-
-  // Remove a bucket by its key
-  remove(key) {
-    const hashedKey = this.hash(key);
-    delete this.map[hashedKey];
-  }
-
-  // Return the number of stored keys
-  length() {
-    return Object.keys(this.map).length;
-  }
-
-  // Clear all entries
-  clear() {
-    this.map = {};
-  }
-
-  // Get keys
-  keys() {
-    return Object.keys(this.map);
-  }
-
-  // Get values
-  values() {
-    return Object.values(this.map);
-  }
-
-  // Get keys and values
-  entries() {
-    return Object.entries(this.map);
+/* eslint-disable max-classes-per-file */
+class Node {
+  constructor(data) {
+    this.data = data;
+    this.right = null;
+    this.left = null;
   }
 }
 
-const newHash = new HashMap();
+class Tree {
+  constructor(array = []) {
+    this.root = this.buildTree(array);
+    this.print = this.prettyPrint(this.root);
+  }
 
-newHash.set("H", "Harry");
-newHash.set("L", "Logan");
-console.log(newHash);
+  buildTree(array) {
+    return this.buildTreeFromArray(array, 0, array.length - 1);
+  }
+
+  buildTreeFromArray(array, start, end) {
+    if (start > end) return null;
+
+    const mid = Math.floor((start + end) / 2);
+    const node = new Node(array[mid]);
+
+    node.left = this.buildTreeFromArray(array, start, mid - 1);
+    node.right = this.buildTreeFromArray(array, mid + 1, end);
+    return node;
+  }
+
+  prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  }
+}
+const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
