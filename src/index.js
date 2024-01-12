@@ -25,6 +25,7 @@ class Tree {
 
     node.left = this.buildTreeFromArray(array, start, mid - 1);
     node.right = this.buildTreeFromArray(array, mid + 1, end);
+
     return node;
   }
 
@@ -239,6 +240,45 @@ class Tree {
       return dist + 1;
 
     return dist;
+  }
+
+  isBalanced() {
+    return this.isBalancedUtil(this.root);
+  }
+
+  isBalancedUtil(root) {
+    if (root === null) return 0;
+
+    const leftH = this.isBalancedUtil(root.left);
+    if (leftH === -1) return -1;
+
+    const rightH = this.isBalancedUtil(root.right);
+    if (rightH === -1) return -1;
+
+    if (Math.abs(leftH - rightH) > 1) {
+      return -1;
+    }
+    return Math.max(leftH, rightH) + 1;
+  }
+
+  rebalance() {
+    return this.rebalanceTree(this.root);
+  }
+
+  storedBSTNodes(root, nodes) {
+    if (root === null) return;
+
+    this.storedBSTNodes(root.left, nodes);
+    nodes.push(root);
+    this.storedBSTNodes(root.right, nodes);
+  }
+
+  rebalanceTree(root) {
+    const nodes = [];
+    this.storedBSTNodes(root, nodes);
+
+    const n = nodes.length;
+    return this.buildTreeFromArray(nodes, 0, n - 1);
   }
 }
 const tree = new Tree([1, 7, 4, 23, 8, 9, 99, 3, 5, 7, 9, 67, 6345, 324]);
