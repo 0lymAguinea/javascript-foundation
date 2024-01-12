@@ -197,6 +197,49 @@ class Tree {
       }
     }
   }
+
+  height(value) {
+    return this.findNodeHeight(this.root, value);
+  }
+
+  findNodeHeight(root, value) {
+    if (root === null) return -1;
+
+    const leftHeight = this.findNodeHeight(root.left, value);
+    const rightHeight = this.findNodeHeight(root.right, value);
+
+    const answer = Math.max(leftHeight, rightHeight) + 1;
+
+    if (root.data === value) {
+      console.log(answer);
+      return answer;
+    }
+    return answer;
+  }
+
+  depth(value) {
+    return this.findNodeDepth(this.root, value);
+  }
+
+  findNodeDepth(root, value) {
+    if (root === null) return -1;
+
+    let dist = -1;
+
+    if (
+      root.data === value ||
+      // Otherwise, check if x is
+      // present in the left subtree
+      (dist = this.findNodeDepth(root.left, value)) >= 0 ||
+      // Otherwise, check if x is
+      // present in the right subtree
+      (dist = this.findNodeDepth(root.right, value)) >= 0
+    )
+      // Return depth of the node
+      return dist + 1;
+
+    return dist;
+  }
 }
 const tree = new Tree([1, 7, 4, 23, 8, 9, 99, 3, 5, 7, 9, 67, 6345, 324]);
 function prettyPrint(node, prefix = "", isLeft = true) {
