@@ -141,6 +141,62 @@ class Tree {
       this.printLevel(root.right, level - 1, callback, result);
     }
   }
+
+  inOrder(callback = null) {
+    const result = [];
+    this.inOrderTraversal(this.root, callback, result);
+    return result;
+  }
+
+  inOrderTraversal(root, callback, result) {
+    if (root !== null) {
+      this.inOrderTraversal(root.left, callback, result);
+
+      if (callback) {
+        callback(root.data);
+      } else {
+        result.push(root.data);
+      }
+      this.inOrderTraversal(root.right, callback, result);
+    }
+  }
+
+  preOrder(callback = null) {
+    const result = [];
+    this.preOrderTraversal(this.root, callback, result);
+    return result;
+  }
+
+  preOrderTraversal(root, callback, result) {
+    if (root !== null) {
+      if (callback) {
+        callback(root.data);
+      } else {
+        result.push(root.data);
+      }
+      this.preOrderTraversal(root.left, callback, result);
+      this.preOrderTraversal(root.right, callback, result);
+    }
+  }
+
+  postOrder(callback = null) {
+    const result = [];
+    this.postOrderTraversal(this.root, callback, result);
+    return result;
+  }
+
+  postOrderTraversal(root, callback, result) {
+    if (root !== null) {
+      this.postOrderTraversal(root.left, callback, result);
+      this.postOrderTraversal(root.right, callback, result);
+
+      if (callback) {
+        callback(root.data);
+      } else {
+        result.push(root.data);
+      }
+    }
+  }
 }
 const tree = new Tree([1, 7, 4, 23, 8, 9, 99, 3, 5, 7, 9, 67, 6345, 324]);
 function prettyPrint(node, prefix = "", isLeft = true) {
