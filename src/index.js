@@ -104,8 +104,45 @@ class Tree {
     }
     return this.findNode(root.right, value);
   }
+
+  levelOrder(callback = null) {
+    const result = [];
+    const height = this.findHeight(this.root);
+
+    for (let level = 1; level <= height; level += 1) {
+      this.printLevel(this.root, level, callback, result);
+    }
+
+    return result;
+  }
+
+  findHeight(root) {
+    if (root === null) return 0;
+
+    // Find the height of left, right subtrees
+    const leftHeight = this.findHeight(root.left);
+    const rightHeight = this.findHeight(root.right);
+
+    // Find max(subtree_height) + 1 to get the height of the tree
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  printLevel(root, level, callback, result) {
+    if (!root) return;
+
+    if (level === 1) {
+      if (callback) {
+        callback(root.data);
+      } else {
+        result.push(root.data);
+      }
+    } else if (level > 1) {
+      this.printLevel(root.left, level - 1, callback, result);
+      this.printLevel(root.right, level - 1, callback, result);
+    }
+  }
 }
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const tree = new Tree([1, 7, 4, 23, 8, 9, 99, 3, 5, 7, 9, 67, 6345, 324]);
 function prettyPrint(node, prefix = "", isLeft = true) {
   if (node === null) {
     return;
