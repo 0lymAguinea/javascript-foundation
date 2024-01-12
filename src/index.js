@@ -32,10 +32,6 @@ class Tree {
     this.root = this.insertNode(this.root, value);
   }
 
-  delete(value) {
-    this.root = this.deleteNode(this.root, value);
-  }
-
   insertNode(root, value) {
     if (root === null) {
       return new Node(value);
@@ -43,13 +39,15 @@ class Tree {
 
     if (value < root.data) {
       root.left = this.insertNode(root.left, value);
-      console.log("Work left");
     } else if (value > root.data) {
       root.right = this.insertNode(root.right, value);
-      console.log("Work right");
     }
 
     return root;
+  }
+
+  delete(value) {
+    this.root = this.deleteNode(this.root, value);
   }
 
   deleteNode(root, value) {
@@ -91,6 +89,21 @@ class Tree {
     }
     return current.data;
   }
+
+  find(value) {
+    return this.findNode(this.root, value);
+  }
+
+  findNode(root, value) {
+    if (root === null || root.data === value) {
+      return root;
+    }
+
+    if (value < root.data) {
+      return this.findNode(root.left, value);
+    }
+    return this.findNode(root.right, value);
+  }
 }
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 function prettyPrint(node, prefix = "", isLeft = true) {
@@ -105,5 +118,4 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 }
-
 prettyPrint(tree.root);
