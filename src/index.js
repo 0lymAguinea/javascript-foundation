@@ -2,8 +2,8 @@
 class Node {
   constructor(data) {
     this.data = data;
-    this.right = null;
     this.left = null;
+    this.right = null;
   }
 }
 
@@ -281,7 +281,19 @@ class Tree {
     return this.buildTreeFromArray(nodes, 0, n - 1);
   }
 }
-const tree = new Tree([1, 7, 4, 23, 8, 9, 99, 3, 5, 7, 9, 67, 6345, 324]);
+function arrayRandomize(size) {
+  const array = [];
+  const min = 0;
+  const max = 100;
+
+  for (let i = 0; i < size; i += 1) {
+    const randomNumbers = Math.floor(Math.random() * (max - min) + min);
+    array.push(randomNumbers);
+  }
+  return array;
+}
+const tree = new Tree(arrayRandomize(20));
+
 function prettyPrint(node, prefix = "", isLeft = true) {
   if (node === null) {
     return;
@@ -294,4 +306,5 @@ function prettyPrint(node, prefix = "", isLeft = true) {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 }
+
 prettyPrint(tree.root);
