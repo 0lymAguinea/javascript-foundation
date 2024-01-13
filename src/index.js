@@ -262,23 +262,9 @@ class Tree {
   }
 
   rebalance() {
-    return this.rebalanceTree(this.root);
-  }
+    const unBalanceTree = this.inOrder();
 
-  storedBSTNodes(root, nodes) {
-    if (root === null) return;
-
-    this.storedBSTNodes(root.left, nodes);
-    nodes.push(root);
-    this.storedBSTNodes(root.right, nodes);
-  }
-
-  rebalanceTree(root) {
-    const nodes = [];
-    this.storedBSTNodes(root, nodes);
-
-    const n = nodes.length;
-    return this.buildTreeFromArray(nodes, 0, n - 1);
+    this.root = this.buildTree(unBalanceTree);
   }
 }
 function arrayRandomize(size) {
