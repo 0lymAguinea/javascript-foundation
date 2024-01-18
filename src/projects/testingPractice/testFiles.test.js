@@ -3,6 +3,7 @@ import sum, {
   capitalize,
   calculator,
   caesarCipher,
+  analyzeArray,
 } from "./testFiles";
 
 test("adds 1 + 2 to equal 3", () => {
@@ -27,4 +28,13 @@ test("caesar", () => {
   expect(caesarCipher("napakaganda mo, namang babae.", 24)).toBe(
     "LYNYIYEYLBY KM, LYKYLE ZYZYC."
   );
+});
+
+test("analyze", () => {
+  expect(analyzeArray([1, 8, 3, 4, 2, 6])).toStrictEqual({
+    average: 4,
+    min: 1,
+    max: 8,
+    length: 6,
+  });
 });

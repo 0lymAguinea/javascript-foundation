@@ -46,3 +46,19 @@ export function caesarCipher(str, key, decrypt = false) {
     .join("")
     .toUpperCase();
 }
+
+export function analyzeArray(array) {
+  const avg = array.reduce((prev, curr) => prev + curr, 0) / array.length;
+  const min = Math.min(...array);
+  const max = Math.max(...array);
+  const arrLength = array.length;
+
+  const object = {
+    average: Math.round(avg),
+    min,
+    max,
+    length: arrLength,
+  };
+  return object;
+}
+export const objectArray = analyzeArray([1, 8, 3, 4, 2, 6]);
