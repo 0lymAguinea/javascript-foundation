@@ -32,14 +32,10 @@ class Ship {
   }
 
   hit(shipType) {
-<<<<<<< HEAD
     if (
       Object.hasOwn(this.shipCategory, shipType) &&
       this.shipCategory[shipType].sunk !== true
     ) {
-=======
-    if (Object.hasOwn(this.shipCategory, shipType)) {
->>>>>>> 7d3756a1b7977fc3edcae6cd0ecf9e94905ffd52
       this.shipCategory[shipType].numberOfHits += 1;
       this.isSunk(this.shipCategory, shipType);
     }
