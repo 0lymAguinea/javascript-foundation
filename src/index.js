@@ -134,6 +134,16 @@ const player1Ships = new Ship();
 const player2Ships = new Ship();
 
 const player1Carrier = player1Ships.shipCategory.carrier;
+const player1Battleship = player1Ships.shipCategory.battleship;
+const player1Cruiser = player1Ships.shipCategory.cruiser;
+const player1Submarine = player1Ships.shipCategory.submarine;
+const player1Destroyer = player1Ships.shipCategory.destroyer;
+
+const player2Carrier = player2Ships.shipCategory.carrier;
+const player2Battleship = player2Ships.shipCategory.battleship;
+const player2Cruiser = player2Ships.shipCategory.cruiser;
+const player2Submarine = player2Ships.shipCategory.submarine;
+const player2Destroyer = player2Ships.shipCategory.destroyer;
 
 const player1Board = new Gameboard(player1Ships);
 const player2Board = new Gameboard(player2Ships);
