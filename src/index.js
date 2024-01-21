@@ -1,30 +1,33 @@
 /* eslint-disable max-classes-per-file */
 class Ship {
-  constructor(name) {
-    this.name = name;
-
+  constructor() {
     this.shipCategory = {
       carrier: {
+        name: "carrier",
         length: 5,
         numberOfHits: 0,
         sunk: false,
       },
       battleship: {
+        name: "battleship",
         length: 4,
         numberOfHits: 0,
         sunk: false,
       },
       cruiser: {
+        name: "cruiser",
         length: 3,
         numberOfHits: 0,
         sunk: false,
       },
       submarine: {
+        name: "submarine",
         length: 3,
         numberOfHits: 0,
         sunk: false,
       },
       destroyer: {
+        name: "destroyer",
         length: 2,
         numberOfHits: 0,
         sunk: false,
@@ -77,9 +80,9 @@ class Gameboard {
     ) {
       for (let i = 0; i < ship.length; i += 1) {
         if (orientation === "horizontal") {
-          this.board[coordinateX][coordinateY + i] = ship.length;
+          this.board[coordinateX][coordinateY + i] = ship.name;
         } else if (orientation === "vertical") {
-          this.board[coordinateX + i][coordinateY] = ship.length;
+          this.board[coordinateX + i][coordinateY] = ship.name;
         }
       }
     } else {
@@ -106,15 +109,36 @@ class Gameboard {
       return coordinateX + ship.length <= this.board.length;
     }
   }
+
+  receiveAttack(coordinateX, coordinateY) {
+    if (
+      this.board[coordinateX][coordinateY] === "X" ||
+      this.board[coordinateX][coordinateY] === "O"
+    ) {
+      console.log("YOU ALREADY HIT THIS");
+    } else if (
+      this.board[coordinateX][coordinateY] !== undefined &&
+      this.board[coordinateX][coordinateY] !== 0
+    ) {
+      const shipHit = this.board[coordinateX][coordinateY];
+      this.board[coordinateX][coordinateY] = "X";
+      this.ship.hit(shipHit);
+    } else {
+      this.board[coordinateX][coordinateY] = "O";
+      console.log("MISSED");
+    }
+  }
 }
 
 const player1Ships = new Ship();
 const player2Ships = new Ship();
 
+const player1Carrier = player1Ships.shipCategory.carrier;
+
 const player1Board = new Gameboard(player1Ships);
 const player2Board = new Gameboard(player2Ships);
 
-player1Board.placeShip(1, 5, player1Ships.shipCategory.carrier, "horizontal");
+player1Board.placeShip(1, 5, player1Carrier, "horizontal");
 
 console.log(player1Board);
 console.log(player2Board);
