@@ -156,6 +156,17 @@ class Gameboard {
 
     return hitRatio;
   }
+
+  checkIfAllShipSunk() {
+    const array = Object.values(this.ship.shipCategory);
+    if (
+      array.map((ship) => ship.sunk).every((sunk) => sunk === true) === true
+    ) {
+      console.log("WINNER!");
+    } else {
+      console.log("NOT YET");
+    }
+  }
 }
 
 const player1Ships = new Ship();
