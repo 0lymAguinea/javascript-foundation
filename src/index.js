@@ -56,6 +56,8 @@ class Gameboard {
   constructor(ship) {
     this.ship = ship;
     this.board = this.boardMap();
+    this.shotsFiredCount = 0;
+    this.missedAttackCount = 0;
   }
 
   boardMap() {
@@ -123,10 +125,36 @@ class Gameboard {
       const shipHit = this.board[coordinateX][coordinateY];
       this.board[coordinateX][coordinateY] = "X";
       this.ship.hit(shipHit);
+      this.shotsFired();
     } else {
       this.board[coordinateX][coordinateY] = "O";
-      console.log("MISSED");
+      this.shotsFired();
+      this.missedAttack();
     }
+  }
+
+  shotsFired() {
+    this.shotsFiredCount += 1;
+
+    return this.shotsFiredCount;
+  }
+
+  missedAttack() {
+    this.missedAttackCount += 1;
+
+    return this.missedAttackCount;
+  }
+
+  getAccuracy() {
+    const totalShots = this.shotsFiredCount + this.missedAttackCount;
+
+    if (totalShots === 0) {
+      return 0;
+    }
+
+    const hitRatio = this.shotsFiredCount / totalShots;
+
+    return hitRatio;
   }
 }
 
@@ -149,6 +177,7 @@ const player1Board = new Gameboard(player1Ships);
 const player2Board = new Gameboard(player2Ships);
 
 player1Board.placeShip(1, 5, player1Carrier, "horizontal");
+player2Board.placeShip(2, 5, player2Destroyer, "horizontal");
 
 console.log(player1Board);
 console.log(player2Board);
