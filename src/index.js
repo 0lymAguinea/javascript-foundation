@@ -90,9 +90,9 @@ class Gameboard {
   }
 
   missedAttack(playerShip) {
-    this.missedAttackCount += 1;
+    playerShip.missedAttackCount += 1;
 
-    return this.missedAttackCount;
+    return playerShip.missedAttackCount;
   }
 
   getAccuracy() {
