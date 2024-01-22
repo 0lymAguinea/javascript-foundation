@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import Ship from "./scripts/ship";
+import Player from "./scripts/player";
 
 class Gameboard {
   constructor(ship) {
@@ -61,7 +62,7 @@ class Gameboard {
     }
   }
 
-  receiveAttack(coordinateX, coordinateY) {
+  receiveAttack(coordinateX, coordinateY, playerShip) {
     if (
       this.board[coordinateX][coordinateY] === "X" ||
       this.board[coordinateX][coordinateY] === "O"
@@ -74,21 +75,21 @@ class Gameboard {
       const shipHit = this.board[coordinateX][coordinateY];
       this.board[coordinateX][coordinateY] = "X";
       this.ship.hit(shipHit);
-      this.shotsFired();
+      this.shotsFired(playerShip);
     } else {
       this.board[coordinateX][coordinateY] = "O";
-      this.shotsFired();
-      this.missedAttack();
+      this.shotsFired(playerShip);
+      this.missedAttack(playerShip);
     }
   }
 
-  shotsFired() {
-    this.shotsFiredCount += 1;
+  shotsFired(playerShip) {
+    playerShip.shotsFiredCount += 1;
 
-    return this.shotsFiredCount;
+    return playerShip.shotsFiredCount;
   }
 
-  missedAttack() {
+  missedAttack(playerShip) {
     this.missedAttackCount += 1;
 
     return this.missedAttackCount;
@@ -138,6 +139,8 @@ const player2Board = new Gameboard(player2Ships);
 
 player1Board.placeShip(1, 5, player1Carrier, "horizontal");
 player2Board.placeShip(2, 5, player2Destroyer, "horizontal");
+const player1 = new Player("Lym", true);
+const player2 = new Player("Myl", false);
 
 console.log(player1Board);
 console.log(player2Board);
