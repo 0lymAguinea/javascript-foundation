@@ -117,6 +117,31 @@ class Gameboard {
       console.log("NOT YET");
     }
   }
+
+  checkplayerTurn(player1, player2) {
+    if (player1.turn === true && player2.turn === false) {
+      const coordinates = prompt("Player 1, choose coordinates");
+      const answer = coordinates.split(",");
+      const row = answer[0];
+      const col = answer[1];
+
+      player2Board.receiveAttack(row, col, player1Board);
+      this.switchPlayer(player1, player2);
+    } else if (player1.turn === false && player2.turn === true) {
+      const coordinates = prompt("Player 2, choose coordinates");
+      const answer = coordinates.split(",");
+      const row = answer[0];
+      const col = answer[1];
+
+      player1Board.receiveAttack(row, col, player2Board);
+      this.switchPlayer(player1, player2);
+    }
+  }
+
+  switchPlayer(player1, player2) {
+    player1.turn = !player1.turn;
+    player2.turn = !player2.turn;
+  }
 }
 
 const player1Ships = new Ship();
