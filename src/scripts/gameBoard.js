@@ -14,7 +14,7 @@ export default class Gameboard {
     for (let i = 0; i < row; i += 1) {
       board[i] = [];
       for (let j = 0; j < col; j += 1) {
-        board[i][j] = 0;
+        board[i][j] = "";
       }
     }
 
@@ -58,23 +58,21 @@ export default class Gameboard {
     }
   }
 
-  receiveAttack(coordinateX, coordinateY, playerShip) {
-    if (
-      this.board[coordinateX][coordinateY] === "X" ||
-      this.board[coordinateX][coordinateY] === "O"
-    ) {
-      console.log("YOU ALREADY HIT THIS");
-    } else if (
-      this.board[coordinateX][coordinateY] !== undefined &&
-      this.board[coordinateX][coordinateY] !== 0
-    ) {
-      const shipHit = this.board[coordinateX][coordinateY];
+  receiveAttack(coordinateX, coordinateY, playerShip, button) {
+    const shipNames = Object.values(playerShip.ship.shipCategory).map(
+      (ship) => ship.name
+    );
+
+    if (shipNames.includes(this.board[coordinateX][coordinateY])) {
+      const hittedShip = this.board[coordinateX][coordinateY];
       this.board[coordinateX][coordinateY] = "X";
-      this.ship.hit(shipHit);
+      button.textContent = "X";
       this.shotsFired(playerShip);
+      this.ship.hit(hittedShip);
     } else {
       this.board[coordinateX][coordinateY] = "O";
       this.shotsFired(playerShip);
+      button.textContent = "O";
       this.missedAttack(playerShip);
     }
   }
@@ -111,26 +109,6 @@ export default class Gameboard {
       console.log("ALL SHIP SUNK!");
     } else {
       console.log("NOT YET");
-    }
-  }
-
-  checkplayerTurn(player1, player2) {
-    if (player1.turn === true && player2.turn === false) {
-      const coordinates = prompt("Player 1, choose coordinates");
-      const answer = coordinates.split(",");
-      const row = answer[0];
-      const col = answer[1];
-
-      player2Board.receiveAttack(row, col, player1Board);
-      this.switchPlayer(player1, player2);
-    } else if (player1.turn === false && player2.turn === true) {
-      const coordinates = prompt("Player 2, choose coordinates");
-      const answer = coordinates.split(",");
-      const row = answer[0];
-      const col = answer[1];
-
-      player1Board.receiveAttack(row, col, player2Board);
-      this.switchPlayer(player1, player2);
     }
   }
 
