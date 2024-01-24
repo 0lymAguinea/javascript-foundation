@@ -6,3 +6,26 @@
 body {
   font-family: sans-serif;
 }
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+#player1Board,
+#player2Board {
+  display: grid;
+  grid-template: repeat(10, 50px) / repeat(10, 50px);
+}
+
+.player1Cell,
+.player2Cell {
+  width: 3rem;
+}
+
+button:disabled {
+  background-color: rgb(216, 22, 22);
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  border: 1px solid black;
+  font-weight: bold;
+}
