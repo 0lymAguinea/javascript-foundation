@@ -1,4 +1,5 @@
 import displayGame from "./gameLogic";
+import { player1 } from "./player";
 
 function playerFormCreation(formPlayer, playerNum) {
   const form = document.createElement("form");
@@ -21,6 +22,12 @@ function playerFormCreation(formPlayer, playerNum) {
   playerCruiserInput.required = true;
   playerSubmarineInput.required = true;
   playerDestroyerInput.required = true;
+
+  playerCarrierInput.pattern = "[0-9],[0-9]";
+  playerBattleShipInput.pattern = "[0-9],[0-9]";
+  playerCruiserInput.pattern = "[0-9],[0-9]";
+  playerSubmarineInput.pattern = "[0-9],[0-9]";
+  playerDestroyerInput.pattern = "[0-9],[0-9]";
 
   const readyButton = document.createElement("button");
 
