@@ -1,5 +1,8 @@
+import displayGame from "./gameLogic";
+
 function playerFormCreation(formPlayer, playerNum) {
   const form = document.createElement("form");
+  form.id = `player${playerNum}Form`;
 
   const playerCarrierLabel = document.createElement("label");
   const playerBattleShipLabel = document.createElement("label");
@@ -7,20 +10,26 @@ function playerFormCreation(formPlayer, playerNum) {
   const playerSubmarineLabel = document.createElement("label");
   const playerDestroyerLabel = document.createElement("label");
 
-  const playerBattleShipInput = document.createElement("input");
   const playerCarrierInput = document.createElement("input");
+  const playerBattleShipInput = document.createElement("input");
   const playerCruiserInput = document.createElement("input");
-  const playerSubMarineInput = document.createElement("input");
+  const playerSubmarineInput = document.createElement("input");
   const playerDestroyerInput = document.createElement("input");
 
-  const submitButton = document.createElement("button");
+  playerCarrierInput.required = true;
+  playerBattleShipInput.required = true;
+  playerCruiserInput.required = true;
+  playerSubmarineInput.required = true;
+  playerDestroyerInput.required = true;
+
+  const readyButton = document.createElement("button");
 
   playerCarrierLabel.textContent = "Carrier";
   playerBattleShipLabel.textContent = "Battleship";
   playerCruiserLabel.textContent = "Cruiser";
   playerSubmarineLabel.textContent = "Submarine";
   playerDestroyerLabel.textContent = "Destroyer";
-  submitButton.textContent = "Submit";
+  readyButton.textContent = "Ready";
 
   playerCarrierLabel.for = `player${playerNum}Carrier`;
   playerBattleShipLabel.for = `player${playerNum}Battleship`;
@@ -34,12 +43,12 @@ function playerFormCreation(formPlayer, playerNum) {
   playerBattleShipInput.name = `player${playerNum}Battleship`;
   playerCruiserInput.id = `player${playerNum}Cruiser`;
   playerCruiserInput.name = `player${playerNum}Cruiser`;
-  playerSubMarineInput.id = `player${playerNum}Submarine`;
-  playerSubMarineInput.name = `player${playerNum}Submarine`;
+  playerSubmarineInput.id = `player${playerNum}Submarine`;
+  playerSubmarineInput.name = `player${playerNum}Submarine`;
   playerDestroyerInput.id = `player${playerNum}Destroyer`;
   playerBattleShipInput.name = `player${playerNum}Destroyer`;
 
-  submitButton.id = `player${playerNum}Button`;
+  readyButton.id = `player${playerNum}ReadyButton`;
 
   formPlayer.append(form);
   form.append(playerCarrierLabel);
@@ -47,17 +56,56 @@ function playerFormCreation(formPlayer, playerNum) {
   form.append(playerCruiserLabel);
   form.append(playerSubmarineLabel);
   form.append(playerDestroyerLabel);
-  form.append(submitButton);
+  form.append(readyButton);
+
   playerCarrierLabel.append(playerCarrierInput);
   playerBattleShipLabel.append(playerBattleShipInput);
   playerCruiserLabel.append(playerCruiserInput);
-  playerSubmarineLabel.append(playerSubMarineInput);
+  playerSubmarineLabel.append(playerSubmarineInput);
   playerDestroyerLabel.append(playerDestroyerInput);
 
-  submitButton.addEventListener("click", (e) => {
+  readyButton.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log(e.target);
+    readyButtonAction(readyButton);
+    if (checkIfBothPlayerIsReady(playerNum)) {
+      submitForm();
+      clearBoard();
+      callGameBoard();
+    }
   });
+}
+
+function readyButtonAction(button) {
+  button.setAttribute("isReady", true);
+}
+
+function clearBoard() {
+  const player1Board = document.getElementById("player1Board");
+  const player2Board = document.getElementById("player2Board");
+
+  player1Board.innerHTML = "";
+  player2Board.innerHTML = "";
+}
+
+function callGameBoard() {
+  displayGame();
+}
+
+function checkIfBothPlayerIsReady(playerNum) {
+  const player1ReadyButton = document.getElementById("player1ReadyButton");
+  const player2ReadyButton = document.getElementById("player2ReadyButton");
+
+  const isPlayer1Ready = player1ReadyButton.getAttribute("isReady") === "true";
+  const isPlayer2Ready = player2ReadyButton.getAttribute("isReady") === "true";
+
+  if (playerNum === 1 && isPlayer1Ready && isPlayer2Ready) {
+    return true;
+  }
+  if (playerNum === 2 && isPlayer1Ready && isPlayer2Ready) {
+    return true;
+  }
+
+  return false;
 }
 
 export default function playerForm() {
