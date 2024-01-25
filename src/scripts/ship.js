@@ -50,3 +50,6 @@ export default class Ship {
     }
   }
 }
+
+export const player1Ships = new Ship();
+export const player2Ships = new Ship();

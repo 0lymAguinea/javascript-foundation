@@ -1,3 +1,6 @@
+import { player1, player2 } from "./player";
+import { player1Board, player2Board } from "./gameBoard";
+
 function displayPlayer1Board() {
   const display = document.getElementById("player1Board");
   const { board } = player1Board;

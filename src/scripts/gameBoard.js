@@ -1,3 +1,5 @@
+import { player1Ships, player2Ships } from "./ship";
+
 export default class Gameboard {
   constructor(ship) {
     this.ship = ship;
@@ -117,3 +119,6 @@ export default class Gameboard {
     player2.turn = !player2.turn;
   }
 }
+
+export const player1Board = new Gameboard(player1Ships);
+export const player2Board = new Gameboard(player2Ships);
