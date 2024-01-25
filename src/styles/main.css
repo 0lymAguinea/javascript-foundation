@@ -29,3 +29,11 @@ button:disabled {
   border: 1px solid black;
   font-weight: bold;
 }
+
+input:invalid {
+  border: 1px red solid;
+}
+
+input:valid {
+  border: 1px solid black;
+}
