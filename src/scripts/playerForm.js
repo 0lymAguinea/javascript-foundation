@@ -1,5 +1,6 @@
 import displayGame from "./gameLogic";
-import { player1 } from "./player";
+import { player1Board, player2Board } from "./gameBoard";
+import { player1Ships, player2Ships } from "./ship";
 
 function playerFormCreation(formPlayer, playerNum) {
   const form = document.createElement("form");
@@ -121,4 +122,48 @@ export default function playerForm() {
 
   playerFormCreation(player1Board, 1);
   playerFormCreation(player2Board, 2);
+}
+
+function submitForm() {
+  const shipNames = [
+    "Carrier",
+    "Battleship",
+    "Cruiser",
+    "Submarine",
+    "Destroyer",
+  ];
+
+  const player1ShipValues = {};
+  const player2ShipValues = {};
+
+  for (const shipName of shipNames) {
+    const inputPlayer1ID = `player1${shipName}`;
+    const inputPlayer2ID = `player2${shipName}`;
+
+    const inputPlayer1Value = document.getElementById(inputPlayer1ID).value;
+    const inputPlayer2Value = document.getElementById(inputPlayer2ID).value;
+
+    player1ShipValues[shipName] = inputPlayer1Value.split(",");
+
+    player2ShipValues[shipName] = inputPlayer2Value.split(",");
+
+    const loweredStrShip = shipName.toLowerCase();
+
+    const row1 = player1ShipValues[shipName][0];
+    const col1 = player1ShipValues[shipName][1];
+    const shipsPlayer1 = player1Ships.shipCategory[loweredStrShip];
+
+    const row2 = player2ShipValues[shipName][0];
+    const col2 = player2ShipValues[shipName][1];
+    const shipsPlayer2 = player2Ships.shipCategory[loweredStrShip];
+
+    placePlayer1ShipsToBoard(row1, col1, shipsPlayer1);
+    placePlayer2ShipsToBoard(row2, col2, shipsPlayer2);
+  }
+}
+function placePlayer1ShipsToBoard(row, col, ship) {
+  player1Board.placeShip(Number(row), Number(col), ship, "horizontal");
+}
+function placePlayer2ShipsToBoard(row, col, ship) {
+  player2Board.placeShip(Number(row), Number(col), ship, "horizontal");
 }
