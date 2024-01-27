@@ -29,15 +29,26 @@ export default class Gameboard {
       this.isValidShipPlacement(coordinateX, coordinateY, ship, orientation)
     ) {
       for (let i = 0; i < ship.length; i += 1) {
+        let cellValue;
+        if (orientation === "horizontal") {
+          cellValue = this.board[coordinateX][coordinateY + i];
+        } else if (orientation === "vertical") {
+          cellValue = this.board[coordinateX + i][coordinateY];
+        }
+
+        if (cellValue !== "") {
+          return false;
+        }
+
         if (orientation === "horizontal") {
           this.board[coordinateX][coordinateY + i] = ship.name;
         } else if (orientation === "vertical") {
           this.board[coordinateX + i][coordinateY] = ship.name;
         }
       }
-    } else {
-      console.log("Invalid placement");
+      return true;
     }
+    return false;
   }
 
   isValidCoordinate(coordinateX, coordinateY) {
@@ -52,12 +63,25 @@ export default class Gameboard {
   }
 
   isValidShipPlacement(coordinateX, coordinateY, ship, orientation) {
-    if (orientation === "horizontal") {
-      return coordinateY + ship.length <= this.board[0].length;
+    for (let i = 0; i < ship.length; i += 1) {
+      if (orientation === "horizontal") {
+        if (
+          coordinateY + i >= this.board[0].length ||
+          this.board[coordinateX][coordinateY + i] !== ""
+        ) {
+          return false; // Invalid placement
+        }
+      } else if (orientation === "vertical") {
+        if (
+          coordinateX + i >= this.board.length ||
+          this.board[coordinateX + i][coordinateY] !== ""
+        ) {
+          return false; // Invalid placement
+        }
+      }
     }
-    if (orientation === "vertical") {
-      return coordinateX + ship.length <= this.board.length;
-    }
+
+    return true; // Valid placement
   }
 
   receiveAttack(coordinateX, coordinateY, playerShip, button) {
