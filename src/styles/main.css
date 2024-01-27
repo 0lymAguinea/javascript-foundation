@@ -37,3 +37,19 @@ input:invalid {
 input:valid {
   border: 1px solid black;
 }
+
+input {
+  width: 80px;
+}
+label,
+#formContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+}
+label {
+  margin-top: 0.5rem;
+}
+#player1ReadyButton,
+#player2ReadyButton {
+  font-size: 1rem;
+}
