@@ -113,11 +113,15 @@ function inputSelectOption(playerNum) {
   );
 
   const playerCarrierSelect = document.createElement("select");
+  playerCarrierSelect.id = `player${playerNum}CarrierSelect`;
   const playerBattleShipSelect = document.createElement("select");
+  playerBattleShipSelect.id = `player${playerNum}BattleshipSelect`;
   const playerCruiserSelect = document.createElement("select");
+  playerCruiserSelect.id = `player${playerNum}CruiserSelect`;
   const playerSubmarineSelect = document.createElement("select");
+  playerSubmarineSelect.id = `player${playerNum}SubmarineSelect`;
   const playerDestroyerSelect = document.createElement("select");
-
+  playerDestroyerSelect.id = `player${playerNum}DestroyerSelect`;
   const playerCarrierOption1 = document.createElement("option");
   const playerCarrierOption2 = document.createElement("option");
 
@@ -143,6 +147,17 @@ function inputSelectOption(playerNum) {
   playerSubmarineOption2.text = VERTICAL;
   playerDestroyerOption1.text = HORIZONTAL;
   playerDestroyerOption2.text = VERTICAL;
+
+  playerCarrierOption1.value = "horizontal";
+  playerCarrierOption2.value = "vertical";
+  playerBattleshipOption1.value = "horizontal";
+  playerBattleshipOption2.value = "vertical";
+  playerCruiserOption1.value = "horizontal";
+  playerCruiserOption2.value = "vertical";
+  playerSubmarineOption1.value = "horizontal";
+  playerSubmarineOption2.value = "vertical";
+  playerDestroyerOption1.value = "horizontal";
+  playerDestroyerOption2.value = "vertical";
 
   playerCarrierLabel.append(playerCarrierSelect);
   playerBattleshipLabel.append(playerBattleShipSelect);
@@ -221,6 +236,7 @@ function submitForm() {
 
     const inputPlayer1Value = document.getElementById(inputPlayer1ID).value;
     const inputPlayer2Value = document.getElementById(inputPlayer2ID).value;
+    console.log(inputPlayer1Value);
 
     player1ShipValues[shipName] = inputPlayer1Value.split(",");
 
@@ -236,13 +252,23 @@ function submitForm() {
     const col2 = player2ShipValues[shipName][1];
     const shipsPlayer2 = player2Ships.shipCategory[loweredStrShip];
 
-    placePlayer1ShipsToBoard(row1, col1, shipsPlayer1);
-    placePlayer2ShipsToBoard(row2, col2, shipsPlayer2);
+    const player1Orientation = document.getElementById(
+      `player1${shipName}Select`
+    ).value;
+    const player2Orientation = document.getElementById(
+      `player2${shipName}Select`
+    ).value;
+
+    console.log("player1", player1Orientation);
+    console.log("player2", player2Orientation);
+
+    placePlayer1ShipsToBoard(row1, col1, shipsPlayer1, player1Orientation);
+    placePlayer2ShipsToBoard(row2, col2, shipsPlayer2, player2Orientation);
   }
 }
-function placePlayer1ShipsToBoard(row, col, ship) {
-  player1Board.placeShip(Number(row), Number(col), ship, "horizontal");
+function placePlayer1ShipsToBoard(row, col, ship, orientation) {
+  player1Board.placeShip(Number(row), Number(col), ship, orientation);
 }
-function placePlayer2ShipsToBoard(row, col, ship) {
-  player2Board.placeShip(Number(row), Number(col), ship, "horizontal");
+function placePlayer2ShipsToBoard(row, col, ship, orientation) {
+  player2Board.placeShip(Number(row), Number(col), ship, orientation);
 }
