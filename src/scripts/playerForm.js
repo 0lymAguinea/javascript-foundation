@@ -40,10 +40,15 @@ function playerFormCreation(formPlayer, playerNum) {
   readyButton.textContent = "Ready";
 
   playerCarrierLabel.for = `player${playerNum}Carrier`;
+  playerCarrierLabel.id = `player${playerNum}CarrierLabel`;
   playerBattleShipLabel.for = `player${playerNum}Battleship`;
+  playerBattleShipLabel.id = `player${playerNum}BattleshipLabel`;
   playerCruiserLabel.for = `player${playerNum}Cruiser`;
+  playerCruiserLabel.id = `player${playerNum}CruiserLabel`;
   playerSubmarineLabel.for = `player${playerNum}Submarine`;
+  playerSubmarineLabel.id = `player${playerNum}SubmarineLabel`;
   playerDestroyerLabel.for = `player${playerNum}Destroyer`;
+  playerDestroyerLabel.id = `player${playerNum}DestroyerLabel`;
 
   playerCarrierInput.id = `player${playerNum}Carrier`;
   playerCarrierInput.name = `player${playerNum}Carrier`;
@@ -72,6 +77,8 @@ function playerFormCreation(formPlayer, playerNum) {
   playerSubmarineLabel.append(playerSubmarineInput);
   playerDestroyerLabel.append(playerDestroyerInput);
 
+  inputSelectOption(playerNum);
+
   readyButton.addEventListener("click", (e) => {
     e.preventDefault();
     readyButtonAction(readyButton);
@@ -81,6 +88,78 @@ function playerFormCreation(formPlayer, playerNum) {
       callGameBoard();
     }
   });
+}
+
+function inputSelectOption(playerNum) {
+  const HORIZONTAL = "Horizontal";
+  const VERTICAL = "Vertical";
+  const playerCarrierLabel = document.getElementById(
+    `player${playerNum}CarrierLabel`
+  );
+  const playerBattleshipLabel = document.getElementById(
+    `player${playerNum}BattleshipLabel`
+  );
+
+  const playerCruiserLabel = document.getElementById(
+    `player${playerNum}CruiserLabel`
+  );
+
+  const playerSubmarineLabel = document.getElementById(
+    `player${playerNum}SubmarineLabel`
+  );
+
+  const playerDestroyerLabel = document.getElementById(
+    `player${playerNum}DestroyerLabel`
+  );
+
+  const playerCarrierSelect = document.createElement("select");
+  const playerBattleShipSelect = document.createElement("select");
+  const playerCruiserSelect = document.createElement("select");
+  const playerSubmarineSelect = document.createElement("select");
+  const playerDestroyerSelect = document.createElement("select");
+
+  const playerCarrierOption1 = document.createElement("option");
+  const playerCarrierOption2 = document.createElement("option");
+
+  const playerBattleshipOption1 = document.createElement("option");
+  const playerBattleshipOption2 = document.createElement("option");
+
+  const playerCruiserOption1 = document.createElement("option");
+  const playerCruiserOption2 = document.createElement("option");
+
+  const playerSubmarineOption1 = document.createElement("option");
+  const playerSubmarineOption2 = document.createElement("option");
+
+  const playerDestroyerOption1 = document.createElement("option");
+  const playerDestroyerOption2 = document.createElement("option");
+
+  playerCarrierOption1.text = HORIZONTAL;
+  playerCarrierOption2.text = VERTICAL;
+  playerBattleshipOption1.text = HORIZONTAL;
+  playerBattleshipOption2.text = VERTICAL;
+  playerCruiserOption1.text = HORIZONTAL;
+  playerCruiserOption2.text = VERTICAL;
+  playerSubmarineOption1.text = HORIZONTAL;
+  playerSubmarineOption2.text = VERTICAL;
+  playerDestroyerOption1.text = HORIZONTAL;
+  playerDestroyerOption2.text = VERTICAL;
+
+  playerCarrierLabel.append(playerCarrierSelect);
+  playerBattleshipLabel.append(playerBattleShipSelect);
+  playerCruiserLabel.append(playerCruiserSelect);
+  playerSubmarineLabel.append(playerSubmarineSelect);
+  playerDestroyerLabel.append(playerDestroyerSelect);
+
+  playerCarrierSelect.append(playerCarrierOption1);
+  playerCarrierSelect.append(playerCarrierOption2);
+  playerBattleShipSelect.append(playerBattleshipOption1);
+  playerBattleShipSelect.append(playerBattleshipOption2);
+  playerCruiserSelect.append(playerCruiserOption1);
+  playerCruiserSelect.append(playerCruiserOption2);
+  playerSubmarineSelect.append(playerSubmarineOption1);
+  playerSubmarineSelect.append(playerSubmarineOption2);
+  playerDestroyerSelect.append(playerDestroyerOption1);
+  playerDestroyerSelect.append(playerDestroyerOption1);
 }
 
 function readyButtonAction(button) {
