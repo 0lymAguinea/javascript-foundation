@@ -92,7 +92,8 @@ function playerFormCreation(formPlayer, playerNum) {
 
   inputSelectOption(playerNum);
 
-  readyButton.addEventListener("click", () => {
+  readyButton.addEventListener("click", (e) => {
+    e.preventDefault();
     readyButtonAction(readyButton);
     if (checkIfBothPlayerIsReady(playerNum)) {
       submitForm();
@@ -236,7 +237,13 @@ function checkIfAllShipsArePlaced() {
   const board1 = player1Board.board;
   const board2 = player2Board.board;
 
-  const shipNames = ["carrier"];
+  const shipNames = [
+    "carrier",
+    "battleship",
+    "cruiser",
+    "submarine",
+    "destroyer",
+  ];
 
   const board1ContainsAllPlayer1Ship = shipNames.every((shipName) =>
     board1.some((row) => row.includes(shipName))
