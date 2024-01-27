@@ -6,6 +6,16 @@ function playerFormCreation(formPlayer, playerNum) {
   const form = document.createElement("form");
   form.id = `player${playerNum}Form`;
 
+  const formContainer = document.createElement("div");
+  formContainer.id = "formContainer";
+
+  const shipName = document.createElement("p");
+  const shipLoc = document.createElement("p");
+  const shipOrientation = document.createElement("p");
+  shipName.textContent = `Ship's name`;
+  shipLoc.textContent = `Ship's coordinates`;
+  shipOrientation.textContent = `Ship's orientation`;
+
   const playerCarrierLabel = document.createElement("label");
   const playerBattleShipLabel = document.createElement("label");
   const playerCruiserLabel = document.createElement("label");
@@ -18,6 +28,8 @@ function playerFormCreation(formPlayer, playerNum) {
   const playerSubmarineInput = document.createElement("input");
   const playerDestroyerInput = document.createElement("input");
 
+  const readyButton = document.createElement("button");
+
   playerCarrierInput.required = true;
   playerBattleShipInput.required = true;
   playerCruiserInput.required = true;
@@ -29,8 +41,6 @@ function playerFormCreation(formPlayer, playerNum) {
   playerCruiserInput.pattern = "[0-9],[0-9]";
   playerSubmarineInput.pattern = "[0-9],[0-9]";
   playerDestroyerInput.pattern = "[0-9],[0-9]";
-
-  const readyButton = document.createElement("button");
 
   playerCarrierLabel.textContent = "Carrier";
   playerBattleShipLabel.textContent = "Battleship";
@@ -52,6 +62,7 @@ function playerFormCreation(formPlayer, playerNum) {
 
   playerCarrierInput.id = `player${playerNum}Carrier`;
   playerCarrierInput.name = `player${playerNum}Carrier`;
+  playerCarrierInput.placeholder = `row,column`;
   playerBattleShipInput.id = `player${playerNum}Battleship`;
   playerBattleShipInput.name = `player${playerNum}Battleship`;
   playerCruiserInput.id = `player${playerNum}Cruiser`;
@@ -64,6 +75,8 @@ function playerFormCreation(formPlayer, playerNum) {
   readyButton.id = `player${playerNum}ReadyButton`;
 
   formPlayer.append(form);
+  form.append(formContainer);
+  formContainer.append(shipName, shipLoc, shipOrientation);
   form.append(playerCarrierLabel);
   form.append(playerBattleShipLabel);
   form.append(playerCruiserLabel);
@@ -79,13 +92,14 @@ function playerFormCreation(formPlayer, playerNum) {
 
   inputSelectOption(playerNum);
 
-  readyButton.addEventListener("click", (e) => {
-    e.preventDefault();
+  readyButton.addEventListener("click", () => {
     readyButtonAction(readyButton);
     if (checkIfBothPlayerIsReady(playerNum)) {
       submitForm();
-      clearBoard();
-      callGameBoard();
+      if (checkIfAllShipsArePlaced()) {
+        clearBoard();
+        callGameBoard();
+      }
     }
   });
 }
@@ -182,11 +196,11 @@ function readyButtonAction(button) {
 }
 
 function clearBoard() {
-  const player1Board = document.getElementById("player1Board");
-  const player2Board = document.getElementById("player2Board");
+  const player1BoardContainer = document.getElementById("player1Board");
+  const player2BoardContainer = document.getElementById("player2Board");
 
-  player1Board.innerHTML = "";
-  player2Board.innerHTML = "";
+  player1BoardContainer.innerHTML = "";
+  player2BoardContainer.innerHTML = "";
 }
 
 function callGameBoard() {
@@ -218,6 +232,28 @@ export default function playerForm() {
   playerFormCreation(player2Board, 2);
 }
 
+function checkIfAllShipsArePlaced() {
+  const board1 = player1Board.board;
+  const board2 = player2Board.board;
+
+  const shipNames = ["carrier"];
+
+  const board1ContainsAllPlayer1Ship = shipNames.every((shipName) =>
+    board1.some((row) => row.includes(shipName))
+  );
+
+  const board2ContainsAllPlayer1Ship = shipNames.every((shipName) =>
+    board2.some((row) => row.includes(shipName))
+  );
+  if (
+    board1ContainsAllPlayer1Ship === true &&
+    board2ContainsAllPlayer1Ship === true
+  ) {
+    return true;
+  }
+  return false;
+}
+
 function submitForm() {
   const shipNames = [
     "Carrier",
@@ -236,7 +272,6 @@ function submitForm() {
 
     const inputPlayer1Value = document.getElementById(inputPlayer1ID).value;
     const inputPlayer2Value = document.getElementById(inputPlayer2ID).value;
-    console.log(inputPlayer1Value);
 
     player1ShipValues[shipName] = inputPlayer1Value.split(",");
 
@@ -258,9 +293,6 @@ function submitForm() {
     const player2Orientation = document.getElementById(
       `player2${shipName}Select`
     ).value;
-
-    console.log("player1", player1Orientation);
-    console.log("player2", player2Orientation);
 
     placePlayer1ShipsToBoard(row1, col1, shipsPlayer1, player1Orientation);
     placePlayer2ShipsToBoard(row2, col2, shipsPlayer2, player2Orientation);
