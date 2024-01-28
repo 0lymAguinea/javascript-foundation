@@ -1,4 +1,5 @@
 import { player1Ships, player2Ships } from "./ship";
+import { disabledPlayersButton, announceWinner } from "./gameLogic";
 
 export default class Gameboard {
   constructor(ship) {
@@ -127,14 +128,13 @@ export default class Gameboard {
     return hitRatio;
   }
 
-  checkIfAllShipSunk() {
+  checkIfAllShipSunk(playerWinner) {
     const array = Object.values(this.ship.shipCategory);
     if (
       array.map((ship) => ship.sunk).every((sunk) => sunk === true) === true
     ) {
-      console.log("ALL SHIP SUNK!");
-    } else {
-      console.log("NOT YET");
+      disabledPlayersButton();
+      announceWinner(playerWinner);
     }
   }
 

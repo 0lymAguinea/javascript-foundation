@@ -45,6 +45,7 @@ function buttonsController(
         const column = e.target.getAttribute("data-column");
 
         opposingBoard.receiveAttack(row, column, currentBoard, button);
+        opposingBoard.checkIfAllShipSunk(currentPlayer);
         currentBoard.switchPlayer(currentPlayer, opposingPlayer);
 
         button.disabled = true;
@@ -77,6 +78,53 @@ function initializeButtons() {
       player1
     );
   }
+}
+
+export function disabledPlayersButton() {
+  const player1Buttons = document.querySelectorAll(".player1Buttons");
+  const player2Buttons = document.querySelectorAll(".player2Buttons");
+
+  player1Buttons.forEach((button) => {
+    button.disabled = true;
+  });
+
+  player2Buttons.forEach((button) => {
+    button.disabled = true;
+  });
+}
+function createWinnerContainer() {
+  const winningContainer = document.createElement("div");
+  winningContainer.id = "winningContainer";
+  document.body.append(winningContainer);
+}
+
+function winnerContainerMessage(winningPlayer) {
+  const p = document.createElement("p");
+  p.textContent = `WE HAVE A WINNER! ${winningPlayer.name} WINS THE GAME`;
+}
+
+function createRestartButton() {
+  const button = document.createElement("button");
+  button.textContent = "New game";
+  button.id = "resetGameButton";
+
+  button.addEventListener("click", () => {
+    location.reload();
+  });
+}
+
+function displayRestartButton() {
+  const container = document.getElementById("winningContainer");
+  const button = document.getElementById("resetGameButton");
+
+  container.append(button);
+}
+
+export function announceWinner(winningPlayer) {
+  createWinnerContainer();
+  winnerContainerMessage(winningPlayer);
+  createRestartButton();
+  displayRestartButton();
 }
 
 export default function displayGame() {
