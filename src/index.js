@@ -1,10 +1,19 @@
-/* eslint-disable max-classes-per-file */
 import playerForm from "./scripts/playerForm";
-import Ship from "./scripts/ship";
+import displayContainers from "./scripts/gameBoardContainer";
 
-function areAllShipSunk(playerShip) {
-  const ships = Object.values(playerShip.shipCategory);
-  return ships.every((ship) => ship.sunk);
+function clearStartingContainer() {
+  const div = document.querySelector(".startingContainer");
+  document.body.removeChild(div);
 }
+function playerVsPlayer() {
+  const button = document.getElementById("playerVsPlayer");
+  button.addEventListener("click", () => {
+    clearStartingContainer();
+    displayContainers();
+    playerForm();
+  });
+}
+playerVsPlayer();
 
-playerForm();
+// displayContainers();
+// playerForm();
