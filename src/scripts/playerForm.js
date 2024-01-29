@@ -1,6 +1,7 @@
 import displayGame from "./gameLogic";
 import { player1Board, player2Board } from "./gameBoard";
 import { player1Ships, player2Ships } from "./ship";
+import validateForm from "./formValidation";
 
 function playerFormCreation(formPlayer, playerNum) {
   const form = document.createElement("form");
@@ -30,18 +31,6 @@ function playerFormCreation(formPlayer, playerNum) {
 
   const readyButton = document.createElement("button");
 
-  playerCarrierInput.required = true;
-  playerBattleShipInput.required = true;
-  playerCruiserInput.required = true;
-  playerSubmarineInput.required = true;
-  playerDestroyerInput.required = true;
-
-  playerCarrierInput.pattern = "[0-9],[0-9]";
-  playerBattleShipInput.pattern = "[0-9],[0-9]";
-  playerCruiserInput.pattern = "[0-9],[0-9]";
-  playerSubmarineInput.pattern = "[0-9],[0-9]";
-  playerDestroyerInput.pattern = "[0-9],[0-9]";
-
   playerCarrierLabel.textContent = "Carrier";
   playerBattleShipLabel.textContent = "Battleship";
   playerCruiserLabel.textContent = "Cruiser";
@@ -63,6 +52,7 @@ function playerFormCreation(formPlayer, playerNum) {
   playerCarrierInput.id = `player${playerNum}Carrier`;
   playerCarrierInput.name = `player${playerNum}Carrier`;
   playerCarrierInput.placeholder = `row,column`;
+
   playerBattleShipInput.id = `player${playerNum}Battleship`;
   playerBattleShipInput.name = `player${playerNum}Battleship`;
   playerCruiserInput.id = `player${playerNum}Cruiser`;
@@ -92,16 +82,13 @@ function playerFormCreation(formPlayer, playerNum) {
 
   inputSelectOption(playerNum);
 
+  validateForm();
+
   readyButton.addEventListener("click", (e) => {
     e.preventDefault();
+
     readyButtonAction(readyButton);
-    if (checkIfBothPlayerIsReady(playerNum)) {
-      submitForm();
-      if (checkIfAllShipsArePlaced()) {
-        clearBoard();
-        callGameBoard();
-      }
-    }
+    checkIfBothPlayerIsReady(playerNum);
   });
 }
 
@@ -207,7 +194,6 @@ function clearBoard() {
 function callGameBoard() {
   displayGame();
 }
-
 function checkIfBothPlayerIsReady(playerNum) {
   const player1ReadyButton = document.getElementById("player1ReadyButton");
   const player2ReadyButton = document.getElementById("player2ReadyButton");
@@ -216,13 +202,46 @@ function checkIfBothPlayerIsReady(playerNum) {
   const isPlayer2Ready = player2ReadyButton.getAttribute("isReady") === "true";
 
   if (playerNum === 1 && isPlayer1Ready && isPlayer2Ready) {
-    return true;
+    checkIfAllInputsAreValid();
   }
   if (playerNum === 2 && isPlayer1Ready && isPlayer2Ready) {
-    return true;
+    checkIfAllInputsAreValid();
   }
 
   return false;
+}
+
+function checkIfAllInputsAreValid() {
+  const inputs = document.querySelectorAll("input");
+  const totalInputs = 10;
+  let countTrue = 0;
+  inputs.forEach((input) => {
+    const isReadyValue = input.getAttribute("isReady");
+    if (isReadyValue === "true") {
+      countTrue += 1;
+      if (countTrue === totalInputs) {
+        submitForm();
+        if (checkIfAllShipsArePlaced()) {
+          clearBoard();
+          callGameBoard();
+        }
+      }
+    }
+    return true;
+  });
+
+  return false;
+}
+
+function addValidationAttributes() {
+  const allInputs = document.querySelectorAll("input");
+
+  allInputs.forEach((input) => {
+    input.required = true;
+    input.pattern = "[0-9],[0-9]";
+    input.maxLength = 3;
+    input.placeholder = "row,column";
+  });
 }
 
 export default function playerForm() {
@@ -230,7 +249,9 @@ export default function playerForm() {
   const player2Board = document.getElementById("player2Board");
 
   playerFormCreation(player1Board, 1);
+
   playerFormCreation(player2Board, 2);
+  addValidationAttributes();
 }
 
 function checkIfAllShipsArePlaced() {
@@ -303,6 +324,8 @@ function submitForm() {
 
     placePlayer1ShipsToBoard(row1, col1, shipsPlayer1, player1Orientation);
     placePlayer2ShipsToBoard(row2, col2, shipsPlayer2, player2Orientation);
+
+    console.log("inputted submitForm()");
   }
 }
 function placePlayer1ShipsToBoard(row, col, ship, orientation) {
