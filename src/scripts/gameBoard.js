@@ -26,6 +26,22 @@ export default class Gameboard {
     return board;
   }
 
+  resetBoard() {
+    const row = 10;
+    const col = 10;
+    const board = [];
+
+    for (let i = 0; i < row; i += 1) {
+      board[i] = [];
+      for (let j = 0; j < col; j += 1) {
+        board[i][j] = "";
+      }
+    }
+    this.board = board;
+
+    return this.board;
+  }
+
   placeShip(coordinateX, coordinateY, ship, orientation, name) {
     if (
       this.isValidCoordinate(coordinateX, coordinateY) &&
@@ -47,7 +63,7 @@ export default class Gameboard {
 
         if (cellValue !== "") {
           notReadyButtonAction();
-          console.log("SHIP NOT PLACED", ship);
+          resetWrongShipInput(ship, name);
           return false;
         }
 
@@ -80,7 +96,6 @@ export default class Gameboard {
           coordinateY + i >= this.board[0].length ||
           this.board[coordinateX][coordinateY + i] !== ""
         ) {
-          console.log("SHIP CULPRIT", ship);
           notReadyButtonAction();
           resetWrongShipInput(ship, name);
           return false; // Invalid placement
@@ -90,7 +105,6 @@ export default class Gameboard {
           coordinateX + i >= this.board.length ||
           this.board[coordinateX + i][coordinateY] !== ""
         ) {
-          console.log("SHIP CULPRIT", ship);
           notReadyButtonAction();
           resetWrongShipInput(ship, name);
           return false; // Invalid placement
