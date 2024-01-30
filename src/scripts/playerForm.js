@@ -181,6 +181,18 @@ function inputSelectOption(playerNum) {
 
 function readyButtonAction(button) {
   button.setAttribute("isReady", true);
+  button.textContent = "Ready";
+}
+
+export function notReadyButtonAction() {
+  const player1Button = document.getElementById(`player1ReadyButton`);
+  const player2Button = document.getElementById("player2ReadyButton");
+
+  player1Button.setAttribute("isReady", false);
+  player2Button.setAttribute("isReady", false);
+
+  player1Button.textContent = "Not ready";
+  player2Button.textContent = "Not ready";
 }
 
 function clearBoard() {
@@ -329,8 +341,33 @@ function submitForm() {
   }
 }
 function placePlayer1ShipsToBoard(row, col, ship, orientation) {
-  player1Board.placeShip(Number(row), Number(col), ship, orientation);
+  player1Board.placeShip(
+    Number(row),
+    Number(col),
+    ship,
+    orientation,
+    "player1"
+  );
 }
 function placePlayer2ShipsToBoard(row, col, ship, orientation) {
-  player2Board.placeShip(Number(row), Number(col), ship, orientation);
+  player2Board.placeShip(
+    Number(row),
+    Number(col),
+    ship,
+    orientation,
+    "player2"
+  );
+}
+function resetWrongInputs(input) {
+  input.value = "";
+}
+
+export function resetWrongShipInput(wrongShip, playerName) {
+  const capitalizeShip =
+    wrongShip.name[0].toUpperCase() + wrongShip.name.slice(1);
+  const input = document.querySelector(`#${playerName}${capitalizeShip}`);
+  console.log(`${playerName}${capitalizeShip}`);
+
+  console.log(input);
+  resetWrongInputs(input);
 }
