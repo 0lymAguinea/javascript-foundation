@@ -1,8 +1,10 @@
 import { player1Ships, player2Ships } from "./ship";
 import { disabledPlayersButton, announceWinner } from "./gameLogic";
+import { notReadyButtonAction, resetWrongShipInput } from "./playerForm";
 
 export default class Gameboard {
-  constructor(ship) {
+  constructor(ship, name) {
+    this.name = name;
     this.ship = ship;
     this.board = this.boardMap();
     this.shotsFiredCount = 0;
@@ -24,10 +26,16 @@ export default class Gameboard {
     return board;
   }
 
-  placeShip(coordinateX, coordinateY, ship, orientation) {
+  placeShip(coordinateX, coordinateY, ship, orientation, name) {
     if (
       this.isValidCoordinate(coordinateX, coordinateY) &&
-      this.isValidShipPlacement(coordinateX, coordinateY, ship, orientation)
+      this.isValidShipPlacement(
+        coordinateX,
+        coordinateY,
+        ship,
+        orientation,
+        name
+      )
     ) {
       for (let i = 0; i < ship.length; i += 1) {
         let cellValue;
@@ -38,6 +46,8 @@ export default class Gameboard {
         }
 
         if (cellValue !== "") {
+          notReadyButtonAction();
+          console.log("SHIP NOT PLACED", ship);
           return false;
         }
 
@@ -63,13 +73,16 @@ export default class Gameboard {
     );
   }
 
-  isValidShipPlacement(coordinateX, coordinateY, ship, orientation) {
+  isValidShipPlacement(coordinateX, coordinateY, ship, orientation, name) {
     for (let i = 0; i < ship.length; i += 1) {
       if (orientation === "horizontal") {
         if (
           coordinateY + i >= this.board[0].length ||
           this.board[coordinateX][coordinateY + i] !== ""
         ) {
+          console.log("SHIP CULPRIT", ship);
+          notReadyButtonAction();
+          resetWrongShipInput(ship, name);
           return false; // Invalid placement
         }
       } else if (orientation === "vertical") {
@@ -77,6 +90,9 @@ export default class Gameboard {
           coordinateX + i >= this.board.length ||
           this.board[coordinateX + i][coordinateY] !== ""
         ) {
+          console.log("SHIP CULPRIT", ship);
+          notReadyButtonAction();
+          resetWrongShipInput(ship, name);
           return false; // Invalid placement
         }
       }
@@ -144,5 +160,5 @@ export default class Gameboard {
   }
 }
 
-export const player1Board = new Gameboard(player1Ships);
-export const player2Board = new Gameboard(player2Ships);
+export const player1Board = new Gameboard(player1Ships, "player1");
+export const player2Board = new Gameboard(player2Ships, "player2");
