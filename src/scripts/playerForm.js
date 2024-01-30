@@ -36,7 +36,7 @@ function playerFormCreation(formPlayer, playerNum) {
   playerCruiserLabel.textContent = "Cruiser";
   playerSubmarineLabel.textContent = "Submarine";
   playerDestroyerLabel.textContent = "Destroyer";
-  readyButton.textContent = "Ready";
+  readyButton.textContent = "Click to ready";
 
   playerCarrierLabel.for = `player${playerNum}Carrier`;
   playerCarrierLabel.id = `player${playerNum}CarrierLabel`;
@@ -63,6 +63,7 @@ function playerFormCreation(formPlayer, playerNum) {
   playerBattleShipInput.name = `player${playerNum}Destroyer`;
 
   readyButton.id = `player${playerNum}ReadyButton`;
+  readyButton.setAttribute("isReady", "false");
 
   formPlayer.append(form);
   form.append(formContainer);
@@ -86,8 +87,8 @@ function playerFormCreation(formPlayer, playerNum) {
 
   readyButton.addEventListener("click", (e) => {
     e.preventDefault();
-
     readyButtonAction(readyButton);
+
     checkIfBothPlayerIsReady(playerNum);
   });
 }
@@ -180,8 +181,13 @@ function inputSelectOption(playerNum) {
 }
 
 function readyButtonAction(button) {
-  button.setAttribute("isReady", true);
-  button.textContent = "Ready";
+  if (button.getAttribute("isReady") === "false") {
+    button.setAttribute("isReady", "true");
+    button.textContent = "Ready";
+  } else if (button.getAttribute("isReady") === "true") {
+    button.setAttribute("isReady", "false");
+    button.textContent = "Click to ready";
+  }
 }
 
 export function notReadyButtonAction() {
@@ -195,12 +201,13 @@ export function notReadyButtonAction() {
   player2Button.textContent = "Not ready";
 }
 
-function clearBoard() {
-  const player1BoardContainer = document.getElementById("player1Board");
-  const player2BoardContainer = document.getElementById("player2Board");
-
-  player1BoardContainer.innerHTML = "";
-  player2BoardContainer.innerHTML = "";
+function removeForms() {
+  const forms = document.querySelectorAll("form");
+  forms.forEach((form) => {
+    if (form.parentNode) {
+      form.parentNode.removeChild(form);
+    }
+  });
 }
 
 function callGameBoard() {
@@ -233,8 +240,9 @@ function checkIfAllInputsAreValid() {
       countTrue += 1;
       if (countTrue === totalInputs) {
         submitForm();
+
         if (checkIfAllShipsArePlaced()) {
-          clearBoard();
+          removeForms();
           callGameBoard();
         }
       }
@@ -303,6 +311,9 @@ function submitForm() {
     "Destroyer",
   ];
 
+  player1Board.resetBoard();
+  player2Board.resetBoard();
+
   const player1ShipValues = {};
   const player2ShipValues = {};
 
@@ -366,8 +377,6 @@ export function resetWrongShipInput(wrongShip, playerName) {
   const capitalizeShip =
     wrongShip.name[0].toUpperCase() + wrongShip.name.slice(1);
   const input = document.querySelector(`#${playerName}${capitalizeShip}`);
-  console.log(`${playerName}${capitalizeShip}`);
 
-  console.log(input);
   resetWrongInputs(input);
 }
