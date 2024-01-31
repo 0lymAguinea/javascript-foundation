@@ -1,5 +1,6 @@
 import playerForm from "./scripts/playerForm";
 import displayContainers from "./scripts/gameBoardContainer";
+import "./styles/main.css";
 
 function clearStartingContainer() {
   const div = document.querySelector(".startingContainer");
