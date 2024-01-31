@@ -6,14 +6,34 @@
 body {
   font-family: sans-serif;
 }
+.startingContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 4.2rem;
+}
+#player1Form,
+#player2Form {
+  display: grid;
+  justify-items: center;
+}
+#playerVsPlayer {
+  font-size: 1.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+}
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
 }
 #player1Board,
 #player2Board {
   display: grid;
   grid-template: repeat(10, 50px) / repeat(10, 50px);
+  justify-content: center;
 }
 
 .player1Cell,
@@ -52,4 +72,6 @@ label {
 #player1ReadyButton,
 #player2ReadyButton {
   font-size: 1rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
 }
