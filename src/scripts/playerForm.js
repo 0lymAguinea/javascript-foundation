@@ -18,68 +18,65 @@ function playerFormCreation(formPlayer, playerNum) {
   shipOrientation.textContent = `Ship's orientation`;
 
   const playerCarrierLabel = document.createElement("label");
-  const playerBattleShipLabel = document.createElement("label");
+  const playerBattleshipLabel = document.createElement("label");
   const playerCruiserLabel = document.createElement("label");
   const playerSubmarineLabel = document.createElement("label");
   const playerDestroyerLabel = document.createElement("label");
 
   const playerCarrierInput = document.createElement("input");
-  const playerBattleShipInput = document.createElement("input");
+  const playerBattleshipInput = document.createElement("input");
   const playerCruiserInput = document.createElement("input");
   const playerSubmarineInput = document.createElement("input");
   const playerDestroyerInput = document.createElement("input");
 
   const readyButton = document.createElement("button");
 
-  playerCarrierLabel.textContent = "Carrier";
-  playerBattleShipLabel.textContent = "Battleship";
-  playerCruiserLabel.textContent = "Cruiser";
-  playerSubmarineLabel.textContent = "Submarine";
-  playerDestroyerLabel.textContent = "Destroyer";
+  const nameOfShips = [
+    "Carrier",
+    "Battleship",
+    "Cruiser",
+    "Submarine",
+    "Destroyer",
+  ];
+  const labelArray = [
+    playerCarrierLabel,
+    playerBattleshipLabel,
+    playerCruiserLabel,
+    playerSubmarineLabel,
+    playerDestroyerLabel,
+  ];
+  const inputArray = [
+    playerCarrierInput,
+    playerBattleshipInput,
+    playerCruiserInput,
+    playerSubmarineInput,
+    playerDestroyerInput,
+  ];
+
+  for (let i = 0; i < nameOfShips.length; i += 1) {
+    const label = labelArray[i];
+    const input = inputArray[i];
+
+    label.textContent = nameOfShips[i];
+    label.for = `player${playerNum}${nameOfShips[i]}`;
+    label.id = `player${playerNum}${nameOfShips[i]}Label`;
+
+    input.id = `player${playerNum}${nameOfShips[i]}`;
+    input.name = `player${playerNum}${nameOfShips[i]}`;
+
+    form.append(label);
+    label.append(input);
+  }
+
   readyButton.textContent = "Click to ready";
-
-  playerCarrierLabel.for = `player${playerNum}Carrier`;
-  playerCarrierLabel.id = `player${playerNum}CarrierLabel`;
-  playerBattleShipLabel.for = `player${playerNum}Battleship`;
-  playerBattleShipLabel.id = `player${playerNum}BattleshipLabel`;
-  playerCruiserLabel.for = `player${playerNum}Cruiser`;
-  playerCruiserLabel.id = `player${playerNum}CruiserLabel`;
-  playerSubmarineLabel.for = `player${playerNum}Submarine`;
-  playerSubmarineLabel.id = `player${playerNum}SubmarineLabel`;
-  playerDestroyerLabel.for = `player${playerNum}Destroyer`;
-  playerDestroyerLabel.id = `player${playerNum}DestroyerLabel`;
-
-  playerCarrierInput.id = `player${playerNum}Carrier`;
-  playerCarrierInput.name = `player${playerNum}Carrier`;
-  playerCarrierInput.placeholder = `row,column`;
-
-  playerBattleShipInput.id = `player${playerNum}Battleship`;
-  playerBattleShipInput.name = `player${playerNum}Battleship`;
-  playerCruiserInput.id = `player${playerNum}Cruiser`;
-  playerCruiserInput.name = `player${playerNum}Cruiser`;
-  playerSubmarineInput.id = `player${playerNum}Submarine`;
-  playerSubmarineInput.name = `player${playerNum}Submarine`;
-  playerDestroyerInput.id = `player${playerNum}Destroyer`;
-  playerBattleShipInput.name = `player${playerNum}Destroyer`;
 
   readyButton.id = `player${playerNum}ReadyButton`;
   readyButton.setAttribute("isReady", "false");
-
+  formPlayer.append(formContainer);
   formPlayer.append(form);
-  form.append(formContainer);
-  formContainer.append(shipName, shipLoc, shipOrientation);
-  form.append(playerCarrierLabel);
-  form.append(playerBattleShipLabel);
-  form.append(playerCruiserLabel);
-  form.append(playerSubmarineLabel);
-  form.append(playerDestroyerLabel);
-  form.append(readyButton);
 
-  playerCarrierLabel.append(playerCarrierInput);
-  playerBattleShipLabel.append(playerBattleShipInput);
-  playerCruiserLabel.append(playerCruiserInput);
-  playerSubmarineLabel.append(playerSubmarineInput);
-  playerDestroyerLabel.append(playerDestroyerInput);
+  formContainer.append(shipName, shipLoc, shipOrientation);
+  form.append(readyButton);
 
   inputSelectOption(playerNum);
 
@@ -88,96 +85,42 @@ function playerFormCreation(formPlayer, playerNum) {
   readyButton.addEventListener("click", (e) => {
     e.preventDefault();
     readyButtonAction(readyButton);
-
     checkIfBothPlayerIsReady(playerNum);
   });
 }
 
 function inputSelectOption(playerNum) {
-  const HORIZONTAL = "Horizontal";
-  const VERTICAL = "Vertical";
-  const playerCarrierLabel = document.getElementById(
-    `player${playerNum}CarrierLabel`
-  );
-  const playerBattleshipLabel = document.getElementById(
-    `player${playerNum}BattleshipLabel`
-  );
+  const labelIds = [
+    `player${playerNum}CarrierLabel`,
+    `player${playerNum}BattleshipLabel`,
+    `player${playerNum}CruiserLabel`,
+    `player${playerNum}SubmarineLabel`,
+    `player${playerNum}DestroyerLabel`,
+  ];
 
-  const playerCruiserLabel = document.getElementById(
-    `player${playerNum}CruiserLabel`
-  );
+  const shipNames = [
+    "Carrier",
+    "Battleship",
+    "Cruiser",
+    "Submarine",
+    "Destroyer",
+  ];
+  const orientationOptions = ["Horizontal", "Vertical"];
 
-  const playerSubmarineLabel = document.getElementById(
-    `player${playerNum}SubmarineLabel`
-  );
+  for (let i = 0; i < labelIds.length; i += 1) {
+    const label = document.getElementById(labelIds[i]);
+    const select = document.createElement("select");
+    select.id = `player${playerNum}${shipNames[i]}Select`;
 
-  const playerDestroyerLabel = document.getElementById(
-    `player${playerNum}DestroyerLabel`
-  );
+    for (const optionText of orientationOptions) {
+      const option = document.createElement("option");
+      option.text = optionText;
+      option.value = optionText.toLowerCase();
+      select.append(option);
+    }
 
-  const playerCarrierSelect = document.createElement("select");
-  playerCarrierSelect.id = `player${playerNum}CarrierSelect`;
-  const playerBattleShipSelect = document.createElement("select");
-  playerBattleShipSelect.id = `player${playerNum}BattleshipSelect`;
-  const playerCruiserSelect = document.createElement("select");
-  playerCruiserSelect.id = `player${playerNum}CruiserSelect`;
-  const playerSubmarineSelect = document.createElement("select");
-  playerSubmarineSelect.id = `player${playerNum}SubmarineSelect`;
-  const playerDestroyerSelect = document.createElement("select");
-  playerDestroyerSelect.id = `player${playerNum}DestroyerSelect`;
-  const playerCarrierOption1 = document.createElement("option");
-  const playerCarrierOption2 = document.createElement("option");
-
-  const playerBattleshipOption1 = document.createElement("option");
-  const playerBattleshipOption2 = document.createElement("option");
-
-  const playerCruiserOption1 = document.createElement("option");
-  const playerCruiserOption2 = document.createElement("option");
-
-  const playerSubmarineOption1 = document.createElement("option");
-  const playerSubmarineOption2 = document.createElement("option");
-
-  const playerDestroyerOption1 = document.createElement("option");
-  const playerDestroyerOption2 = document.createElement("option");
-
-  playerCarrierOption1.text = HORIZONTAL;
-  playerCarrierOption2.text = VERTICAL;
-  playerBattleshipOption1.text = HORIZONTAL;
-  playerBattleshipOption2.text = VERTICAL;
-  playerCruiserOption1.text = HORIZONTAL;
-  playerCruiserOption2.text = VERTICAL;
-  playerSubmarineOption1.text = HORIZONTAL;
-  playerSubmarineOption2.text = VERTICAL;
-  playerDestroyerOption1.text = HORIZONTAL;
-  playerDestroyerOption2.text = VERTICAL;
-
-  playerCarrierOption1.value = "horizontal";
-  playerCarrierOption2.value = "vertical";
-  playerBattleshipOption1.value = "horizontal";
-  playerBattleshipOption2.value = "vertical";
-  playerCruiserOption1.value = "horizontal";
-  playerCruiserOption2.value = "vertical";
-  playerSubmarineOption1.value = "horizontal";
-  playerSubmarineOption2.value = "vertical";
-  playerDestroyerOption1.value = "horizontal";
-  playerDestroyerOption2.value = "vertical";
-
-  playerCarrierLabel.append(playerCarrierSelect);
-  playerBattleshipLabel.append(playerBattleShipSelect);
-  playerCruiserLabel.append(playerCruiserSelect);
-  playerSubmarineLabel.append(playerSubmarineSelect);
-  playerDestroyerLabel.append(playerDestroyerSelect);
-
-  playerCarrierSelect.append(playerCarrierOption1);
-  playerCarrierSelect.append(playerCarrierOption2);
-  playerBattleShipSelect.append(playerBattleshipOption1);
-  playerBattleShipSelect.append(playerBattleshipOption2);
-  playerCruiserSelect.append(playerCruiserOption1);
-  playerCruiserSelect.append(playerCruiserOption2);
-  playerSubmarineSelect.append(playerSubmarineOption1);
-  playerSubmarineSelect.append(playerSubmarineOption2);
-  playerDestroyerSelect.append(playerDestroyerOption1);
-  playerDestroyerSelect.append(playerDestroyerOption1);
+    label.append(select);
+  }
 }
 
 function readyButtonAction(button) {
@@ -239,10 +182,13 @@ function checkIfAllInputsAreValid() {
     if (isReadyValue === "true") {
       countTrue += 1;
       if (countTrue === totalInputs) {
+        player1Board.resetBoard();
+        player2Board.resetBoard();
         submitForm();
 
         if (checkIfAllShipsArePlaced()) {
           removeForms();
+          removePlayerBoardForm();
           callGameBoard();
         }
       }
@@ -251,6 +197,15 @@ function checkIfAllInputsAreValid() {
   });
 
   return false;
+}
+
+function removePlayerBoardForm() {
+  const container = document.querySelector(".container");
+  const form1 = document.getElementById("player1BoardForm");
+  const form2 = document.getElementById("player2BoardForm");
+
+  container.removeChild(form1);
+  container.removeChild(form2);
 }
 
 function addValidationAttributes() {
@@ -265,12 +220,12 @@ function addValidationAttributes() {
 }
 
 export default function playerForm() {
-  const player1Board = document.getElementById("player1Board");
-  const player2Board = document.getElementById("player2Board");
+  const player1 = document.getElementById("player1BoardForm");
+  const player2 = document.getElementById("player2BoardForm");
 
-  playerFormCreation(player1Board, 1);
+  playerFormCreation(player1, 1);
 
-  playerFormCreation(player2Board, 2);
+  playerFormCreation(player2, 2);
   addValidationAttributes();
 }
 
@@ -311,9 +266,6 @@ function submitForm() {
     "Destroyer",
   ];
 
-  player1Board.resetBoard();
-  player2Board.resetBoard();
-
   const player1ShipValues = {};
   const player2ShipValues = {};
 
@@ -347,8 +299,6 @@ function submitForm() {
 
     placePlayer1ShipsToBoard(row1, col1, shipsPlayer1, player1Orientation);
     placePlayer2ShipsToBoard(row2, col2, shipsPlayer2, player2Orientation);
-
-    console.log("inputted submitForm()");
   }
 }
 function placePlayer1ShipsToBoard(row, col, ship, orientation) {
