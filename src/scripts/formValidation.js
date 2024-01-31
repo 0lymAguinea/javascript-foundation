@@ -7,16 +7,13 @@ export default function validateForm() {
       input.checkValidity();
       input.reportValidity();
 
-      if (input.validity.valueMissing) {
+      if (input.validity.patternMismatch) {
         input.setAttribute("isReady", false);
-      } else if (input.validity.patternMismatch) {
-        input.setAttribute("isReady", false);
+        input.setCustomValidity("Correct ship cooridnate example: 5,2 | 9,0");
       } else {
         input.setAttribute("isReady", true);
         input.setCustomValidity("");
       }
     });
-    // return button.setAttribute("isReady", true);
   });
-  // return button.setAttribute("isReady", true);
 }
