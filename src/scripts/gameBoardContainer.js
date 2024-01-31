@@ -7,7 +7,7 @@ function createMainContainer() {
 function player1BoardContainer() {
   const div = document.querySelector(".container");
   const container = document.createElement("div");
-  container.id = "player1Board";
+  container.id = "player1BoardForm";
 
   div.append(container);
 }
@@ -15,7 +15,7 @@ function player1BoardContainer() {
 function player2BoardContainer() {
   const div = document.querySelector(".container");
   const container = document.createElement("div");
-  container.id = "player2Board";
+  container.id = "player2BoardForm";
 
   div.append(container);
 }

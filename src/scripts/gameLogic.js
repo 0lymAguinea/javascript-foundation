@@ -2,7 +2,10 @@ import { player1, player2 } from "./player";
 import { player1Board, player2Board } from "./gameBoard";
 
 function displayPlayer1Board() {
-  const display = document.getElementById("player1Board");
+  const container = document.querySelector(".container");
+  const display = document.createElement("div");
+  display.id = "player1Board";
+  container.append(display);
   const { board } = player1Board;
 
   for (let i = 0; i < board.length; i += 1) {
@@ -17,7 +20,10 @@ function displayPlayer1Board() {
 }
 
 function displayPlayer2Board() {
-  const display = document.getElementById("player2Board");
+  const container = document.querySelector(".container");
+  const display = document.createElement("div");
+  display.id = "player2Board";
+  container.append(display);
   const { board } = player2Board;
 
   for (let i = 0; i < board.length; i += 1) {
