@@ -14,6 +14,3 @@ function playerVsPlayer() {
   });
 }
 playerVsPlayer();
-
-// displayContainers();
-// playerForm();
