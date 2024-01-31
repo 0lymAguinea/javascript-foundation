@@ -57,7 +57,6 @@ function buttonsController(
         button.disabled = true;
 
         initializeButtons();
-        console.log(player1Board, player2Board);
       }
     });
   });
