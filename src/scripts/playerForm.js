@@ -64,6 +64,8 @@ function playerFormCreation(formPlayer, playerNum) {
     input.id = `player${playerNum}${nameOfShips[i]}`;
     input.name = `player${playerNum}${nameOfShips[i]}`;
 
+    input.autocomplete = "off";
+
     form.append(label);
     label.append(input);
   }
