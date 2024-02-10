@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+.content {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  margin: 1rem;
+}
+#projectFolders {
+  display: grid;
+  grid-template-rows: 2rem 5rem 5rem;
+  background-color: rgb(236, 233, 233);
+  border-radius: 5px;
+  min-width: 100%;
+  row-gap: 0.5rem;
+}
+#projectFolder {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+#priorityFolder {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+#mainContent {
+  display: grid;
+  grid-template-rows: 2rem 2rem 2fr;
+}
+#mainContent button {
+  border-radius: 5px;
+}
+#todoPage {
+  background-color: rgb(236, 233, 233);
+  border-radius: 5px;
+}
+#projectFolders,
+#mainContent,
+#todoPage {
+  padding: 0 1rem;
+}
+#mainContent > #currentProjectContainer {
+  display: flex;
+  flex-direction: row;
+}
+#currentProjectContainer > h2 {
+  padding-right: 1rem;
+}
+#addTodoButton {
+  display: flex;
+  width: 100%;
+}
+#addTodoButton::before {
+  content: "+";
+}
+#bottomDisplay {
+  display: flex;
+  flex-direction: column;
+}
+#bottomDisplay > button {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  justify-items: center;
+  margin-bottom: 0.2rem;
+}
+#bottomDisplay > button::before {
+  content: "";
+}
+
+#bottomDisplay > button::after {
+  content: ">";
+}
+#bottomDisplay > button.taskCompleteTrue::before {
+  content: "✓";
+  color: rgb(9, 247, 9);
+}
+
+#addTodoButton {
+  font-size: 1.3rem;
+  min-height: 0.4rem;
+}
+#calendar {
+  font-size: 1rem;
+}
+#middleDisplay {
+  margin-bottom: 1rem;
+}
+.todoProjectButton {
+  font-size: 1.1rem;
+}
+.todoProjectButton.high {
+  background-color: rgb(226, 32, 32);
+  color: white;
+}
+.todoProjectButton.medium {
+  background-color: rgb(223, 175, 44);
+  color: white;
+}
+.todoProjectButton.low {
+  background-color: rgb(16, 102, 16);
+  color: white;
+}
+#labels {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+}
+#todoInformation {
+  font-size: 2rem;
+}
+#todoPage > #todoInformationPage {
+  color: rgb(71, 70, 70);
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  text-overflow: ellipsis;
+}
+#todoInformationPage > h5 > p {
+  font-size: 1.5rem;
+  color: black;
+}
+#informationButtons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+#labelTitle::before,
+#labelDueDate::before {
+  content: "*";
+  color: red;
+}
+#labels > label {
+  min-width: 5rem;
+  max-width: 100%;
+}
+#labels > label > * {
+  width: 100%;
+}
+#highPriorityButton::before {
+  content: "■";
+  color: rgb(226, 32, 32);
+  font-size: 1.2rem;
+}
+#mediumPriorityButton::before {
+  content: "■";
+  color: rgb(223, 175, 44);
+  font-size: 1.2rem;
+}
+#lowPriorityButton::before {
+  content: "■";
+  color: rgb(16, 102, 16);
+  font-size: 1.2rem;
+}
+#projectFolders button {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  align-content: center;
+  max-height: 100%;
+}
+#submitButton,
+#editButton {
+  background-color: yellow;
+  color: black;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+#editButton {
+  border: yellow;
+}
+#completeButton {
+  background-color: green;
+  color: black;
+  border: green;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+button {
+  font-weight: bold;
+}
+#delButton {
+  background-color: red;
+  color: black;
+  border: red;
+  border-radius: 5px;
+}
+input,
+select {
+  border-radius: 5px;
+  border: black solid 1px;
+}
+input:invalid {
+  border: 1px solid red;
+}

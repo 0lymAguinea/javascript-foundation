@@ -4,8 +4,8 @@ import showCalendar from "./scripts/displays/calendar.js";
 import showHighPriorities from "./scripts/displays/highPriority.js";
 import showMediumPriorities from "./scripts/displays/mediumPriority.js";
 import showLowPriorities from "./scripts/displays/lowPriority.js";
-import  './styles/main.css'
-//Create the navigation for the todo lists located at left side.
+import "./styles/main.css";
+// Create the navigation for the todo lists located at left side.
 function myProjects() {
   const projectFolders = document.getElementById("projectFolders");
 
@@ -54,43 +54,43 @@ function myProjects() {
   priorityFolder.append(mediumPriorityButton);
   priorityFolder.append(lowPriorityButton);
 
-  //Buttons for default todos,today todos, and calendar todos
+  // Buttons for default todos,today todos, and calendar todos
   projectButtonSelector();
-  //Buttons for the 3 priorities todos such as high priority todos.
+  // Buttons for the 3 priorities todos such as high priority todos.
   priorityButtonSelector();
 }
 
-//Create to avoid duplication by clearing the mainContent which is the middle display
+// Create to avoid duplication by clearing the mainContent which is the middle display
 function clearMainContent() {
   const mainContent = document.getElementById("mainContent");
   mainContent.innerHTML = "";
 }
-//Create to avoid duplication by clearing the todoPage which is the right display
+// Create to avoid duplication by clearing the todoPage which is the right display
 function clearTodoPage() {
   const todoPage = document.getElementById("todoPage");
   todoPage.innerHTML = "";
 }
-//Handles click event for the 3 main buttons.
+// Handles click event for the 3 main buttons.
 function projectButtonSelector() {
   const projectsBtn = document.getElementById("projectsBtn");
   const todayBtn = document.getElementById("todayBtn");
   const calendarBtn = document.getElementById("calendarBtn");
 
-  //For the default todos
+  // For the default todos
   projectsBtn.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showDefaultContent();
   });
 
-  //For the today todos
+  // For the today todos
   todayBtn.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showToday();
   });
 
-  //For the calendar todos
+  // For the calendar todos
   calendarBtn.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
@@ -98,35 +98,35 @@ function projectButtonSelector() {
   });
 }
 
-//Handle click events for priorities todos
+// Handle click events for priorities todos
 function priorityButtonSelector() {
   const highPriorityButton = document.getElementById("highPriorityButton");
   const mediumPriorityButton = document.getElementById("mediumPriorityButton");
   const lowPriorityButton = document.getElementById("lowPriorityButton");
 
-  //For high priority todos
+  // For high priority todos
   highPriorityButton.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showHighPriorities();
   });
 
-  //For medium priority todos
+  // For medium priority todos
   mediumPriorityButton.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showMediumPriorities();
   });
 
-  //For low priority todos
+  // For low priority todos
   lowPriorityButton.addEventListener("click", () => {
     clearMainContent();
     clearTodoPage();
     showLowPriorities();
   });
 }
-//call the left side navigation bar
+// call the left side navigation bar
 myProjects();
 
-//call the default todos
+// call the default todos
 showDefaultContent();
